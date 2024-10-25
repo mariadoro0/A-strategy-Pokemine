@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("users")
 public class AuthController {
 
 
@@ -30,7 +30,7 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
     @Autowired
     private JwtUtil jwtUtil;
-    @PostMapping("/authenticate")
+    @PostMapping("/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody User user) throws Exception {
             User users = userimp.getByEmail(user.getEmail());
 

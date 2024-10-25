@@ -42,7 +42,7 @@ public class SecurityConfig{
         http
                 .csrf(csrf -> csrf.disable())  // Disabilita la protezione CSRF per le API stateless
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/**","/users/signin").permitAll()  // Permetti l'accesso a /authenticate senza autenticazione
+                        .requestMatchers("/cards","/users/login","/users/signup").permitAll()  // Permetti l'accesso a /authenticate senza autenticazione
                         .anyRequest().authenticated())  // Tutte le altre richieste devono essere autenticate
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));  // Disabilita le sessioni

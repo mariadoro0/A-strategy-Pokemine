@@ -1,11 +1,15 @@
 package com.astrategy.pokemine.controllers;
 
+import java.io.IOException;
 import java.security.Principal;
+import java.util.Collections;
 import java.util.List;
 
 import com.astrategy.pokemine.entities.CustomUserDetails;
 import com.astrategy.pokemine.entities.User;
+import com.astrategy.pokemine.services.JwtUtil;
 import com.astrategy.pokemine.services.UserService;
+import io.jsonwebtoken.JwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,36 +30,34 @@ public class UserCollectionController {
     private UserCollectionService service;
 	@Autowired
 	private UserService userService;
-    
+    @Autowired
+	private JwtUtil jwtUtil;
 
 	@GetMapping("")
 	//@PreAuthorize("authentication.principal instanceof T(com.astrategy.pokemine.entities.CustomUserDetails) and authentication.principal.id == #userId")
 	public ResponseEntity<?> getCards(@AuthenticationPrincipal UserDetails userDetails) {
 
-		 User u =userService.findByUsername(userDetails.getUsername());
-		List<UserCollection> collection = service.getUserCollection(u.getId());
-		return ResponseEntity.ok(collection);
-		 /*if(userService.checkAuthorization(userId, principal)){
-			List<UserCollection> collection = service.getUserCollection(userId);
-			if (collection == null) {
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Restituisce 404 se non trovata e potremmo anche personalizzare la pagina 404
-			}
-			return new ResponseEntity<>(collection, HttpStatus.OK); // Restituisce 200 con la collezione
-		} else {
-			 return new ResponseEntity<>("Non puoi accedere ai dati di altri utenti.",HttpStatus.FORBIDDEN);
-		 } */
 
+			User user =userService.findByUsername(userDetails.getUsername());
+			if (user == null) {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Restituisce 404 se l'utente non esiste
+			}
+			List<UserCollection> collection = service.getUserCollection(user.getId());
+			if (collection == null || collection.isEmpty()) {
+				return ResponseEntity.ok(Collections.singletonMap("message", "No cards found for this user."));
+			}
+			return ResponseEntity.ok(collection);
 	}
 
 	@PostMapping("add")
-	public ResponseEntity<String> addCard(@AuthenticationPrincipal CustomUserDetails userDetails, @RequestParam String cardId) {
+	public ResponseEntity<String> addCard(@AuthenticationPrincipal UserDetails userDetails, @RequestParam String cardId) {
 		 try {
 
 			User u =userService.findByUsername(userDetails.getUsername());
 			 service.addCardToCollection(u.getId(),cardId);
 			 return ResponseEntity.ok("Carta aggiunta alla collezione");
 		 } catch(Exception e){
-			 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("iii");
+			 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		 }
 	}
 

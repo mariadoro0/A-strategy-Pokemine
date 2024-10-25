@@ -2,9 +2,11 @@ package com.astrategy.pokemine.services;
 
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import javax.crypto.SecretKey;
@@ -19,9 +21,9 @@ public class JwtUtil {
     // Genera una chiave segreta sicura
     private SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
-    public String extractUsername(String token) {
-        return extractClaim(token, Claims::getSubject);
-    }
+   // public String extractUsername(String token) {
+     //   return extractClaim(token, Claims::getSubject);
+    //}
 
     public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
@@ -44,7 +46,15 @@ public class JwtUtil {
         Map<String, Object> claims = new HashMap<>();
         return createToken(claims, userDetails.getUsername());
     }
-
+    public String extractUsername(String token) {
+        try {
+            return extractClaim(token, Claims::getSubject);
+        } catch (SignatureException e) {
+            throw new JwtException("Invalid JWT signature", e); // Lancia un'eccezione personalizzata
+        } catch (JwtException e) {
+            throw new JwtException("Invalid JWT token", e); // Gestisci altre eccezioni JWT
+        }
+    }
     private String createToken(Map<String, Object> claims, String subject) {
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 ore di scadenza

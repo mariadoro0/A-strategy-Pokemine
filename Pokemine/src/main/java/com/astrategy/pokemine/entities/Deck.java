@@ -17,11 +17,11 @@ public class Deck {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(nullable = false)
-	private Integer id;
+	private Integer deck_id;
 	
 	// Many-to-One relationship with the User entity, linking a deck to its owner. Marked with @JsonIgnore to prevent serialization in the JSON response.
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id", nullable = true)
 	@JsonIgnore
 	private User user;
 	

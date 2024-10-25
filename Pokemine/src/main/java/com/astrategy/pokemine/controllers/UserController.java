@@ -37,7 +37,7 @@ public class UserController {
   private AuthenticationManager authenticationManager;
   	@Autowired
 	private JwtUtil jwtUtil;
-	@PostMapping("signin")
+	@PostMapping("signup")
     public ResponseEntity<String> add(@RequestBody User user) {
         try {
             user.setPassword(passEncode.encode(user.getPassword()));

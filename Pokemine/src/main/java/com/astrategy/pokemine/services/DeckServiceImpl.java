@@ -60,7 +60,7 @@ public class DeckServiceImpl implements DeckService {
                 .anyMatch(subtype -> subtype.getName().equals("Basic"));
         
         // Handle adding the card to the deck (updating quantity if it already exists)
-        DeckCardId id = new DeckCardId(deck.getId(), card.getId());
+        DeckCardId id = new DeckCardId(deck.getDeck_id(), card.getId());
         Optional<DeckCard> record = deckCardDAO.findById(id);
         DeckCard cardToAdd;
 

@@ -111,7 +111,7 @@ public class Card {
 	@JoinTable(
 			name = "card_resistances",
 			joinColumns = @JoinColumn(name = "card_id"),
-			inverseJoinColumns = @JoinColumn(name = "resistance_id")
+			inverseJoinColumns = @JoinColumn(name = "resistances_id")
 	)
 	@JsonManagedReference
 	private Set<Resistances> resistances;
