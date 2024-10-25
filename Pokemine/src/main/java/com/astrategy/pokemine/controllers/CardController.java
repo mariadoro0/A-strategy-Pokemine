@@ -18,7 +18,7 @@ public class CardController {
 	
 	// HTTP GET method to retrieve cards based on various optional filters
 	@GetMapping
-	public ResponseEntity<CardDTO> getCardByFilters(
+	public ResponseEntity<?> getCardByFilters(
 			@RequestParam(required = false) String id,
 			@RequestParam(required = false) String name,
 			@RequestParam(required = false) String series,
@@ -30,8 +30,12 @@ public class CardController {
 			@RequestParam(required = false) String supertype,
 			@RequestParam(required = false, defaultValue = "1") int page
 			) {
-		  // Calls the service method to get filtered cards and returns them in the response
-		return new ResponseEntity<>(service.getByFilters(id,name, series, artist, type, set, generation, rarity, supertype, page),HttpStatus.OK);
+		try {
+			// Calls the service method to get filtered cards and returns them in the response
+			return new ResponseEntity<>(service.getByFilters(id, name, series, artist, type, set, generation, rarity, supertype, page), HttpStatus.OK);
+		} catch (IllegalArgumentException e){
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
 	}	
 	
 		

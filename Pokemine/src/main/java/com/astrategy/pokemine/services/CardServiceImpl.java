@@ -68,13 +68,18 @@ public class CardServiceImpl implements CardService {
      // Creating a pageable object for pagination.
         Pageable pageable = PageRequest.of(page - 1, page_size);
         Page<Card> cardPage = dao.findAll(spec, pageable);
-        // returns a DTO in order to store the page information.
-        return new CardDTO(
-                cardPage.getContent(),
-                page,
-                cardPage.getTotalPages(),
-                (int) cardPage.getTotalElements()
-        );
+        if(cardPage.isEmpty()){
+            throw new IllegalArgumentException("Invalid filter parameter: ");
+        }else{
+            // returns a DTO in order to store the page information.
+            return new CardDTO(
+                    cardPage.getContent(),
+                    page,
+                    cardPage.getTotalPages(),
+                    (int) cardPage.getTotalElements()
+            );
+        }
+
     }
 
 }
