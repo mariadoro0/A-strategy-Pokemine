@@ -72,7 +72,7 @@ public class UsersServiceImpl implements UserService{
 
 		if (existingUser.isEmpty()) {
 
-			throw new RuntimeException("The user does not exist and cannot be deleted.");
+			throw new RuntimeException("The user does not exist and cannot be deactivated.");
 
 		}
 		existingUser.get().setActive(false);
