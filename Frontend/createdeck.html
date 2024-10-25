@@ -12,35 +12,39 @@
 </head>
 <body>
 
-    <div class="logo">
-        <img src="img/logo.png" alt="Pokemine Logo">
-    </div>
-    <nav>
-        <button class="nav-btn">Home</button>
-        <button class="nav-btn">My cards</button>
-        <button class="nav-btn">My decks</button>
-        <div class="profile-icon">
-            <img src="img/pokeball.svg" alt="Profile">
+    <header>
+        <div class="logo">
+            <img src="img/logo.png" alt="Pokemine Logo">
         </div>
-    </nav>
+        <nav>
+            <button class="nav-btn">Home</button>
+            <button class="nav-btn">My cards</button>
+            <button class="nav-btn">My decks</button>
+            <div class="profile-icon">
+                <img src="img/pokeball.svg" alt="Profile">
+            </div>
+        </nav>
+    </header>
    
 
 
 	<br>
 	<br>
 	<br>
-	<div class ="bic">
-        <div class="container">
-            <form action="">
-                <h1>Deck Creation</h1>
-                <input type="text" id="inputdeckname" placeholder="Insert deck name">
-                <br>
-                <textarea name="" id="description" placeholder="Description deck"></textarea>
-                <br>
-                <button type="submit">Create Deck</button>
-
-            </form>
-        </div>
-    </div>
+	<main>
+        <section class="deck-create-container">
+            <h1>Deck Creation</h1>
+            <div class="deck-details">
+                <div class="deck-info">
+                    <h2>Deck Name</h2>
+                    <input type="text" placeholder="insert deck name">
+                    <h3>Description</h3>
+                    <textarea name="" id="descriptiondeck" placeholder="insert Description of the deck"></textarea>
+                    <hr>
+                    <button class="create-btn">Create deck</button>
+                </div>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
