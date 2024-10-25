@@ -1,0 +1,81 @@
+
+main {
+    max-width: 1000px;
+    margin: 40px auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.deck-create-container h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.deck-details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-image img {
+    width: 250px;
+    height: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.deck-info {
+    max-width: 600px;
+    padding-left: 20px;
+}
+
+.deck-info h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.card-number {
+    color: red;
+    font-weight: bold;
+}
+
+.deck-info h3 {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.deck-info p {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+.create-btn {
+    background-color: lawngreen;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    border: 1px solid black;
+}
+
+.create-btn:hover {
+    background-color: green;
+}
+
+
+#descriptiondeck{
+    min-width: 500px;
+    max-width: 500px;
+    min-height: 200px;
+    max-height: 200px;
+}
