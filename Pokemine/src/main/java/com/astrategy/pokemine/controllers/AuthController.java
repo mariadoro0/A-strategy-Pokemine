@@ -1,7 +1,6 @@
 package com.astrategy.pokemine.controllers;
 
 
-import com.astrategy.pokemine.entities.CustomUserDetails;
 import com.astrategy.pokemine.entities.User;
 import com.astrategy.pokemine.services.JwtUtil;
 import com.astrategy.pokemine.services.UsersServiceImpl;
@@ -12,7 +11,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +22,7 @@ public class AuthController {
 
 
     @Autowired
-    private UsersServiceImpl userimp;
+    private UsersServiceImpl userServiceImp;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -32,11 +30,8 @@ public class AuthController {
     private JwtUtil jwtUtil;
     @PostMapping("/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody User user) throws Exception {
-            User users = userimp.getByEmail(user.getEmail());
-
-        //	return new ResponseEntity<>(user.getPassword(),HttpStatus.OK);
+            User users = userServiceImp.getByEmail(user.getEmail());
         try {
-            //throw new Exception(user.getPassword());
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(users.getUsername(), user.getPassword())
             );
@@ -44,7 +39,7 @@ public class AuthController {
             throw new Exception("Incorrect username or password", e);
         }
 
-        final UserDetails userDetails = userimp.loadUserByUsername(users.getUsername());
+        final UserDetails userDetails = userServiceImp.loadUserByUsername(users.getUsername());
 
         final String jwt = jwtUtil.generateToken(userDetails);
 

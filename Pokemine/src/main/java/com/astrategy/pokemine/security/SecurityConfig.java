@@ -26,49 +26,53 @@ import org.springframework.security.web.SecurityFilterChain;
 import com.astrategy.pokemine.services.UsersServiceImpl;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
-public class SecurityConfig{
+public class SecurityConfig {
 
     @Autowired
-    private UsersServiceImpl userDetailService;
+    private UsersServiceImpl userDetailService; // Service to retrieve user details
+
     @Autowired
-    private JwtRequestFilter jwtRequestFilter;
+    private JwtRequestFilter jwtRequestFilter; // Filter for processing JWT requests
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // Configurazione della catena di filtri di sicurezza
+        // Configure the security filter chain
         http
-                .csrf(csrf -> csrf.disable())  // Disabilita la protezione CSRF per le API stateless
+                .csrf(csrf -> csrf.disable())  // Disable CSRF protection for stateless APIs
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/cards","/users/login","/users/signup").permitAll()  // Permetti l'accesso a /authenticate senza autenticazione
-                        .anyRequest().authenticated())  // Tutte le altre richieste devono essere autenticate
+                        .requestMatchers("/cards", "/users/login", "/users/signup").permitAll()  // Allow access to /cards, /login, and /signup without authentication
+                        .anyRequest().authenticated())  // Require authentication for all other requests
                 .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS));  // Disabilita le sessioni
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS));  // Disable sessions
 
+        // Add the JWT request filter before the UsernamePasswordAuthenticationFilter
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-   
-  @Bean
-  public UserDetailsService userDetailsService(){
-  
-        return userDetailService; //class da fare 
-  }
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return userDetailService; // Return the user details service implementation
+    }
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
+        return authenticationConfiguration.getAuthenticationManager(); // Get the authentication manager
     }
-  @Bean
-  public  AuthenticationProvider authenticationProvider(){
-    DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-      provider.setUserDetailsService(userDetailService);
-      provider.setPasswordEncoder(passwordEncoder());
-      return provider;
-  }
-  @Bean
-  public PasswordEncoder passwordEncoder(){
-      return new BCryptPasswordEncoder();
-  }
+
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailService); // Set the user details service for the provider
+        provider.setPasswordEncoder(passwordEncoder()); // Set the password encoder for the provider
+        return provider;
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(); // Return a BCrypt password encoder
+    }
 }

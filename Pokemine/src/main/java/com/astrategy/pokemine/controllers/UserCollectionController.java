@@ -21,56 +21,53 @@ import org.springframework.web.bind.annotation.*;
 import com.astrategy.pokemine.entities.UserCollection;
 import com.astrategy.pokemine.services.UserCollectionService;
 
-
-
 @RestController
 @RequestMapping("collection")
 public class UserCollectionController {
-    @Autowired
-    private UserCollectionService service;
+
 	@Autowired
-	private UserService userService;
-    @Autowired
-	private JwtUtil jwtUtil;
+	private UserCollectionService service; // Service for managing user collections
 
+	@Autowired
+	private UserService userService; // Service for user-related operations
+
+
+	// Endpoint to retrieve the user's card collection
 	@GetMapping("")
-	//@PreAuthorize("authentication.principal instanceof T(com.astrategy.pokemine.entities.CustomUserDetails) and authentication.principal.id == #userId")
 	public ResponseEntity<?> getCards(@AuthenticationPrincipal UserDetails userDetails) {
-
-
-			User user =userService.findByUsername(userDetails.getUsername());
-			if (user == null) {
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Restituisce 404 se l'utente non esiste
-			}
-			List<UserCollection> collection = service.getUserCollection(user.getId());
-			if (collection == null || collection.isEmpty()) {
-				return ResponseEntity.ok(Collections.singletonMap("message", "No cards found for this user."));
-			}
-			return ResponseEntity.ok(collection);
+		User user = userService.findByUsername(userDetails.getUsername()); // Retrieve the user by username
+		if (user == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Return 404 if user does not exist
+		}
+		List<UserCollection> collection = service.getUserCollection(user.getId()); // Get user's card collection
+		if (collection == null || collection.isEmpty()) {
+			return ResponseEntity.ok(Collections.singletonMap("message", "No cards found for this user.")); // Return message if collection is empty
+		}
+		return ResponseEntity.ok(collection); // Return the user's card collection
 	}
 
+	// Endpoint to add a card to the user's collection
 	@PostMapping("add")
 	public ResponseEntity<String> addCard(@AuthenticationPrincipal UserDetails userDetails, @RequestParam String cardId) {
-		 try {
-
-			User u =userService.findByUsername(userDetails.getUsername());
-			 service.addCardToCollection(u.getId(),cardId);
-			 return ResponseEntity.ok("Carta aggiunta alla collezione");
-		 } catch(Exception e){
-			 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-		 }
+		try {
+			User u = userService.findByUsername(userDetails.getUsername()); // Retrieve the user by username
+			service.addCardToCollection(u.getId(), cardId); // Add the card to the user's collection
+			return ResponseEntity.ok("Card added to collection"); // Return success message
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage()); // Return error message in case of an exception
+		}
 	}
 
-	 @PostMapping("remove")
+	// Endpoint to remove a card from the user's collection
+	@PostMapping("remove")
 	public ResponseEntity<String> removeCard(@AuthenticationPrincipal UserDetails userDetails, @RequestParam String cardId) {
-
-		 User u =userService.findByUsername(userDetails.getUsername());
-		 try {
-			 service.removeCardToCollection(u.getId(),cardId);
-			 return ResponseEntity.ok("Carta rimossa dalla collezione");
-		 } catch(Exception e){
-			 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-		 }
-	    }
+		User u = userService.findByUsername(userDetails.getUsername()); // Retrieve the user by username
+		try {
+			service.removeCardToCollection(u.getId(), cardId); // Remove the card from the user's collection
+			return ResponseEntity.ok("Card removed from collection"); // Return success message
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage()); // Return 404 with error message if the card is not found
+		}
+	}
 
 }
