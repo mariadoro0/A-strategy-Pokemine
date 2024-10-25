@@ -86,9 +86,18 @@ public class UsersServiceImpl implements UserService, UserDetailsService {
 		   dao.deleteById(id);
 	}
 
+	// Method to deactivate account so collection and decks don't get lost in cancellation.
 	@Override
 	public void deactivateUser(int userId) {
+		Optional<User> existingUser = dao.findById(userId);
 
+		if (existingUser.isEmpty()) {
+
+			throw new RuntimeException("The user does not exist and cannot be deactivated.");
+
+		}
+		existingUser.get().setActive(false);
+		dao.save(existingUser.get());
 	}
 
 
