@@ -1,14 +1,14 @@
 package com.astrategy.pokemine.controllers;
 
-import java.util.List;
 
-import com.astrategy.pokemine.dto.CardDTO;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.astrategy.pokemine.entities.Card;
+
 import com.astrategy.pokemine.services.CardService;
 @RestController // Indicates that this class is a REST controller
 @RequestMapping("cards") // Maps HTTP requests to /cards URL path
