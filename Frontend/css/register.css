@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
 .container {
     width: 500px;
-    height: 500px;
+    height: 600px;
     background-color: white;
     padding: 20px;
    
@@ -16,14 +16,8 @@
     justify-content: center;
     align-items: center;
  
-    
 }
-.logo {
-    margin-top: 20px;
-    width: 210px;/* Adjust the size of your logo */
-    height: 100px;
-    margin-bottom: 20px;
-}
+
 .register-form {
     margin-top: 100px;
     display: flex;
@@ -44,12 +38,7 @@
     cursor: pointer;
 }
 
-.logo {
-    margin-top: 20px;
-    width: 210px;/* Adjust the size of your logo */
-    height: 100px;
-    margin-bottom: 20px;
-}
+
 
 .register-form {
     margin-top: 80px;
