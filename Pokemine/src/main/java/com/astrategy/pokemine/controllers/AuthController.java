@@ -1,6 +1,7 @@
 package com.astrategy.pokemine.controllers;
 
 
+import com.astrategy.pokemine.entities.CustomUserDetails;
 import com.astrategy.pokemine.entities.User;
 import com.astrategy.pokemine.services.JwtUtil;
 import com.astrategy.pokemine.services.UsersServiceImpl;
@@ -31,22 +32,22 @@ public class AuthController {
     private JwtUtil jwtUtil;
     @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody User user) throws Exception {
+            User users = userimp.getByEmail(user.getEmail());
+
         //	return new ResponseEntity<>(user.getPassword(),HttpStatus.OK);
         try {
             //throw new Exception(user.getPassword());
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword())
+                    new UsernamePasswordAuthenticationToken(users.getUsername(), user.getPassword())
             );
         } catch (AuthenticationException e) {
             throw new Exception("Incorrect username or password", e);
         }
 
-        final UserDetails userDetails = userimp.loadUserByUsername(user.getUsername());
+        final UserDetails userDetails = userimp.loadUserByUsername(users.getUsername());
 
         final String jwt = jwtUtil.generateToken(userDetails);
-        System.out.println("ID passed to the query: " + user.getId());
-        System.out.println("ID passed to the query: " + user.getEmail());
-        System.out.println("ID passed to the query: " + user.getPassword());
+
 
         return new ResponseEntity<>(jwt, HttpStatus.OK);
     }
