@@ -51,7 +51,7 @@ public class UserController {
 	
 	
 	@GetMapping("deleteaccount")
-	public ResponseEntity<String> delete(@AuthenticationPrincipal CustomUserDetails userDetails) {
+	public ResponseEntity<String> delete(@AuthenticationPrincipal UserDetails userDetails) {
 		User u =userService.findByUsername(userDetails.getUsername());
 	    try {
 	        userService.deleteById(u.getId());
