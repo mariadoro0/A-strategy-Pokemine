@@ -27,7 +27,7 @@ import com.astrategy.pokemine.services.UserService;
 @RequestMapping("users")
 public class UserController {
 	 
-	@Autowired
+	@Autowired // Automatically injects the UserService bean
 	private UserService userService;
 	@Autowired
 	private UsersServiceImpl userimp;
