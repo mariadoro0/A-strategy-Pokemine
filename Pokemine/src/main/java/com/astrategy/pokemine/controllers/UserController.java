@@ -29,8 +29,6 @@ public class UserController {
 	 
 	@Autowired // Automatically injects the UserService bean
 	private UserService userService;
-	@Autowired
-	private UsersServiceImpl userimp;
   @Autowired
   private PasswordEncoder passEncode;
   @Autowired

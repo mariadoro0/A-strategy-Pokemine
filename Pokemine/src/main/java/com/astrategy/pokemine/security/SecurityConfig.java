@@ -41,7 +41,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         // Configure the security filter chain
         http
-                .csrf(csrf -> csrf.disable())  // Disable CSRF protection for stateless APIs
+                .csrf(AbstractHttpConfigurer::disable)  // Disable CSRF protection for stateless APIs
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/cards", "/users/login", "/users/signup").permitAll()  // Allow access to /cards, /login, and /signup without authentication
                         .anyRequest().authenticated())  // Require authentication for all other requests
