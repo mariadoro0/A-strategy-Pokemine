@@ -4,29 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokémon Card Collection</title>
+    <link rel="stylesheet" href="./css/decks-screen.css">
     <link rel="stylesheet" href="./css/home-page.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-        <div class="logo-home">
-            <!-- Logo -->
-            <a >
-                <img src="./img/logo.png" alt="Logo" class="nav-pic" width="100px" height="50px">
-            </a>
-
-            <!-- Link Home -->
-            <a class="home" href="#" >Home</a>
+    <header>
+        <div class="logo">
+            <img src="img/logo.png" alt="Pokemine Logo">
+            <button id="home-btn">Home</button>
+            <div class="flag-icons">
+                <img src="img/ita-flag.png" alt="Italian Flag">
+                <img src="img/en-flag.png" alt="English Flag">
+            </div>
         </div>
-       
-       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-         <div class="navbar-nav">
-            <a><img class="im" src="./img/ita-flag.png" width="30px" height="20px"></a> 
-            <a href=""><img class="im" src="./img/en-flag.png" width="30px" height="20px"></a>
-            <a id="logind"  href="login.html">Login</a></a>
-         </div>
-       </div>
-    </nav>
+        <nav>
+            <div class="nav-btns">
+                <button id="my-cards-btn">Le mie carte</button>
+                
+                <button id="my-decks-btn"><a href="decks-screen.html">I miei mazzi</a></button>
+                <div class="profile-icon">
+                    <img src="img/pokeball-user.png" alt="Profile" width="60">
+                </div>
+            </div>
+        </nav>
+    </header>
     <br>
     <div class="search-container">
         <div class="search-box">
