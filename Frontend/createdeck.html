@@ -4,52 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create deck</title>
-    <link rel="stylesheet" href="css/nav.css">
+    
     <link rel="stylesheet" href="css/createdeck.css">
+    <link rel="stylesheet" href="css/new-navbar.css">
       
 
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-        <div class="losgo-home">
-          
-            <a>
-                <img src="img/logo.png" alt="Logo" class="nav-pic" width="100px" height="50px">
-            </a>
-            <a class="home" href="#" >Home</a>
-
-            <a  class="nav-pic" href="about.html" id="mycard">My Cards</a>
-            <a  class="nav-pic" href="about.html" id="mydeck">My Decks</a>
-
-           
+    <header>
+        <div class="logo">
+            <img src="img/logo.png" alt="Pokemine Logo">
         </div>
-        <div>
-            
-            <img src="img/pokeball.svg" alt=""  id="immagineutente"  height="50px" width="50px">
-
-        </div>
-       
-     </nav>
+        <nav>
+            <button class="nav-btn">Home</button>
+            <button class="nav-btn">My cards</button>
+            <button class="nav-btn">My decks</button>
+            <div class="profile-icon">
+                <img src="img/pokeball.svg" alt="Profile">
+            </div>
+        </nav>
+    </header>
    
 
 
-	<br/>
-	<br/>
-	<br/>
-	<div class ="bic">
-        <div class="container">
-            <form action="">
-                <h1>Deck Creation</h1>
-                <input type="text" id="inputdeckname" placeholder="Insert deck name">
-                <br>
-                <textarea name="" id="description" placeholder="Description deck"></textarea >
-                <br>
-                <button type="submit">Create Deck</button>
-
-            </form>
-        </div>
-    </div>
+	<br>
+	<br>
+	<br>
+	<main>
+        <section class="deck-create-container">
+            <h1>Deck Creation</h1>
+            <div class="deck-details">
+                <div class="deck-info">
+                    <h2>Deck Name</h2>
+                    <input type="text" placeholder="insert deck name">
+                    <h3>Description</h3>
+                    <textarea name="" id="descriptiondeck" placeholder="insert Description of the deck"></textarea>
+                    <hr>
+                    <button class="create-btn">Create deck</button>
+                </div>
+            </div>
+        </section>
+    </main>
 </body>
 </html>

@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #FFD700;
+}
+
+nav button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.profile-icon {
+    width: 30px;
+    height: 30px;
+    background-color: #FF0000;
+    border-radius: 50%;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    padding: 20px;
+    text-align: center;
+}
+
+.card-image {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.card-info h2 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.card-info .hp {
+    font-size: 18px;
+    color: red;
+}
+
+.card-info .type {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.card-info h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.card-info p {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.card-info .damage {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.details {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.details div {
+    font-size: 14px;
+}
+
+.illustrators {
+    font-size: 12px;
+    margin-top: 20px;
+    color: #777;
+}

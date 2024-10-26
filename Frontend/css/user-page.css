@@ -1,3 +1,63 @@
+
+.logo-home {
+    display: flex;
+    align-items: center;
+}
+#nav-btn {
+    background-color: #333;
+    color: white;
+    border: none;
+    margin: 0 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#nav-btn:hover {
+    background-color: #555;
+}
+.navbar {
+    background-color: #000000;
+    color: rgb(255, 255, 255); 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  /*  padding: 1rem; */
+    padding: 10px 20px;
+    flex-wrap: wrap;
+    height: 76px;
+}
+
+.nav-links {
+    margin-right: 5px;
+    padding: 0;
+}
+
+.im {
+    margin-right: 10px;
+}
+
+.bic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home {
+    color:white;
+   /* margin-right: auto; /* Use auto for a more fluid layout */
+    margin-right: 0; /* Remove large margin */
+    margin-left: 20px; /* Add a small left margin to separate from the logo */
+    text-decoration: none;
+    border: 2px solid #535353;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.nav-pic {
+    margin-left: 20px;
+}
+
 .profile {
     width: 500px;
     height: 500px;
@@ -7,6 +67,20 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+button.delete-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button.delete-btn:hover {
+    background-color: darkred;
+}
+
 
 .profile img {
     display: center;
@@ -23,17 +97,7 @@
     color: #333;
 }
 
-.profile button {
-    margin: 40px;
-    padding: 10px 20px;
-    margin: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007BFF;
-    color: white;
-    cursor: pointer;
-    display: center;
-}body {
+body {
     background-image: url("https://static.prod.pokemon.com/images/pikachu_pattern.png");
     background-repeat: repeat;
     margin: 0;
@@ -121,20 +185,6 @@ a {
     color: #333;
 }
 
-.profile button {
-    margin: 10px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007BFF;
-    color: white;
-    cursor: pointer;
-    display: inline-block;
-}
-
-.profile button:hover {
-    background-color: #0056b3;
-}
 
 /* Media query for smaller screens */
 @media (max-width: 768px) {
@@ -155,49 +205,6 @@ a {
     }
 }
 
-.controls {
-    display: flex;
-    align-items: center;
-}
-
-.controls input {
-    margin-right: 10px;
-    padding: 5px;
-}
-
-.controls button {
-    margin-right: 10px;
-    padding: 5px 10px;
-}
-
-.lang-toggle button {
-    margin-left: 5px;
-    padding: 5px;
-}
-
-.card-container {
-    margin-top: 50px;
-    padding-top: 40px;
-}
-
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-}
-
-.card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 0px;
-    width: 250px;
-    background-color: white;
-}
-
-.card img {
-    max-width: 100%;
-    height: auto;
-}
 
 .pagination {
     display: flex;
@@ -235,31 +242,6 @@ a {
     margin-bottom: 20px;
 }
 
-.login-form {
-    margin-top: 100px;
-    display: flex;
-    flex-direction: column;
-}
-
-.login-form input {
-    margin-bottom: 40px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.login-form button {
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.login-form button:hover {
-    background-color: #0056b3;
-}
 
 .container {
     width: 500px;

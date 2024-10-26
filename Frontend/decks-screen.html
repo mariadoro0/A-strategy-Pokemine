@@ -4,41 +4,49 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>My Pokémon Decks</title>
-        <link rel="stylesheet" href="css-main/nav.css">
-        <link rel="stylesheet" href="decks-screen.css">
+        <link rel="stylesheet" href="css/nav.css">
+        <link rel="stylesheet" href="css/decks-screen.css">
     </head>
     <body>
-        <nav class="navbar">
+        <header>
             <div class="logo">
-                <img src="https://static.prod.pokemon.com/assets/cms2/img/misc/virtual-backgrounds/masters-ex-logo.png" alt="Pokemon Logo" width="100">
+                <img src="img/logo.png" alt="Pokemine Logo">
+                <button id="home-btn">Home</button>
+                <div class="flag-icons">
+                    <img src="img/ita-flag.png" alt="Italian Flag">
+                    <img src="img/en-flag.png" alt="English Flag">
+                </div>
             </div>
-            <div class="nav-links">
-                <button class="buttons">Home</button>
-                <button class="buttons">My cards</button>
-                <button class="buttons">My decks</button>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Poké_Ball_icon.svg/1024px-Poké_Ball_icon.svg.png" alt="Profile" width="40">
-            </div>
-        </nav>
+            <nav>
+                <div class="nav-btns">
+                    <button id="my-cards-btn">Le mie carte</button>
+                    <button id="my-decks-btn">I miei mazzi</button>
+                    <div class="profile-icon">
+                        <img src="img/pokeball-user.png" alt="Profile" width="60">
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <p class="rule-link">Puoi consultare il regolamento ufficiale delle carte Pokémon cliccando <a href="https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/rulebook/twm_rulebook_it.pdf">qui</a>.</p>
         <div class="container">
-            <h1 class="header">My decks</h1>
+            <h1 class="header">I miei mazzi</h1>
             <div class="deck-buttons">
                 <div class="left-buttons">
-                    <button class="deck-btn active">Deck 1</button>
-                    <button class="deck-btn">Deck 2</button>
-                    <button class="deck-btn">Deck 3</button>
+                    <button class="deck-btn-active">Mazzo 1</button>
+                    <button class="deck-btn">Mazzo 2</button>
+                    <button class="deck-btn">Mazzo 3</button>
                 </div>
                 <div class="right-buttons">
-                    <button class="new-deck-btn">New deck</button>
-                    <button class="info-btn">Deck info</button>
+                    <button class="new-deck-btn">Nuovo mazzo</button>
+                    <button class="info-btn">Info mazzo</button>
                 </div>
             </div>
-
             <hr class="separator">
 
             <div class="cards-container">
                 <!-- 12 Cards (4 per row, 3 rows) -->
                 <div class="card">
-                    <img src="https://images.pokemontcg.io/swsh5/4_hires.png" alt="Charizard">
+                    <img src="https://images.pokemontcg.io/swsh5/4_hires.png" alt="Cacnea">
                     <div class="card-info">
                         <button class="counter-btn">-</button>
                         <span class="counter-text">0/4</span>
@@ -48,7 +56,7 @@
                 </div>
 
                 <div class="card">
-                    <img src="https://images.pokemontcg.io/swsh5/6_hires.png" alt="Flareon">
+                    <img src="https://images.pokemontcg.io/swsh5/6_hires.png" alt="Kricketune V">
                     <div class="card-info">
                         <button class="counter-btn">-</button>
                         <span class="counter-text">0/4</span>
@@ -58,7 +66,7 @@
                 </div>
 
                 <div class="card">
-                    <img src="https://images.pokemontcg.io/swsh5/8_hires.png" alt="Terrakion">
+                    <img src="https://images.pokemontcg.io/swsh5/8_hires.png" alt="Cherrim">
                     <div class="card-info">
                         <button class="counter-btn">-</button>
                         <span class="counter-text">0/4</span>
@@ -68,7 +76,7 @@
                 </div>
 
                 <div class="card">
-                    <img src="https://images.pokemontcg.io/swsh5/9_hires.png" alt="Shedinja">
+                    <img src="https://images.pokemontcg.io/swsh5/9_hires.png" alt="Carnivine">
                     <div class="card-info">
                         <button class="counter-btn">-</button>
                         <span class="counter-text">0/4</span>
@@ -79,7 +87,7 @@
 
                 <!-- Next Row -->
                 <div class="card">
-                    <img src="https://images.pokemontcg.io/swsh5/11_hires.png" alt="Eelektross">
+                    <img src="https://images.pokemontcg.io/swsh5/11_hires.png" alt="Scatterbug">
                     <div class="card-info">
                         <button class="counter-btn">-</button>
                         <span class="counter-text">0/4</span>
@@ -89,7 +97,7 @@
                 </div>
 
                 <div class="card">
-                    <img src="https://images.pokemontcg.io/swsh5/13_hires.png" alt="Shiftry">
+                    <img src="https://images.pokemontcg.io/swsh5/13_hires.png" alt="Vivillon">
                     <div class="card-info">
                         <button class="counter-btn">-</button>
                         <span class="counter-text">0/4</span>
@@ -99,7 +107,7 @@
                 </div>
 
                 <div class="card">
-                    <img src="https://images.pokemontcg.io/swsh5/15_hires.png" alt="Dusclops">
+                    <img src="https://images.pokemontcg.io/swsh5/15_hires.png" alt="Lurantis">
                     <div class="card-info">
                         <button class="counter-btn">-</button>
                         <span class="counter-text">0/4</span>
@@ -109,7 +117,7 @@
                 </div>
 
                 <div class="card">
-                    <img src="https://images.pokemontcg.io/swsh5/17_hires.png" alt="Sableye">
+                    <img src="https://images.pokemontcg.io/swsh5/17_hires.png" alt="Blipbug">
                     <div class="card-info">
                         <button class="counter-btn">-</button>
                         <span class="counter-text">0/4</span>
@@ -120,7 +128,7 @@
 
                 <!-- Last Row -->
                 <div class="card">
-                    <img src="https://images.pokemontcg.io/swsh5/19_hires.png" alt="Drampa">
+                    <img src="https://images.pokemontcg.io/swsh5/19_hires.png" alt="Flapple VMax">
                     <div class="card-info">
                         <button class="counter-btn">-</button>
                         <span class="counter-text">0/4</span>
@@ -130,7 +138,7 @@
                 </div>
 
                 <div class="card">
-                    <img src="https://images.pokemontcg.io/swsh5/21_hires.png" alt="Braviary">
+                    <img src="https://images.pokemontcg.io/swsh5/21_hires.png" alt="Victini V">
                     <div class="card-info">
                         <button class="counter-btn">-</button>
                         <span class="counter-text">0/4</span>
@@ -140,7 +148,7 @@
                 </div>
 
                 <div class="card">
-                    <img src="https://images.pokemontcg.io/swsh5/23_hires.png" alt="Talonflame">
+                    <img src="https://images.pokemontcg.io/swsh5/23_hires.png" alt="Tepig">
                     <div class="card-info">
                         <button class="counter-btn">-</button>
                         <span class="counter-text">0/4</span>
@@ -150,7 +158,7 @@
                 </div>
 
                 <div class="card">
-                    <img src="https://images.pokemontcg.io/swsh5/25_hires.png" alt="Oricorio">
+                    <img src="https://images.pokemontcg.io/swsh5/25_hires.png" alt="Emboar">
                     <div class="card-info">
                         <button class="counter-btn">-</button>
                         <span class="counter-text">0/4</span>

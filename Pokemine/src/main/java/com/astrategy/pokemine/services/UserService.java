@@ -9,7 +9,7 @@ public interface UserService {
 
 	 // Adds a new user to the system
 	void addUser(User user);
-	
+	User findByUsername(String username);
 	// Retrieves a user by their email address
 	User getByEmail(String email);
 

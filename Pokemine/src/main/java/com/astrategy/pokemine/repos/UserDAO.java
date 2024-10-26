@@ -13,7 +13,7 @@ public interface UserDAO extends JpaRepository<User, Integer>{
 	
 	// Method to find a User by their email address.
 	User findByEmail(String email);
-	
+	User findByUsername(String username);
 	// Method to delete a User by their ID.
 	void deleteById(int id);	
 	
