@@ -3,15 +3,10 @@ package com.astrategy.pokemine.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.astrategy.pokemine.entities.*;
+import com.astrategy.pokemine.repos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.astrategy.pokemine.entities.Card;
-import com.astrategy.pokemine.entities.UserCollectionId;
-import com.astrategy.pokemine.entities.UserCollection;
-import com.astrategy.pokemine.entities.User;
-import com.astrategy.pokemine.repos.CardDAO;
-import com.astrategy.pokemine.repos.UserCollectionDAO;
-import com.astrategy.pokemine.repos.UserDAO;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,13 +18,17 @@ public class UserCollectionServiceImp implements UserCollectionService {
 	private UserDAO userDAO;
 	@Autowired 
 	private CardDAO carddao;
+	@Autowired
+	private DeckDAO deckDAO;
+	@Autowired
+	private DeckCardDAO deckCardDAO;
 
 	// Method to add a card to the user's collection
 	@Override
 	public void addCardToCollection(int userId, String cardId) {
 		// Fetch the user by userId or throw an exception if not found
 	    User user = userDAO.findById(userId)
-				.orElseThrow(() -> new IllegalArgumentException("User with id : " + userId+" not found."));
+				.orElseThrow(() -> new IllegalArgumentException("User with id: " + userId+" not found."));
 	 // Fetch the card by cardId or throw an exception if not found
 	    Card card = carddao.findById(cardId)
 				.orElseThrow(() -> new IllegalArgumentException("Card with id: " + cardId+" not found."));
@@ -37,11 +36,11 @@ public class UserCollectionServiceImp implements UserCollectionService {
 		UserCollectionId uid = new UserCollectionId(userId, cardId);
 
 		// Try to find the existing entry in the user's collection
-	    Optional<UserCollection> usercollection = dao.findById(uid);
+	    Optional<UserCollection> optionalUserCollection = dao.findById(uid);
 	    
 	    // If the card is already in the user's collection, increase the quantity
-	    if (usercollection.isPresent()) {
-	        UserCollection userCollection = usercollection.get();
+	    if (optionalUserCollection.isPresent()) {
+	        UserCollection userCollection = optionalUserCollection.get();
 	        userCollection.setQuantity(userCollection.getQuantity() + 1);
 	        dao.save(userCollection);
 	    } else {
@@ -76,10 +75,40 @@ public class UserCollectionServiceImp implements UserCollectionService {
 			if (userCollection.getQuantity() > 1) {
 				userCollection.setQuantity(userCollection.getQuantity() - 1);
 				dao.save(userCollection);
+				// If the card is present in any deck, its quantity can't be bigger
+				// than the quantity in the collection
+				List<Deck> userDecks = deckDAO.findByUserId(userId);
+				for (Deck deck : userDecks) {
+					List<DeckCard> cardsInDeck = deckCardDAO.findByDeck(deck);
+					for (DeckCard deckCard : cardsInDeck) {
+						if (deckCard.getCard().equals(card)) {
+							// if the quantity in the deck is greater than the collection
+							// set the deck quantity to the collection quantity
+							// so the user still has the maximum amount available
+							if(deckCard.getQuantity()>userCollection.getQuantity()){
+								deckCard.setQuantity(userCollection.getQuantity());
+								deckCardDAO.save(deckCard);
+							}
+						}
+					}
+				}
 			} else {
 				// If the quantity is 1 or less, remove the card from the collection
 				dao.delete(userCollection);
+				// if the card gets removed from the collection, it must be also removed
+				// from the decks
+				List<Deck> userDecks = deckDAO.findByUserId(userId);
+				for (Deck deck : userDecks) {
+					List<DeckCard> cardsInDeck = deckCardDAO.findByDeck(deck);
+					for (DeckCard deckCard : cardsInDeck) {
+						if (deckCard.getCard().equals(card)) {
+							deckCardDAO.delete(deckCard);
+						}
+					}
+				}
 			}
+
+
 		} else {
 			throw new RuntimeException("The card does not exist in the collection.");
 		}

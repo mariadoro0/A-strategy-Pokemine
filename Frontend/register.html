@@ -4,35 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Page</title>
-    <link rel="stylesheet" href="css/nav.css">
-    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="css/new-navbar.css">
+    <link rel="stylesheet" href="css/register.css"> 
       
 
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-        <div class="losgo-home">
-            <!-- Logo -->
-            <a >
-                <img src="img/logo.png" alt="Logo" class="nav-pic" width="100px" height="50px">
-            </a>
-
-            <!-- Link Home -->
-            <a class="home" href="#" >Home</a>
+    <header>
+        <div class="logo">
+            <img src="img/logo.png" alt="Pokemine Logo">
         </div>
-        <div>
-            <a id="logind"  href="about.html">Login</a></a>
-        </div>
-       
-     </nav>
+        <nav>
+            <button class="nav-btn">Home</button>
+           
+            <div class="profile-icon">
+                <img src="img/pokeball.svg" alt="Profile">
+            </div>
+        </nav>
+    </header>
    
 
 
-	<br/>
-	<br/>
-	<br/>
+	<br>
+	<br>
+	<br>
 	<div class ="bic">
     <div class="container">
         <img src="img/logo.png" alt="Logo" class="logo">
@@ -46,7 +42,7 @@
                 name="email">
             <input 
                 type="text" 
-                placeholder="Username" 
+                placeholder="Nome Utente" 
                 required 
                 id="username" 
                 name="username">
@@ -56,7 +52,7 @@
                 required 
                 id="password" 
                 name="password">
-            <button type="submit">Register</button>
+            <button type="submit">Registrati</button>
 
         </form>
     </div>

@@ -17,7 +17,7 @@ public class CardController {
 	private CardService service;
 	
 	// HTTP GET method to retrieve cards based on various optional filters
-	@GetMapping("/")
+	@GetMapping("")
 	public ResponseEntity<CardDTO> getCardByFilters(
 			@RequestParam(required = false) String id,
 			@RequestParam(required = false) String name,

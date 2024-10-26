@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collezioni Pokémon</title>
+    <link rel="stylesheet" href="css/usercollection.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="img/logo.png" alt="Pokemine Logo">
+        </div>
+        <nav>
+            <button class="nav-btn">Home</button>
+            <button class="nav-btn">My cards</button>
+            <button class="nav-btn">My decks</button>
+            <div class="profile-icon">
+                <img src="img/pokeball.svg" alt="Profile">
+            </div>
+        </nav>
+    </header>
+    <div class="content">
+        <div class="header-container">
+            <h1>My Cards</h1>
+            <button class="add-button">Add</button>
+        </div>
+        <hr>
+        <div class="grid">
+            <div class="card-image">
+                <img src="img/base1-1.png" alt="Carta 1" />
+                <div class="card-controls">
+                    <div class="card-counter">
+                        <button class="counter-button" onclick="updateCounter(0, -1)">-</button>
+                        <span class="counter-display" id="display0">0/4</span>
+                        <button class="counter-button" onclick="updateCounter(0, 1)">+</button>
+                    </div>
+                    <select class="deck-select">
+                        <option value="" disabled selected>Select Mazzo</option>
+                        <option value="mazzo1">Mazzo 1</option>
+                        <option value="mazzo2">Mazzo 2</option>
+                        <option value="mazzo3">Mazzo 3</option>
+                    </select>
+                    <button class="add-card-button">Aggiungi Carta</button>
+                </div>
+            </div>
+
+            <div class="card-image">
+                <img src="img/base1-10.png" alt="Carta 2" />
+                <div class="card-controls">
+                    <div class="card-counter">
+                        <button class="counter-button" onclick="updateCounter(1, -1)">-</button>
+                        <span class="counter-display" id="display1">0/4</span>
+                        <button class="counter-button" onclick="updateCounter(1, 1)">+</button>
+                    </div>
+                    <select class="deck-select">
+                        <option value="" disabled selected>Select Mazzo</option>
+                        <option value="mazzo1">Mazzo 1</option>
+                        <option value="mazzo2">Mazzo 2</option>
+                        <option value="mazzo3">Mazzo 3</option>
+                    </select>
+                    <button class="add-card-button">Aggiungi Carta</button>
+                </div>
+            </div>
+
+            <div class="card-image">
+                <img src="img/base1-26.png" alt="Carta 3" />
+                <div class="card-controls">
+                    <div class="card-counter">
+                        <button class="counter-button" onclick="updateCounter(2, -1)">-</button>
+                        <span class="counter-display" id="display2">0/4</span>
+                        <button class="counter-button" onclick="updateCounter(2, 1)">+</button>
+                    </div>
+                    <select class="deck-select">
+                        <option value="" disabled selected>Select Mazzo</option>
+                        <option value="mazzo1">Mazzo 1</option>
+                        <option value="mazzo2">Mazzo 2</option>
+                        <option value="mazzo3">Mazzo 3</option>
+                    </select>
+                    <button class="add-card-button">Aggiungi Carta</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const counters = [0, 0, 0];
+
+        function updateCounter(index, change) {
+            const newCount = counters[index] + change;
+
+            if (newCount >= 0 && newCount <= 4) {
+                counters[index] = newCount;
+                document.getElementById(`display${index}`).innerText = `${newCount}/4`;
+            }
+        }
+    </script>
+
+</body>
+</html>

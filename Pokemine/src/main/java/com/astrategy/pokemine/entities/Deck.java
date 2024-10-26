@@ -16,7 +16,7 @@ public class Deck {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "deck_id", nullable = false)
+	@Column(nullable = false)
 	private Integer id;
 	
 	// Many-to-One relationship with the User entity, linking a deck to its owner. Marked with @JsonIgnore to prevent serialization in the JSON response.

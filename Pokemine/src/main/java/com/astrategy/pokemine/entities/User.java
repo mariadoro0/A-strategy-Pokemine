@@ -27,13 +27,15 @@ public class User {
 	private String username;
 	private String email;
 	private String password;
-	private boolean isActive;
+	@Column(columnDefinition = "BIT(1)")
+	private boolean isActive = true;
 	
 	public User(String username, String email, String password) {
 		this.username = username;
 		this.email = email;
 		this.password = password;
-		this.isActive = true;
+		this.decks = new LinkedHashSet<>();
+		this.userCollection = new LinkedHashSet<>();
 	}
 
 	// One-to-Many relationship with the Deck entity.
@@ -49,5 +51,5 @@ public class User {
     // @JsonIgnore: Prevents this field from being included in JSON serialization, avoiding recursive references during serialization.
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore
-	private Set<Deck> decks = new LinkedHashSet<>(); // A collection of Deck objects representing the user's decks.
+	private Set<Deck> decks;// A collection of Deck objects representing the user's decks.
 }
