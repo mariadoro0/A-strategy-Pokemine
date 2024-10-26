@@ -36,14 +36,13 @@ public class UsersServiceImpl implements UserService, UserDetailsService {
 
 		boolean existingUserByEmail = dao.existsByEmail(user.getEmail());
 		if(existingUserByEmail) {
-			throw new RuntimeException("Un utente esiste già con questa email");
+			throw new RuntimeException("A user already exists with this email.");
 		}
 
 		boolean existingUserByUsername = dao.existsByUsername(user.getUsername());
 		if(existingUserByUsername) {
-			throw new RuntimeException("Un utente esiste già con questa email");
+			throw new RuntimeException("A user already exists with this username.");
 		}
-
 		dao.save(user);
 
 	}
@@ -52,7 +51,6 @@ public class UsersServiceImpl implements UserService, UserDetailsService {
 	// Method to retrieve a user by their email address
 	@Override
 	public User getByEmail(String email) {
-
 		return dao.findByEmail(email);
 	}
 
@@ -76,13 +74,9 @@ public class UsersServiceImpl implements UserService, UserDetailsService {
 	public void deleteById(int id) {
 
 		 Optional<User> existingUser = dao.findById(id);
-
 		   if (existingUser.isEmpty()) {
-
-		        throw new RuntimeException("L'utente non esiste e non può essere cancellato");
-
+		        throw new RuntimeException("The user does not exist and cannot be deleted.");
 		    }
-
 		   dao.deleteById(id);
 	}
 
