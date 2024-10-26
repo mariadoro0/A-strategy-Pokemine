@@ -127,9 +127,9 @@ With these steps, you’ll be able to access phpMyAdmin and manage your database
 # This was just for installing XAMPP; now let’s look at how the database is structured.
 
 
-## Database Pokémine Diagram
+## Pokémine Database Diagram
 
-![alt text](image.png)
+![db-schema](Frontend/img/image.png)
 
 ## Explanation of the Tables and Their Roles
 
