@@ -18,7 +18,9 @@ Pokémine is a Java-based API for managing Pokémon cards, user card collections
 
 ## Database Configuration
 
-The project is configured to connect to a MariaDB/MySQL instance with the URL `jdbc:mariadb://localhost:3306/pokemine`. Ensure credentials are correctly set up in the `application.properties` file.
+The project is configured to connect to a MariaDB/MySQL instance with the URL `jdbc:mariadb://localhost:3306/pokemine`. 
+
+Ensure credentials are correctly set up in the `application.properties` file.
 
 Example configuration (`application.properties`):
 
@@ -29,22 +31,29 @@ spring.datasource.username=root
 spring.datasource.password=
 ```
 
+**_Further info_**: For a more detailed guide on how to setup your database, see the [database documentation](./Database-Documentation.md) 
+
 ### API TEST  Table 
+**_Further info_**: For a more detailed guide on how the API calls work, see the[ API documentation](./API-Documentation.md)
 #### some examples of API calls
-| Endpoint                                         | Method   | Description                                | Parameters                                   | request body |
-|--------------------------------------------------|----------|--------------------------------------------|----------------------------------------------|---------|
-| `localhost:8080/cards/`                           | GET      | Fetch all Cards                            | `name`,`type`,`artist`,`set`,`rarity`,<br>`supertype`,`series`,`generation`,`id`,`page` | - |
-| `localhost:8080/cards/page`                    | GET        | Fetch  First 100 Cards                           | `page`                | yes |
-| `localhost:8080/users/signin`                    | POST        | Add new user                          | `username`,`email`,`password`                | yes |
-| `localhost:8080/users/deleteaccount`              | GET         | remove user with id                   | `id`                                         | yes |
-| `localhost:8080/users/deactivate`              | GET         | deactivates user with id                   | `id`                                         | yes |
-| `localhost:8080/collection/` | GET         | Fetch all Cards of collection         | `userid`                                         | yes
-| `localhost:8080/collection/{userid}/add`  | POST        | Add new Card to user collection            |  `cardid`                           | yes
-| `localhost:8080/collection/{userid}/remove`| POST       | remove Card From collection           | `cardid`                            | yes
-| `localhost:8080/decks/{userid}` | GET         | Fetch Deck by User id                 | `None`                                     | - |
-| `localhost:8080/decks/{userid}/newdeck`| POST        | Add new Deck to user                  | `name`, `description`                    | yes
-| `localhost:8080/decks/{userid}/{deckid}`| GET        | Fecth User with speci. Deck Id        |`None`                                        | - |
-| `localhost:8080/decks/{userid}/{deckid}/validate`| GET | validation of decks                 | `None`                                       | - |
-| `localhost:8080/decks/{userid}/{deckid}/add`| POST | Add new Card to Deck                 | `cardid`                                        | yes |
-| `localhost:8080/decks/{userid}/{deckid}/remove`| POST | remove Card from Deck                 | `cardid`                                        | yes |
-| `localhost:8080/decks/{userid}/{deckid}/deletedeck`| GET | remove Deck for user                  | `deckid`                                        | yes |
+| Endpoint                                         | Method   | Description                                | Parameters                                   | Request Body | Auth needed |
+|--------------------------------------------------|----------|--------------------------------------------|----------------------------------------------|--------------|----|
+| `localhost:8080/cards`                           | GET      | Fetch all cards                            | `name`, `type`, `artist`, `set`, `rarity`,<br>`supertype`, `series`, `generation`, `id`, `page` |       |    no | 
+| `localhost:8080/users/signin`                     | POST     | Sign in a new user                         | `username`, `email`, `password` | yes | no|
+| `localhost:8080/users/login`                     | POST     | Logs in the user and gives an auth token                         |  `email`, `password`              | yes          | no: will create the token |
+| `localhost:8080/users/deleteaccount`              | DELETE      | Remove logged user                         | `id`                                         |           | yes |
+| `localhost:8080/users/deactivate`                 | GET      | Deactivate logged user                      | `id`                                         |           | yes|
+| `localhost:8080/collection`                      | GET      | Fetch all cards in a user's collection     | `userid`                                     |           | yes |
+| `localhost:8080/collection/add`          | POST     | Add a new card to user’s collection        | `cardid`                                     |           | yes |
+| `localhost:8080/collection/remove`       | POST     | Remove a card from user’s collection       | `cardid`                                     |           | yes |
+| `localhost:8080/decks`                   | GET      | Fetch all auth user's decks                  | -                                            |            | yes |
+| `localhost:8080/decks/newdeck`           | POST     | Add a new deck to auth user's decks                     | `name`, `description`                        |           | yes |
+| `localhost:8080/decks/{deckid}`          | GET      | Fetch deck by deck ID for a specific user  | -                                            |            | yes |
+| `localhost:8080/decks/{deckid}/validate` | GET      | Validate deck                              | -                                            |            | yes |
+| `localhost:8080/decks/{deckid}/add`      | POST     | Add a card to deck                         | `cardid`                                     |           | yes |
+| `localhost:8080/decks/{deckid}/remove`   | POST     | Remove a card from deck                    | `cardid`                                     |           |  yes |
+| `localhost:8080/decks/{deckid}/deletedeck` | GET   | Remove a deck by deck ID                   | `deckid`                                     |           | yes |
+
+### Frontend
+We provided a Frontend folder with mockup static pages displaying how our API can collaborate with a front-end client.
+See [Frontend documentation](./manuale_utente/README.md) to see more.

@@ -1,4 +1,6 @@
 # BENVENUTO IN POKEMINE
+[English below](#welcome-to-pokemine)
+
 
 Quello che segue è una guida su come usare Pokemine correttamente:
 
