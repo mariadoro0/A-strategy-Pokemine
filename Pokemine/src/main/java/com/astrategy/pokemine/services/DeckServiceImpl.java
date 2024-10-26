@@ -198,6 +198,7 @@ public class DeckServiceImpl implements DeckService {
 
     @Override
     public void deleteDeck(int deckId) {
-        deckDAO.deleteById(deckId);
+        Deck deck = deckDAO.findById(deckId).orElseThrow(()->new IllegalArgumentException("Deck not found with id: " + deckId));
+        deckDAO.delete(deck);
     }
 }
