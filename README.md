@@ -56,4 +56,4 @@ spring.datasource.password=
 
 ### Frontend
 We provided a Frontend folder with mockup static pages displaying how our API can collaborate with a front-end client.
-See [Frontend documentation](./manuale_utente/README.md) to see more.
+See [Frontend documentation](./Frontend-Documentation.md) to see more.

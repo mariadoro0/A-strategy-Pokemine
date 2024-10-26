@@ -68,7 +68,7 @@ This API allows users to manage a collection of Pokémon cards, create decks, an
             "cardLevel": "13",
             "hp": 40,
             
-                 //all card info ...
+             //all card info ...
         }
     ],
     "currentPage": 1,
