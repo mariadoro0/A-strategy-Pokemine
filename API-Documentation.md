@@ -8,6 +8,7 @@ This API allows users to manage a collection of Pokémon cards, create decks, an
 - [User Management](#user-management)
 - [Collection Management](#collection-management)
 - [Deck Management](#deck-management)
+- [Authentication and Authorization](#authentication-and-authorization)
 - [Api Overview](#api-overview)
 
  ## Cards
@@ -67,7 +68,7 @@ This API allows users to manage a collection of Pokémon cards, create decks, an
             "cardLevel": "13",
             "hp": 40,
             
-                 //all card info ...
+             //all card info ...
         }
     ],
     "currentPage": 1,
@@ -80,7 +81,7 @@ The response also shows the current page we are on, the total number of result p
 
 
 ## User Management
-- #### /users/signin
+- #### /users/signup
     Method: `POST`
 
     Register a new user using a unique username, email, and password.
@@ -107,19 +108,40 @@ The response also shows the current page we are on, the total number of result p
     ```response
     Error creating user: A user already exists with this email.
     ```
+- #### /users/login
+    Method: `POST`
 
+    .
+    For example:
+    ```request
+    localhost:8080/users/login
+    ```
+    Request body:
+    ```json
+    {
+        "email":"test@example.com",
+        "password":"testPassword123"
+    }
+    ```
+    If the operation in <span style="color:green">successful</span>, you will obtain a Bearer token that will identify your user:
+    ```json
+    {"token":"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZWZpbml0aXZvIiwiaWF0IjoxNzI5OTQxNDUzLCJleHAiOjE3Mjk5Nzc0NTN9.Y5u_1AlVc6JkViY0tFyhElPLevMShdvc5Fj9VcS2kEI"}
+    ```
+    For your future requests, you will need to insert this token into the `Authorization > Bearer token` slot in Postman.
+
+
+> **_WARNING:_**  The following operations will require for the user to be logged in. You cannot access your collection, you decks and manage your account without being logged in.
 
 
 - ### user/deactivate: 
     Method: `GET`
 
-    Request parameter required: `userId`
 
-    Temporarily deactivate a user by their ID: sets the isActive boolean property from 1 to 0.
+    Temporarily deactivate an authetincated user account: sets the isActive boolean property from 1 to 0.
 
     Example:
     ```request
-    localhost:8080/users/deactivate?userId=1
+    localhost:8080/users/deactivate
     ```
 
     A <span style="color:green">successful</span> operation will produce an output like:
@@ -133,15 +155,15 @@ The response also shows the current page we are on, the total number of result p
     ```
 
 - #### user/deleteaccount: 
-    Method: `GET`
+    Method: `DELETE`
 
     Request parameter required: `userId`
 
-    Definetly delete a user by their ID: also deletes the user's card collection and decks.
+    Definetly delete the authenticated user's account: also deletes the user's card collection and decks.
 
     Example:
     ```request
-    localhost:8080/users/deleteaccount?userId=1
+    localhost:8080/users/deleteaccount
     ```
 
     A <span style="color:green">successful</span> operation will produce an output like:
@@ -157,14 +179,14 @@ The response also shows the current page we are on, the total number of result p
 
 ## Collection Management
     
-- #### /collection/{userId}
+- #### /collection
     Method: `GET`
 
-     Fetch all cards in a user’s collection using `userid`.
+     Fetch all cards in the user’s collection.
 
     A request example will be:
     ```request
-    localhost:8080/collection/1
+    localhost:8080/collection
     ```
     And the response will look like:
     ```json
@@ -188,13 +210,13 @@ The response also shows the current page we are on, the total number of result p
 
 
 
-- #### /collection/{userid}/add?cardId={cardId}
+- #### /collection/add?cardId={cardId}
     Method: `POST`
 
-     Add a new card to a user’s collection by specifying `cardid`.
+     Add a new card to the user’s collection by specifying `cardid`.
      Example:
     ```request
-    localhost:8080/collection/1/add?cardId=base1-1
+    localhost:8080/collection/add?cardId=base1-1
     ```
 
     A <span style="color:green">successful</span> operation will produce an output like:
@@ -209,13 +231,13 @@ The response also shows the current page we are on, the total number of result p
     ```
     Card with id: base1-1 not found.
     ```
-- #### /collection/{userid}/remove?cardId={cardId}
+- #### /collection/remove?cardId={cardId}
     Method: `POST`
 
-     Removes a card from a user’s collection by specifying `cardid`.
+     Removes a card from the user’s collection by specifying `cardid`.
      Example:
     ```request
-    localhost:8080/collection/1/remove?cardId=base1-1
+    localhost:8080/collection/remove?cardId=base1-1
     ```
 
     A <span style="color:green">successful</span> operation will produce an output like:
@@ -236,14 +258,14 @@ The response also shows the current page we are on, the total number of result p
 
 
 ### Deck Management
-- ### /decks/{userId}
+- ### /decks
     Method: `GET`
 
-     Fetch all user's decks using `userid`.
+     Fetch all user's decks.
 
     A request example will be:
     ```request
-    localhost:8080/decks/1
+    localhost:8080/decks
     ```
     And the response will look like:
     ```json
@@ -256,29 +278,29 @@ The response also shows the current page we are on, the total number of result p
     ]
   ```
 
-- ### /decks/{userId}/newdeck
+- ### /decks/newdeck
     Method: `POST`
 
-        Creates a new deck for the user using `userid`, specifying the name and the description of the deck as request parameters.
+    Creates a new deck for the user using `userid`, specifying the name and the description of the deck as request parameters.
 
     A request example will be:
     ```request
-    localhost:8080/decks/1/newdeck?name=newdeck&description=new description
+    localhost:8080/decks/newdeck?name=newdeck&description=new description
     ```
     A <span style="color:green">successful</span> operation will produce an output like:
     ```
     New deck created successfully.
     ```
 
-- ### /decks/{userId}/{deckId}
+- ### /decks/{deckId}
     Method: `GET`
 
-     Fetch all cards in the deck by using `userid` and `deckId`. 
-     The response will show a map with the card id and relative quantity.
+     Fetch all cards in the user's deck by `deckId`. 
+     The response will show a map containing the card id and relative quantity.
 
     A request example will be:
     ```request
-    localhost:8080/decks/1/2
+    localhost:8080/decks/2
     ```
     And the response will look like:
     ```json
@@ -287,15 +309,15 @@ The response also shows the current page we are on, the total number of result p
     }
     ```
 
-- ### /decks/{userId}/{deckId}/validate
+- ### /decks/{deckId}/validate
     Method: `GET`
 
-     Performs the deck validation by using `userid` and `deckId`. 
+     Performs the deck validation by using  `deckId`. 
      The deck will result valid if it has 60 cards and at least one Basic Pokémon.
 
     A request example will be:
     ```request
-    localhost:8080/decks/1/2/validate
+    localhost:8080/decks/2/validate
     ```
     A <span style="color:green">successful</span> validation will look like:
     ```response
@@ -307,7 +329,7 @@ The response also shows the current page we are on, the total number of result p
     Card of type Pokemon Basic not found.
     ```
 
-- ### /decks/{userid}/{deckId}/add?cardId={cardId}
+- ### /decks/{deckId}/add?cardId={cardId}
     Method: `POST`
 
      Add a new card to a user’s deck by specifying `cardid`.
@@ -316,7 +338,7 @@ The response also shows the current page we are on, the total number of result p
 
      Example:
     ```request
-    localhost:8080/decks/1/2/add?cardId=base1-1
+    localhost:8080/decks/2/add?cardId=base1-1
     ```
 
     A <span style="color:green">successful</span> operation will produce an output like:
@@ -347,7 +369,7 @@ The response also shows the current page we are on, the total number of result p
     You do not own enough copies of this card in your collection.
     ```
 
-- ### /decks/{userid}/{deckId}/remove?cardId={cardId}
+- ### /decks/{deckId}/remove?cardId={cardId}
     Method: `POST`
 
      Remove a card from a user’s deck by specifying `cardid`.
@@ -356,7 +378,7 @@ The response also shows the current page we are on, the total number of result p
 
      Example:
     ```request
-    localhost:8080/decks/1/2/remove?cardId=base1-1
+    localhost:8080/decks/2/remove?cardId=base1-1
     ```
 
     A <span style="color:green">successful</span> operation will produce an output like:
@@ -378,14 +400,14 @@ The response also shows the current page we are on, the total number of result p
     The deck does not belong to the selected user
     ```
 
-- ### /decks/{userId}/{deckId}/deletedeck
+- ### /decks/{deckId}/deletedeck
     Method: `GET`
 
      Deletes the selected deck.
 
     A request example will be:
     ```request
-    localhost:8080/decks/1/2/delete
+    localhost:8080/decks/2/delete
     ```
     And the <span style="color:green">successful</span> response will look like:
     ```
@@ -397,25 +419,27 @@ The response also shows the current page we are on, the total number of result p
 
 ## Authentication and Authorization
 
-To manage user-specific collections and decks, this API requires proper user authentication. Ensure each request includes valid authentication tokens where necessary.
+To manage user-specific collections and decks, this API requires proper user authentication by using Bearer tokens, which are generated at the login moment. 
+Ensure each request includes the valid authentication token where necessary.
 
 ## API Overview
 
-| Endpoint                                         | Method   | Description                                | Parameters                                   | Request Body |
-|--------------------------------------------------|----------|--------------------------------------------|----------------------------------------------|--------------|
-| `localhost:8080/cards`                           | GET      | Fetch all cards                            | `name`, `type`, `artist`, `set`, `rarity`,<br>`supertype`, `series`, `generation`, `id`, `page` |            
-| `localhost:8080/users/signin`                     | POST     | Sign in a new user                         | `username`, `email`, `password`              | yes          |
-| `localhost:8080/users/deleteaccount`              | GET      | Remove user by ID                          | `id`                                         |           |
-| `localhost:8080/users/deactivate`                 | GET      | Deactivate user by ID                      | `id`                                         |           |
-| `localhost:8080/collection/`                      | GET      | Fetch all cards in a user's collection     | `userid`                                     |           |
-| `localhost:8080/collection/{userid}/add`          | POST     | Add a new card to user’s collection        | `cardid`                                     |           |
-| `localhost:8080/collection/{userid}/remove`       | POST     | Remove a card from user’s collection       | `cardid`                                     |           |
-| `localhost:8080/decks/{userid}`                   | GET      | Fetch all decks by user ID                 | -                                            |            |
-| `localhost:8080/decks/{userid}/newdeck`           | POST     | Add a new deck to user                     | `name`, `description`                        |           |
-| `localhost:8080/decks/{userid}/{deckid}`          | GET      | Fetch deck by deck ID for a specific user  | -                                            |            |
-| `localhost:8080/decks/{userid}/{deckid}/validate` | GET      | Validate deck                              | -                                            |            |
-| `localhost:8080/decks/{userid}/{deckid}/add`      | POST     | Add a card to deck                         | `cardid`                                     |           |
-| `localhost:8080/decks/{userid}/{deckid}/remove`   | POST     | Remove a card from deck                    | `cardid`                                     |           |
-| `localhost:8080/decks/{userid}/{deckid}/deletedeck` | GET   | Remove a deck by deck ID                   | `deckid`                                     |           |
+| Endpoint                                         | Method   | Description                                | Parameters                                   | Request Body | Auth needed |
+|--------------------------------------------------|----------|--------------------------------------------|----------------------------------------------|--------------|----|
+| `localhost:8080/cards`                           | GET      | Fetch all cards                            | `name`, `type`, `artist`, `set`, `rarity`,<br>`supertype`, `series`, `generation`, `id`, `page` |       |    no | 
+| `localhost:8080/users/signin`                     | POST     | Sign in a new user                         | `username`, `email`, `password` | yes | no|
+| `localhost:8080/users/login`                     | POST     | Logs in the user and gives an auth token                         |  `email`, `password`              | yes          | no: will create the token |
+| `localhost:8080/users/deleteaccount`              | DELETE      | Remove logged user                         | `id`                                         |           | yes |
+| `localhost:8080/users/deactivate`                 | GET      | Deactivate logged user                      | `id`                                         |           | yes|
+| `localhost:8080/collection`                      | GET      | Fetch all cards in a user's collection     | `userid`                                     |           | yes |
+| `localhost:8080/collection/add`          | POST     | Add a new card to user’s collection        | `cardid`                                     |           | yes |
+| `localhost:8080/collection/remove`       | POST     | Remove a card from user’s collection       | `cardid`                                     |           | yes |
+| `localhost:8080/decks`                   | GET      | Fetch all auth user's decks                  | -                                            |            | yes |
+| `localhost:8080/decks/newdeck`           | POST     | Add a new deck to auth user's decks                     | `name`, `description`                        |           | yes |
+| `localhost:8080/decks/{deckid}`          | GET      | Fetch deck by deck ID for a specific user  | -                                            |            | yes |
+| `localhost:8080/decks/{deckid}/validate` | GET      | Validate deck                              | -                                            |            | yes |
+| `localhost:8080/decks/{deckid}/add`      | POST     | Add a card to deck                         | `cardid`                                     |           | yes |
+| `localhost:8080/decks/{deckid}/remove`   | POST     | Remove a card from deck                    | `cardid`                                     |           |  yes |
+| `localhost:8080/decks/{deckid}/deletedeck` | GET   | Remove a deck by deck ID                   | `deckid`                                     |           | yes |
 
 ---

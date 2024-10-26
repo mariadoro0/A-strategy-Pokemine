@@ -94,15 +94,15 @@ With these steps, you’ll be able to access phpMyAdmin and manage your database
 
 # Importing a Database Dump in phpMyAdmin
 
-1. **Locate the `.sql` File**:
-   - Go to your project repository and find the database dump file with the `.sql` extension.
+1. **Locate the `pokemine-db.sql` File**:
+   - Go to the project repository and find the database dump file with the `.sql` extension.
 
 2. **Open phpMyAdmin**:
    - Go to [http://localhost/phpmyadmin](http://localhost/phpmyadmin).
 
 3. **Import the `.sql` File**:
-   - With the database selected, go to the **Import** tab.
-   - Click **Choose File**, select your `.sql` file, and click **Go** to import.
+   - Go to the **Import** tab.
+   - Click **Choose File**, select `pokemine-db.sql` file, and click **Go** to import.
 
 4. **Confirmation**:
    - A success message will confirm the import is complete.
@@ -127,14 +127,31 @@ With these steps, you’ll be able to access phpMyAdmin and manage your database
 # This was just for installing XAMPP; now let’s look at how the database is structured.
 
 
-## Database Pokimane Diagram
+## Database Pokémine Diagram
 
 ![alt text](image.png)
+
+## Explanation of the Tables and Their Roles
+
+### 1. `cards`
+The central table that stores each card's unique attributes like name, set, and stats. This table is the **primary entity** in the system, and it connects to other tables through **foreign keys**.
+
+### 2. `weaknesses`, `resistances`, `abilities`, `types`, `attacks`, `subtypes`
+These are **supporting tables** that store **specific attributes** related to the cards (e.g., a card's weaknesses, abilities, or types). Rather than storing these attributes directly in the `cards` table, they are broken out into separate tables.
+
+### 3. Linking Tables (e.g., `card_weaknesses`, `card_resistances`, `card_abilities`...)
+These tables store the **many-to-many relationships** between `cards` and their attributes. For example:
+- `card_weaknesses` links cards to the weaknesses stored in the `weaknesses` table.
+- `card_abilities` links cards to the abilities stored in the `abilities` table.
+
+This ensures that a single card can have multiple weaknesses or abilities, and those can be shared across multiple cards.
+
+### 4. `users`, `users_collection`,`decks`, `deck_cards`
+These tables manage user-related data and the organization of cards into decks. Each deck belongs to a user and can contain multiple cards. The `deck_cards` table links **specific cards** to **specific decks**.
 
 # Tables Schema
 ## cards
 ```sql
-CREATE TABLE `cards` (
   `id` varchar(16) NOT NULL,
   `set_name` varchar(255) DEFAULT NULL,
   `series` varchar(255) DEFAULT NULL,
@@ -142,7 +159,7 @@ CREATE TABLE `cards` (
   `generation` varchar(255) DEFAULT NULL,
   `release_date` varchar(255) DEFAULT NULL,
   `artist` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL, /*pokémon name*/
   `set_num` varchar(255) DEFAULT NULL,
   `supertype` varchar(255) DEFAULT NULL,
   `card_level` varchar(255) DEFAULT NULL,
@@ -158,153 +175,106 @@ CREATE TABLE `cards` (
   `rules` text DEFAULT NULL,
   `regulation_mark` varchar(255) DEFAULT NULL,
   `ancient_trait` text DEFAULT NULL,
-  `img` text DEFAULT NULL
-)
+  `img` text DEFAULT NULL  /*url card image*/
 ```
 
 ## abilities
 ```sql
-CREATE TABLE `abilities` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `text` varchar(629) NOT NULL,
+  `text` varchar(629) NOT NULL, /*ability description*/
   `type` varchar(255) DEFAULT NULL
-)
 ```
 ## attacks
 ```sql
-CREATE TABLE `attacks` (
   `id` int(11) NOT NULL,
   `attack_name` varchar(255) DEFAULT NULL,
   `cost` varchar(255) DEFAULT NULL,
   `damage` varchar(255) DEFAULT NULL,
   `convertedEnergyCost` int(11) NOT NULL,
-  `text` varchar(472) DEFAULT NULL,
+  `text` varchar(472) DEFAULT NULL, /*attack description*/
   `converted_energy_cost` int(11) NOT NULL
-) 
 ```
-## card_abilities
+## weaknesses
 ```sql
-CREATE TABLE `card_abilities` (
-  `card_id` varchar(50) NOT NULL,
-  `ability_id` int(11) NOT NULL
-)
-```
-## card_attacks
-```sql
-CREATE TABLE `card_attacks` (
-  `card_id` varchar(50) NOT NULL,
-  `attack_id` int(11) NOT NULL
-) 
-```
-## card_resistances
-```sql
-CREATE TABLE `card_resistances` (
-  `card_id` varchar(50) NOT NULL,
-  `resistance_id` int(11) NOT NULL
-)
-```
-## card_subtypes
-```sql
-CREATE TABLE `card_subtypes` (
-  `card_id` varchar(16) NOT NULL,
-  `subtype_id` int(11) NOT NULL
-)
-```
-## card_types
-```sql
-CREATE TABLE `card_types` (
-  `card_id` varchar(255) NOT NULL,
-  `type_id` int(11) DEFAULT NULL
-)
-```
-## card_weaknesses
-```sql
-CREATE TABLE `card_weaknesses` (
-  `card_id` varchar(16) NOT NULL,
-  `weakness_id` int(11) NOT NULL
-)
-```
-## decks
-```sql
-CREATE TABLE `decks` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `deck_name` varchar(255) DEFAULT NULL,
-  `deck_description` varchar(255) DEFAULT NULL
-)
-```
-## deck_cards
-```sql
-CREATE TABLE `deck_cards` (
-  `card_id` varchar(16) NOT NULL,
-  `deck_id` int(11) NOT NULL,
-  `quantity` int(11) DEFAULT NULL
-)
-```
-## resistances
-```sql
-CREATE TABLE `resistances` (
   `id` int(11) NOT NULL,
   `type` varchar(255) DEFAULT NULL,
   `value` varchar(255) DEFAULT NULL
-)
+```
+## resistances
+```sql
+  `id` int(11) NOT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `value` varchar(255) DEFAULT NULL
 ```
 ## subtypes
 ```sql
-CREATE TABLE `subtypes` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL
-)
 ```
 ## types
 ```sql
-CREATE TABLE `types` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL
-)
 ```
+## card_abilities
+```sql
+  `card_id` varchar(50) NOT NULL,
+  `ability_id` int(11) NOT NULL
+```
+## card_attacks
+```sql
+  `card_id` varchar(50) NOT NULL,
+  `attack_id` int(11) NOT NULL
+```
+## card_resistances
+```sql
+  `card_id` varchar(50) NOT NULL,
+  `resistance_id` int(11) NOT NULL
+```
+## card_subtypes
+```sql
+  `card_id` varchar(16) NOT NULL,
+  `subtype_id` int(11) NOT NULL
+```
+## card_types
+```sql
+  `card_id` varchar(255) NOT NULL,
+  `type_id` int(11) DEFAULT NULL
+```
+## card_weaknesses
+```sql
+  `card_id` varchar(16) NOT NULL,
+  `weakness_id` int(11) NOT NULL
+```
+
 ## users
 ```sql
-CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   `email` varchar(125) NOT NULL,
   `is_active` bit(1) NOT NULL DEFAULT b'1'
-)
 ```
 ## user_collection
 ```sql
-CREATE TABLE `user_collection` (
   `quantity` int(11) DEFAULT NULL,
   `card_id` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL
-) 
 ```
-## weaknesses
+## decks
 ```sql
-CREATE TABLE `weaknesses` (
   `id` int(11) NOT NULL,
-  `type` varchar(255) DEFAULT NULL,
-  `value` varchar(255) DEFAULT NULL
-)
+  `user_id` int(11) NOT NULL,
+  `deck_name` varchar(255) DEFAULT NULL,
+  `deck_description` varchar(255) DEFAULT NULL
+```
+## deck_cards
+```sql
+  `card_id` varchar(16) NOT NULL,
+  `deck_id` int(11) NOT NULL,
+  `quantity` int(11) DEFAULT NULL
 ```
 
 
-## Explanation of the Tables and Their Roles
 
-### 1. `cards`
-The central table that stores each card's unique attributes like name, set, and stats. This table is the **primary entity** in the system, and it connects to other tables through **foreign keys**.
-
-### 2. `weaknesses`, `resistances`, `abilities`, `types`, `attacks`, `subtypes`
-These are **supporting tables** that store **specific attributes** related to the cards (e.g., a card's weaknesses, abilities, or types). Rather than storing these attributes directly in the `cards` table, they are broken out into separate tables.
-
-### 3. Linking Tables (e.g., `card_weaknesses`, `card_resistances`, `card_abilities`)
-These tables store the **many-to-many relationships** between `cards` and their attributes. For example:
-- `card_weaknesses` links cards to the weaknesses stored in the `weaknesses` table.
-- `card_abilities` links cards to the abilities stored in the `abilities` table.
-This ensures that a single card can have multiple weaknesses or abilities, and those can be shared across multiple cards.
-
-### 4. `users`, `decks`, `deck_cards`
-These tables manage user-related data and the organization of cards into decks. Each deck belongs to a user and can contain multiple cards. The `deck_cards` table links **specific cards** to **specific decks**.
