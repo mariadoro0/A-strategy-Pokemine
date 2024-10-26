@@ -51,5 +51,5 @@ public class User {
     // @JsonIgnore: Prevents this field from being included in JSON serialization, avoiding recursive references during serialization.
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore
-	private Set<Deck> decks ;// A collection of Deck objects representing the user's decks.
+	private Set<Deck> decks;// A collection of Deck objects representing the user's decks.
 }
