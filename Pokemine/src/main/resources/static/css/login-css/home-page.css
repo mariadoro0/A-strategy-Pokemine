@@ -342,13 +342,4 @@ a {
     width: 100%;
     border-radius: 5px;
 }
-.add-button:hover {
-    background-color: #660000;
-}
-
-.rule-link {
-    font-family: 'Patrick Hand', Arial, sans-serif;
-    text-align: center;
-    font-size: 22px;
-    margin-bottom: 1px;
-}
+	

@@ -42,7 +42,7 @@ public class SecurityConfig {
         http
             .csrf(AbstractHttpConfigurer::disable)  // Disabilita la protezione CSRF per le API stateless
             .authorizeHttpRequests(auth -> auth
-            		.requestMatchers("/index2.html", "/index.html", "/cardinfo.html", "/css/**", "/js/**", "/img/**", "/cards/**", "/users/login", "/users/signup").permitAll()
+            		.requestMatchers("/user-collection.html","/usercollection-statica.html","/index2.html", "/index.html", "/cardinfo.html", "/css/**", "/js/**", "/img/**", "/cards/**", "/users/login", "/users/signup").permitAll()
                 
                 .anyRequest().authenticated())  // Richiede autenticazione per tutti gli altri percorsi
             .sessionManagement(session -> session

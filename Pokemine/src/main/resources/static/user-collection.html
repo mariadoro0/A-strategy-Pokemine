@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemine - Home</title>
+    <link rel="stylesheet" href="./css/decks-screen.css">
+    <link rel="stylesheet" href="./css/home-page.css">
+<style>
+h1.header {
+    text-align: left;
+    font-size: 3.2rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 60px;
+}
+
+.separator {
+    border: 1px solid #ccc;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+</style>    
+    
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="img/logo.png" alt="Pokemine Logo">
+            <button id="home-btn">Home</button>
+            <div class="flag-icons">
+                <img src="img/ita-flag.png" alt="Italian Flag">
+                <img src="img/en-flag.png" alt="English Flag">
+            </div>
+        </div>
+        <nav>
+            <div class="nav-btns">
+                <button id="my-cards-btn"><a href="usercollection.html">Le mie carte</a></button>
+                <button id="my-decks-btn"><a href="decks-screen.html">I miei mazzi</a></button>
+                <div class="profile-icon">
+                    <a href="user-page.html"><img src="img/pokeball-user.png" alt="Profile" width="60"></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <p class="rule-link">Puoi consultare il regolamento ufficiale delle carte Pokémon cliccando <a href="https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/rulebook/twm_rulebook_it.pdf">qui</a>.</p>
+    
+    <h1 class="header">Le mie Carte</h1>
+    
+    <hr class="separator">
+    
+
+    <!-- Griglia delle carte -->
+    <div class="card-container">
+        <div class="card-grid" id="cardGrid">
+            <!-- Le carte verranno caricate qui -->
+        </div>
+    </div>
+
+    <!-- Script JavaScript per il caricamento dinamico delle carte -->
+    <script>
+    const cardGrid = document.getElementById('cardGrid');
+    let currentPage = 1;
+
+    function fetchPokemonCards(page) {
+        let apiUrl = `/cards?page=${page}`;
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                cardGrid.innerHTML = ''; 
+
+                if (data.cards && data.cards.length > 0) {
+                    data.cards.forEach(card => {
+                        const cardElement = document.createElement('div');
+                        cardElement.className = 'card';
+                        cardElement.innerHTML = `
+                            <img src="${card.img || 'img/default-card.png'}" alt="${card.name || 'No name'}">
+                            <p><strong>Name:</strong> ${card.name || 'N/A'}</p>
+                          
+                            <button class="add-button">Aggiungi</button>
+                        `;
+
+                        cardElement.addEventListener('click', () => {
+                            window.location.href = `cardinfo.html?id=${card.id}`;
+                        });
+
+                        cardGrid.appendChild(cardElement);
+                    });
+                } else {
+                    cardGrid.innerHTML = `<p>No cards found.</p>`;
+                }
+            })
+            .catch(error => {
+                console.error('Error loading cards:', error);
+                alert('Error loading cards: ' + error.message);
+            });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchPokemonCards(currentPage);
+    });
+</script>
+
+</body>
+</html>
