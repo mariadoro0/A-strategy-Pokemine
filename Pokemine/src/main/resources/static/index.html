@@ -136,6 +136,17 @@
                     <option value="Legendary Collection">Legendary Collection</option>
                 </select>
             </div>
+            
+            <!-- Filtro per Supertype -->
+            <div>
+                <label for="supertype">Supertype:</label>
+                <select id="supertype">
+                    <option value="">Select</option>
+                    <option value="Pokémon">Pokémon</option>
+                    <option value="Energy">Energy</option>
+                    <option value="Trainer">Trainer</option>
+                </select>
+            </div>
         </div>
         <button class="search-button" id="filterSearchBtn">Search by Filters</button>
     </div>
@@ -185,7 +196,6 @@
                             <p><strong>HP:</strong> ${card.hp || 'N/A'}</p>
                         `;
 
-                        // Imposta un evento click sulla carta
                         cardElement.addEventListener('click', () => {
                             window.location.href = `cardinfo.html?id=${card.id}`;
                         });
@@ -210,7 +220,8 @@
             series: document.getElementById('series').value,
             rarity: document.getElementById('rarity').value,
             generation: document.getElementById('generation').value,
-            setName: document.getElementById('setName').value
+            setName: document.getElementById('setName').value,
+            supertype: document.getElementById('supertype').value // Added supertype filter here
         };
 
         fetchPokemonCards(currentPage, filters);
@@ -226,7 +237,8 @@
             series: document.getElementById('series').value,
             rarity: document.getElementById('rarity').value,
             generation: document.getElementById('generation').value,
-            setName: document.getElementById('setName').value
+            setName: document.getElementById('setName').value,
+            supertype: document.getElementById('supertype').value // Ensure supertype is included here too
         };
         fetchPokemonCards(currentPage, filters);
     });
@@ -235,6 +247,7 @@
         fetchPokemonCards(currentPage);
     });
 </script>
+
 
 </body>
 </html>
