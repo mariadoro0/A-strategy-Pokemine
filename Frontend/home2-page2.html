@@ -6,119 +6,6 @@
     <title>Home</title>
     <link rel="stylesheet" href="./css/decks-screen.css">
     <link rel="stylesheet" href="./css/home-page.css">
-    
-<!--  <style>
-        .search-container {
-            margin-left: 60px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .search-box {
-            display: flex;
-            align-items: center;
-            border: 2px solid black;
-            border-radius: 30px;
-            padding: 5px 10px;
-            background-color: white;
-        }
-
-        .search-input {
-            border: none;
-            outline: none;
-            height: 30px;
-            padding-left: 10px;
-            font-size: 16px;
-            width: 200px;
-        }
-
-        .icon-search, .icon-clear {
-            font-size: 18px;
-            cursor: pointer;
-        }
-
-        .filter-button, .search-button {
-            font-family: 'Patrick Hand', Arial, sans-serif;
-            border: 2px solid black;
-            background-color: white;
-            border-radius: 30px;
-            padding: 5px 15px;
-            font-size: 20px;
-            cursor: pointer;
-            height: 45px;
-        }
-
-        .filter-button {
-            display: flex;
-            align-items: center;
-        }
-
-        .filter-button i {
-            margin-right: 5px;
-        }
-
-        /* Modal styling */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 10% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 50%;
-            border-radius: 15px;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .filter-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .filter-grid div {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .search-button {
-            background-color: #ffa500;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .search-button:hover {
-            background-color: #ff8c00;
-        }
-    </style> -->
 </head>
 
 <body>
@@ -133,12 +20,9 @@
         </div>
         <nav>
             <div class="nav-btns">
-                <button id="my-cards-btn"><a href="usercollection.html">Le mie carte</a></button>
+             
 
-                <button id="my-decks-btn"><a href="decks-screen.html">I miei mazzi</a></button>
-                <div class="profile-icon">
-                    <a href="user-page.html"><img src="img/pokeball-user.png" alt="Profile" width="60"></a>
-                </div>
+                <button id="my-decks-btn"><a href="login.html">Login</a></button>
             </div>
         </nav>
     </header>
@@ -326,8 +210,8 @@
        
         <div class="pagination-container">
             <a href="#" class="pagination-arrow">&#10094;</a> <!-- Freccia sinistra -->
-            <a href="#" class="pagination-number active" >1</a>
-            <a href="homepagination.html" class="pagination-number">2</a>
+            <a href="#" class="pagination-number">1</a>
+            <a href="#" class="pagination-number active">2</a>
             <a href="#" class="pagination-number">3</a>
             <span class="pagination-dots">...</span>
             <a href="#" class="pagination-number">8</a>
@@ -419,7 +303,7 @@
                 alert('Errore nel caricamento delle carte: ' + error.message);
             });
     }
- */
+*/
     // Funzione per eseguire la ricerca con i filtri selezionati
 document.getElementById('filterSearchBtn').addEventListener('click', () => {
     const filters = {
