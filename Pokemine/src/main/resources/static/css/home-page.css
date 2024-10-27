@@ -1,0 +1,311 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+body {
+    /* Set a background image with repeat */
+    background-image: url("https://static.prod.pokemon.com/images/pikachu_pattern.png");
+    font-family: 'Patrick Hand', Arial, sans-serif;
+    background-repeat: repeat;
+    margin: 0;
+}
+
+.logo-home {
+    /* Flexbox layout for logo and home elements */
+    display: flex;
+    align-items: center;
+}
+
+
+.navbar {
+    /* Styling for the navigation bar */
+    background-color: #000000;
+    color: rgb(255, 255, 255); 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 54.75px;
+    padding: 1rem;
+    flex-wrap: wrap; /* Allows wrapping for smaller screens */
+}
+
+.nav-links {
+    /* Adjust margin and padding for navigation links */
+    margin-right: 5px;
+    padding: 0;
+}
+
+.im {
+    /* Margin-right for image alignment */
+    margin-right: 10px;
+}
+
+.bic {
+    /* Centering content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home {
+    /* Styling for home button */
+    margin-right: 0; /* Remove large margin */
+    margin-left: 20px; /* Add small left margin */
+    color: white;
+    text-decoration: none;
+    border: 2px solid #535353;
+    background-color: #535353;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 20px;
+}
+
+.nav-pic {
+    /* Left margin for navigation picture */
+    margin-left: 20px;
+}
+
+.profile {
+    /* Profile card styling */
+    width: 100%; /* Full width */
+    max-width: 500px; /* Maximum width */
+    height: auto;
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+    margin: 20px auto; /* Center the profile card */
+}
+
+.profile img {
+    /* Profile image styling */
+    width: 100%;
+    max-width: 200px; /* Maximum width */
+    height: auto;
+    border-radius: 50%; /* Round image */
+    margin-bottom: 10px;
+    background-color: black;
+}
+
+.profile h2 {
+    /* Profile title styling */
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #333;
+}
+
+.profile button {
+    /* Button styling */
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.profile button:hover {
+    /* Hover effect for button */
+    background-color: #0056b3;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .navbar {
+        /* Change navbar direction on small screens */
+        flex-direction: column;
+    }
+
+    .home {
+        /* Adjust margin to fit screen on small devices */
+        margin-right: 0;
+    }
+
+    .profile {
+        /* Reduce profile width on small screens */
+        width: 90%;
+    }
+
+    .profile img {
+        /* Reduce profile image size on small screens */
+        max-width: 150px;
+    }
+}
+
+.controls {
+    /* Flexbox for controls section */
+    display: flex;
+    align-items: center;
+}
+
+.controls input {
+    /* Input field styling */
+    margin-right: 10px;
+    padding: 5px;
+}
+
+.controls button {
+    /* Button styling for controls */
+    margin-right: 10px;
+    padding: 5px 10px;
+}
+
+.lang-toggle button {
+    /* Language toggle button styling */
+    margin-left: 5px;
+    padding: 5px;
+}
+
+.card-container {
+    /* Card container styling */
+    margin-top: 30px;
+    padding: 20px;
+    margin: 20px;
+}
+
+.card-grid {
+    /* Grid layout for cards */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 16px;
+    padding: 16px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 0px;
+    width: 250px;
+    background-color: white; /* Sfondo bianco per le carte */
+}
+
+
+.card img {
+    /* Image inside card styling */
+    max-width: 100%;
+    height: auto;
+}
+
+.pagination-container {
+    /* Pagination container styling */
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.pagination button {
+    /* Pagination button styling */
+    padding: 5px 10px;
+    margin: 0 5px;
+}
+
+#logind {
+    /* Login button styling */
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    background-color: #ddd;
+    font-size: 20px;
+    
+}
+
+#logind a:hover {
+    /* Hover effect for login button */
+    background-color: #555;
+    border-radius: 5px;
+}
+
+.pagination-arrow, .pagination-number {
+    /* Styling for pagination elements */
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 30%;
+    border: 1px solid black;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.pagination-number.active {
+    /* Active pagination number styling */
+    background-color: black;
+    color: white;
+    border: none;
+}
+
+.pagination-dots {
+    /* Dots between pagination numbers */
+    font-size: 18px;
+    padding: 10px;
+}
+
+.search-container {
+    /* Search bar container styling */
+    
+    margin-left: 60px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.search-box {
+    /* Search box styling */
+    
+    display: flex;
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 30px;
+    padding: 5px 10px;
+    background-color: white;
+}
+
+.search-input {
+    /* Input field inside search box */
+    border: none;
+    outline: none;
+    height: 30px;
+    padding-left: 10px;
+    font-size: 16px;
+    width: 200px;
+}
+
+.icon-search, .icon-clear {
+    /* Search and clear icons styling */
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.icon-clear {
+    /* Margin for the clear icon */
+    margin-left: 10px;
+}
+
+.filter-button, .search-button {
+    /* Button styling for filter and search */
+    font-family: 'Patrick Hand', Arial, sans-serif;
+    border: 2px solid black;
+    background-color: white;
+    border-radius: 30px;
+    padding: 5px 15px;
+    font-size: 20px;
+    cursor: pointer;
+    height: 45px;
+}
+
+.filter-button {
+    /* Flexbox layout for filter button */
+    display: flex;
+    align-items: center;
+}
+
+.filter-button i {
+    /* Margin for filter button icon */
+    margin-right: 5px;
+}

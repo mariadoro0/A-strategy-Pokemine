@@ -1,6 +1,7 @@
 package com.astrategy.pokemine.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,9 +23,9 @@ public class DeckCard {
     
     // Many-to-One relationship to the Card entity. This field maps to the "card_id" column and links a deck to a specific card. @MapsId ties this field to the cardId in the composite key. @JsonIgnore prevents it from being serialized in JSON responses.
     @MapsId("cardId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "card_id", nullable = false)
-    @JsonIgnore
+    @JsonManagedReference
     private Card card;
     
     // This field stores the number of times a specific card appears in a deck.

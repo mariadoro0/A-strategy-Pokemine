@@ -1,0 +1,102 @@
+body {
+    background-image: url("https://static.prod.pokemon.com/images/pikachu_pattern.png");
+    background-repeat: repeat;
+    margin: 0;
+}
+.logo-home {
+    display: flex;
+    align-items: center;
+}
+.navbar {
+    background-color: #000000;
+    color: rgb(255, 255, 255); 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    flex-wrap: wrap;
+}
+
+.nav-links {
+    margin-right: 5px;
+    padding: 0;
+}
+
+.bic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home {
+   /* margin-right: auto; /* Usa auto per un layout più fluido */
+    margin-right: 0; /* Rimuovi il margine grande */
+    margin-left: 20px; /* Aggiungi un piccolo margine sinistro per separare dal logo */
+
+}
+
+.nav-pic {
+    
+    margin-left: 20px;
+}
+
+.profile {
+    width: 100%; /* Usa 100% per renderlo flessibile */
+    max-width: 500px; /* Imposta un limite massimo */
+    height: auto;
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto; /* Centra l'elemento */
+}
+
+.profile img {
+    width: 100%;
+    max-width: 200px; /* Limita la larghezza massima */
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    background-color: black;
+}
+
+.profile h2 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #333;
+}
+
+.profile button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.profile button:hover {
+    background-color: #0056b3;
+}
+
+/* Media query per schermi più piccoli */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Cambia la direzione degli elementi nel menu su schermi piccoli */
+    }
+
+    .home {
+        margin-right: 0; /* Riduci il margine per evitare che vada fuori dallo schermo */
+    }
+
+    .profile {
+        width: 90%; /* Riduci la larghezza della scheda su schermi piccoli */
+    }
+
+    .profile img {
+        max-width: 150px; /* Riduci la dimensione dell'immagine su schermi piccoli */
+    }
+}

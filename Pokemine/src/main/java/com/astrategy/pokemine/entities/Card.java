@@ -77,6 +77,10 @@ public class Card {
 	@JsonIgnore
 	private Set<UserCollection> userCollection ;
 
+	@OneToMany(mappedBy = "card")
+	@JsonIgnore
+	private Set<DeckCard> deckCards ;
+
 	/*relationship between a card and its abilities by relational table*/
 	@ManyToMany
 	@JoinTable(

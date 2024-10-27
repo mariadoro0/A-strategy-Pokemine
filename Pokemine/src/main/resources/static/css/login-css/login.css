@@ -1,0 +1,54 @@
+/* Rimuoviamo lo stile del body in login.css perché già definito in layout.css */
+.bic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home {
+    color: white;
+    margin-right: 0; /* Remove large margin */
+    margin-left: 20px; /* Add a small left margin to separate from the logo */
+    text-decoration: none;
+    border: 2px solid #535353;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.login-form {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form input {
+    margin-bottom: 40px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.login-form button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.login-form button:hover {
+    background-color: #0056b3;
+}
+
+.container {
+    width: 500px;
+    height: 500px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Rimuovo i duplicati del profile e navbar poiché già gestiti in layout.css */

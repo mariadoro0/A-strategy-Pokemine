@@ -1,0 +1,57 @@
+.bics {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*//height: 100vh; /* Altezza della viewport per centrare verticalmente */
+}
+
+.profile {
+    width: 500px;
+    height: auto; /* Altezza auto per adattarsi al contenuto */
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: auto; /* Margine automatico per centrare orizzontalmente */
+}
+
+.profile img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    background-color: black;
+}
+
+.profile h2 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #333;
+}
+
+.profile button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.profile button:hover {
+    background-color: #0056b3;
+}
+
+/* Modifiche specifiche per piccoli schermi */
+@media (max-width: 768px) {
+    .profile {
+        width: 90%;
+    }
+
+    .profile img {
+        max-width: 150px;
+    }
+}

@@ -1,0 +1,72 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+body {
+    background-image: url("https://static.prod.pokemon.com/images/pikachu_pattern.png");
+    font-family: 'Patrick Hand', Arial, sans-serif;
+    background-repeat: repeat;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    padding: 10px 20px;
+}
+
+.logo img {
+    width: 150px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-btn {
+    background-color: #333;
+    color: white;
+    border: none;
+    margin: 0 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.nav-btn:hover {
+    background-color: #555;
+}
+
+.profile-icon img {
+    width: 50px;
+    border-radius: 50%;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+}
+
+.controls input, .controls button {
+    margin-right: 10px;
+    padding: 5px;
+}
+
+.lang-toggle button {
+    margin-left: 5px;
+    padding: 5px;
+}
+
+#logind {
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    background-color: #ddd;
+    font-size: 20px;
+}
+
+#logind a:hover {
+    background-color: #555;
+    border-radius: 5px;
+}

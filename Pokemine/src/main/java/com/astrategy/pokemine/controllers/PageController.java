@@ -37,4 +37,5 @@ public class PageController {
     public String about() {
         return "deckscreen"; // Nome della vista per la pagina di informazioni
     }
+
 }

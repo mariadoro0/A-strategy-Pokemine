@@ -1,20 +1,312 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Pokémon Decks</title>
-    <link rel="stylesheet" href="css/nav.css">
-    <link rel="stylesheet" href="css/decks-screen.css">
 </head>
+<style>
+    /* decks-screen.css */
+
+/* Importa il font Patrick Hand da Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+body {
+overflow-x: hidden;
+margin: 0;
+padding: 0;
+background-image: url("https://static.prod.pokemon.com/images/pikachu_pattern.png");
+background-repeat: repeat;
+font-family: 'Patrick Hand', Arial, sans-serif; /* Font simile */
+}
+
+.container {
+max-width: 1600px; /* Imposta una larghezza massima per il contenitore */
+margin: 0 auto; /* Centra la pagina orizzontalmente */
+padding: 0 20px; /* Aggiungi padding laterale per un layout più fluido */
+overflow-x: hidden; /* Previeni scorrimento orizzontale */
+}
+
+h1.header {
+text-align: left; /* Sposta il titolo a destra */
+margin-left: 22px;
+font-size: 2.7rem; /* Dimensione testo simile */
+}
+
+.buttons {
+font-family: 'Patrick Hand', Arial, sans-serif;
+}
+
+.deck-buttons {
+display: flex;
+justify-content: space-between; /* Bottoni a destra e sinistra */
+align-items: center;
+padding: 1rem 20px;
+}
+
+.left-buttons {
+display: flex;
+gap: 10px; /* Spazio tra i bottoni */
+}
+
+.right-buttons {
+display: flex;
+gap: 10px; /* Bottoni per "New deck" e "Deck info" */
+}
+
+/* Bottoni più lunghi e stretti */
+.deck-buttons button {
+width: 150px;  /* Più lungo */
+height: 40px;  /* Più stretto */
+margin-right: 10px;
+padding: 8px 16px;
+border-radius: 5px;
+border: 2px solid #ccc;
+cursor: pointer;
+font-size: 16px;  /* Aumenta leggermente il testo */
+}
+
+/* Bottoni "New deck" e "Deck info" in colonna */
+.new-deck-btn,
+.info-btn {
+display: block;
+width: 150px; /* Aumenta larghezza */
+height: 40px; /* Regola altezza */
+margin-bottom: 10px; /* Spazio tra i due bottoni */
+margin-left: auto; /* Allinea a destra */
+margin-right: 0;
+}
+
+
+.deck-btn, .new-deck-btn, .info-btn {
+padding: 10px 20px;
+border-radius: 5px;
+border: 2px solid #ccc;
+cursor: pointer;
+font-family: 'Patrick Hand', Arial, sans-serif;
+font-size: 20px;
+}
+
+.deck-btn.active {
+background-color: #5a5ff0;
+color: white;
+font-family: 'Patrick Hand', Arial, sans-serif;
+}
+
+.new-deck-btn {
+background-color: #00cc66;
+color: white;
+}
+
+.info-btn {
+background-color: #f0f0f0;
+}
+
+hr.separator {
+border: 2px solid #ccc;
+width: 96.9%;
+margin-left: 22px;
+margin-right: 22px;
+}
+
+.cards-container {
+display: grid;
+grid-template-columns: repeat(5, 1fr); /* 5 carte per riga */
+gap: 20px;
+padding: 20px;
+margin: 0 auto;
+}
+
+.card {
+background-color: white;
+border-radius: 10px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+padding: 20px;
+text-align: center;
+border: 2px solid #f0f0f0;
+}
+
+.card img {
+max-width: 100%;
+height: auto;
+border-radius: 5px;
+}
+
+.card-info {
+display: flex;
+justify-content: space-between; /* Aggiusta il layout del contatore */
+align-items: center;
+border: 1px solid black; /* Bordo nero attorno al counter */
+padding: 5px;
+width: 100px; /* Larghezza del contenitore del counter */
+margin: 0 auto;
+}
+
+.counter-btn {
+background-color: #ccc;
+border: none;
+padding: 5px 10px;
+cursor: pointer;
+margin: 0 5px;
+}
+
+.counter-text {
+font-size: 16px;
+font-weight: bold;
+}
+
+.delete-btn {
+background-color: red;
+color: white;
+padding: 10px;
+border: none;
+cursor: pointer;
+margin-top: 10px;
+width: 100%;
+border-radius: 5px;
+}
+
+.delete-btn:hover {
+background-color: #cc0000;
+}
+
+/* Media query per schermi più piccoli */
+@media (max-width: 768px) {
+.cards-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 colonne su schermi più piccoli */
+}
+}
+
+@media (max-width: 480px) {
+.cards-container {
+    grid-template-columns: 1fr; /* 1 colonna su schermi molto piccoli */
+}
+}
+body {
+background-image: url("https://static.prod.pokemon.com/images/pikachu_pattern.png");
+background-repeat: repeat;
+margin: 0;
+}
+.losgo-home {
+display: flex;
+align-items: center;
+}
+.navbar {
+background-color: #000000;
+color: rgb(255, 255, 255);
+display: flex;
+justify-content: space-between;
+align-items: center;
+/* padding: 1rem; */
+flex-wrap: wrap;
+}
+
+.nav-links {
+margin-right: 5px;
+padding: 0;
+}
+
+.bic {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.home {
+color:white;
+/* margin-right: auto; /* Use auto for a more fluid layout */
+margin-right: 0; /* Remove large margin */
+margin-left: 20px; /* Add a small left margin to separate from the logo */
+text-decoration: none;
+border: 2px solid #535353;
+border-radius: 10px;
+padding: 5px;
+
+}
+
+.nav-pic {
+
+margin-left: 20px;
+}
+
+.profile {
+width: 100%; /* Usa 100% per renderlo flessibile */
+max-width: 500px; /* Imposta un limite massimo */
+height: auto;
+text-align: center;
+padding: 20px;
+background-color: #fff;
+border-radius: 10px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+margin: 20px auto; /* Centra l'elemento */
+}
+
+.profile img {
+width: 100%;
+max-width: 200px; /* Limita la larghezza massima */
+height: auto;
+border-radius: 50%;
+margin-bottom: 10px;
+background-color: black;
+}
+
+.profile h2 {
+margin-bottom: 20px;
+font-size: 20px;
+color: #333;
+}
+
+.profile button {
+margin: 10px;
+padding: 10px 20px;
+border: none;
+border-radius: 5px;
+background-color: #007BFF;
+color: white;
+cursor: pointer;
+display: inline-block;
+}
+
+.profile button:hover {
+background-color: #0056b3;
+}
+#logind {
+text-decoration: none;
+border-radius: 10px;
+padding: 0.5rem 1rem;
+background-color: #ddd;
+}
+#logind a:hover {
+   background-color: #555;
+   border-radius: 5px;
+}
+/* Media query per schermi più piccoli */
+@media (max-width: 768px) {
+.navbar {
+    flex-direction: column; /* Cambia la direzione degli elementi nel menu su schermi piccoli */
+}
+
+.home {
+    margin-right: 0; /* Riduci il margine per evitare che vada fuori dallo schermo */
+}
+
+.profile {
+    width: 90%; /* Riduci la larghezza della scheda su schermi piccoli */
+}
+
+.profile img {
+    max-width: 150px; /* Riduci la dimensione dell'immagine su schermi piccoli */
+}
+}
+</style>
 <body>
 <header>
     <div class="logo">
-        <img src="img/logo.png" alt="Pokemine Logo">
+        <img th:src="@{/img/logo.png}" alt="Pokemine Logo">
         <button id="home-btn">Home</button>
         <div class="flag-icons">
-            <img src="img/ita-flag.png" alt="Italian Flag">
-            <img src="img/en-flag.png" alt="English Flag">
+            <img th:src="@{/img/ita-flag.png}" alt="Italian Flag">
+            <img th:src="@{/img/en-flag.png}" alt="English Flag">
         </div>
     </div>
     <nav>
@@ -22,16 +314,16 @@
             <button id="my-cards-btn">Le mie carte</button>
             <button id="my-decks-btn">I miei mazzi</button>
             <div class="profile-icon">
-                <img src="img/pokeball-user.png" alt="Profile" width="60">
+                <img th:src="@{/img/pokeball-user.png}" alt="Profile" width="60">
             </div>
         </div>
     </nav>
 </header>
-<p class="rule-link">Puoi consultare il regolamento ufficiale delle carte Pokémon cliccando <a href="https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/rulebook/twm_rulebook_it.pdf">qui</a>.</p>
+<p class="rule-link">Puoi consultare il regolamento ufficiale delle carte Pokémon cliccando <a th:href="@{https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/rulebook/twm_rulebook_it.pdf}">qui</a>.</p>
 <div class="container">
     <h1 class="header">I miei mazzi</h1>
     <div class="deck-buttons">
-        <div class="left-buttons">
+        <div class="left-buttons" id="decks-container" >
             <button class="deck-btn-active">Mazzo 1</button>
             <button class="deck-btn">Mazzo 2</button>
             <button class="deck-btn">Mazzo 3</button>
@@ -43,78 +335,85 @@
     </div>
     <hr class="separator">
 
-    <div class="cards-container" id="decks-container">
-        <!-- I mazzi verranno caricati qui -->
+    <div class="cards-container">
+
     </div>
 </div>
-
-<script>
-    async function fetchDecks() {
-        const token = localStorage.getItem('token'); // Assicurati che il token sia presente nel localStorage
-        try {
-            const response = await fetch('http://localhost:8080/decks', {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            if (!response.ok) {
-                throw new Error('Network response was not ok: ' + response.statusText);
-            }
-
-            const decks = await response.json();
-            displayDecks(decks);
-        } catch (error) {
-            console.error('Error fetching decks:', error);
+    <script>
+        async function fetchDecks() {
+const token = localStorage.getItem('token');
+try {
+    const response = await fetch('http://localhost:8080/decks', {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
         }
+    });
+
+    if (!response.ok) {
+        throw new Error('Network response was not ok: ' + response.statusText);
     }
 
-    function displayDecks(decks) {
-        const decksContainer = document.getElementById('decks-container');
-        decksContainer.innerHTML = ''; // Svuota il contenitore esistente
+    const decks = await response.json();
+    displayDeckButtons(decks);
+} catch (error) {
+    console.error('Error fetching decks:', error);
+}
+}
 
-        decks.forEach(deck => {
-            const deckElement = document.createElement('div');
-            deckElement.classList.add('card');
-            deckElement.innerHTML = `
-                <img src="deck.Card.img" alt="${deck.deckName}"> <!-- Modifica questo con l'immagine reale del mazzo -->
-                <div class="card-info">
-                    <h2>${deck.deckName}</h2>
-                    <p><strong>ID del mazzo:</strong> ${deck.id}</p>
-                    <p>${deck.deckDescription}</p>
-                    <button class="delete-btn" onclick="deleteDeck(${deck.id})">Elimina</button>
-                </div>
-            `;
-            decksContainer.appendChild(deckElement);
-        });
-    }
+function displayDeckButtons(decks) {
+const decksContainer = document.getElementById('decks-container');
+decksContainer.innerHTML = '';
 
-    async function deleteDeck(deckId) {
-        const token = localStorage.getItem('token');
-        try {
-            const response = await fetch(`http://localhost:8080/decks/${deckId}`, {
-                method: 'DELETE',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            });
+decks.forEach(deck => {
+    const button = document.createElement('button');
+    button.classList.add('deck-btn');
+    button.textContent = deck.deckName;
+    button.onclick = () => loadDeckCards(deck.id);  // Carica le carte del mazzo quando viene cliccato
+    decksContainer.appendChild(button);
+});
+}
 
-            if (response.ok) {
-                alert('Mazzo eliminato con successo!');
-                fetchDecks(); // Ricarica i mazzi dopo l'eliminazione
-            } else {
-                throw new Error('Errore nell\'eliminazione del mazzo: ' + response.statusText);
-            }
-        } catch (error) {
-            console.error('Error deleting deck:', error);
+async function loadDeckCards(deckId) {
+const token = localStorage.getItem('token');
+try {
+    const response = await fetch(`http://localhost:8080/deckcard/${deckId}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
         }
+    });
+
+    if (!response.ok) {
+        throw new Error('Errore nel caricamento delle carte: ' + response.statusText);
     }
 
-    // Carica i mazzi quando la pagina è pronta
-    window.onload = fetchDecks;
-</script>
+    const cards = await response.json();
+    displayCards(cards);
+} catch (error) {
+    console.error('Error fetching cards:', error);
+}
+}
+
+function displayCards(cards) {
+const cardsContainer = document.querySelector('.cards-container');
+cardsContainer.innerHTML = '';
+
+cards.forEach(card => {
+    const cardElement = document.createElement('div');
+    cardElement.classList.add('card');
+    cardElement.innerHTML = `
+        <img src="${card.card.img}" alt="${card.name}"> <!-- Assicurati che `card.imgUrl` sia corretto -->
+
+        </div>
+    `;
+    cardsContainer.appendChild(cardElement);
+});
+}
+
+window.onload = fetchDecks;
+    </script>
 </body>
 </html>

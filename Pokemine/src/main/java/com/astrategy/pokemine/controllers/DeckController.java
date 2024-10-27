@@ -51,8 +51,9 @@ public class DeckController {
     public ResponseEntity<?> getDeckCards(@AuthenticationPrincipal CustomUserDetails userDetails, @PathVariable int deckId) {
         User u =userService.findByUsername(userDetails.getUsername());
         try {
-            Map<String, Integer> deckCards = deckService.getDeckCardsByDeckId(u.getId(), deckId); // Retrieves cards of the specified deck
-            return new ResponseEntity<>(deckCards, HttpStatus.OK);
+
+          //  Map<String, Integer> deckCards = deckService.getDeckCardsByDeckId(u.getId(), deckId); // Retrieves cards of the specified deck
+            return new ResponseEntity<>(deckService.getDeckCardsByDeckId(u.getId(), deckId), HttpStatus.OK);
         }catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }

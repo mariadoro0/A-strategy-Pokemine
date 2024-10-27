@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profilo Utente</title>
-    <link rel="stylesheet" href="./css/user-page.css">
-    <link rel="stylesheet" href="./css/decks-screen.css">
+
     <style>
         /* decks-screen.css */
 
@@ -508,17 +507,17 @@
 <body>
 <header>
     <div class="logo">
-        <img src="img/logo.png" alt="Pokemine Logo">
+        <img th:src="@{/img/logo.png}" alt="Pokemine Logo">
         <button id="home-btn">Home</button>
         <div class="flag-icons">
-            <img src="img/ita-flag.png" alt="Italian Flag">
-            <img src="img/en-flag.png" alt="English Flag">
+            <img th:src="@{/img/ita-flag.png}" alt="Italian Flag">
+            <img th:src="@{/img/en-flag.png}" alt="English Flag">
         </div>
     </div>
     <nav>
         <div class="nav-btns">
             <div class="profile-icon">
-                <img src="img/pokeball-user.png" alt="Profile" width="60">
+                <img th:src="@{/img/pokeball-user.png}" alt="Profile" width="60">
             </div>
         </div>
     </nav>
@@ -529,11 +528,11 @@
 <br/>
 <div class ="bic">
     <div class="profile2">
-        <img src="./img/pokeball-user.png" alt="User Logo" width=100 height=100>
+        <img th:src="@{/img/pokeball-user.png}" alt="User Logo" width=100 height=100>
         <!--  <img th:src="${logo}" alt="User Logo" width=100 height=100> -->
         <h2 id="user-name"></h2>
         <button class="delete-btn" onclick="viewCards()" >Carte</button>
-        <button class="delete-btn">Mazzi</button>
+        <button class="delete-btn" onclick="ViewDecks()">Mazzi</button>
     </div>
 </div>
 
