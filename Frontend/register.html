@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Page</title>
-    <link rel="stylesheet" href="css/new-navbar.css">
     <link rel="stylesheet" href="css/register.css"> 
       
 
@@ -14,13 +13,14 @@
     <header>
         <div class="logo">
             <img src="img/logo.png" alt="Pokemine Logo">
+            <button id="home-btn"><a href="homepage.html">Home</a></button>
+            <div class="flag-icons">
+                <img src="img/ita-flag.png" alt="Italian Flag">
+                <img src="img/en-flag.png" alt="English Flag">
+            </div>
         </div>
         <nav>
-            <button class="nav-btn">Home</button>
            
-            <div class="profile-icon">
-                <img src="img/pokeball.svg" alt="Profile">
-            </div>
         </nav>
     </header>
    
@@ -31,7 +31,7 @@
 	<br>
 	<div class ="bic">
     <div class="container">
-        <img src="img/logo.png" alt="Logo" class="logo">
+        <img src="img/logo.png" alt="Logo" class="logos">
         <form class="register-form" method="post"  role="form">
 
             <input 
@@ -52,7 +52,9 @@
                 required 
                 id="password" 
                 name="password">
-            <button type="submit">Registrati</button>
+            <button type="submit"><a href="login.html">Registrati</a></button>
+            <p>Hai un account accedi <a href="login.html">qui</a></p>
+            
 
         </form>
     </div>
