@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémine - Deck Info</title>
+    <link rel="stylesheet" href="css/deckinfo.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="img/logo.png" alt="Pokemine Logo">
+            <button id="home-btn" onclick="location.href='home-page-eng.html'">Home</button>
+            <div class="flag-icons">
+                <a href="/../A-strategy-Learning_by-Project/Frontend/ita/deckinfo.html" class="flag-icon" title="ITA"><img src="img/ita-flag.png" alt="Italian Flag"></a>
+                <a href="deckinfo-eng.html" class="flag-icon" title="ENG"><img src="img/en-flag.png" alt="English Flag"></a>
+            </div>
+        </div>
+        <nav>
+            <div class="nav-btns">
+                <button id="my-cards-btn" onclick="location.href='usercollection-eng.html'">My cards</button>
+                <button id="my-decks-btn" onclick="location.href='decks-screen-eng.html'">My decks</button>
+                <div class="profile-icon">
+                    <a href="user-page-eng.html" title="Profile"><img src="img/pokeball-user.png" alt="Profile" width="60"></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="deck-info-container">
+            <h1>Deck Info</h1>
+            <div class="deck-details">
+                <div class="card-image">
+                    <img src="./img/pokecard.JPG" alt="Pokemon Card">
+                </div>
+                <div class="deck-info">
+                    <h2>Deck name</h2>
+                    <p><strong>Card number</strong> <span class="card-number">18/60</span></p>
+                    <h3>Description</h3>
+                    <p>The deck can contain only cards available in your collection. Pay attention to the number of cards you own and ensure they are not already included in other decks.</p>
+                    <hr>
+                    <button class="delete-btn">Delete deck</button>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

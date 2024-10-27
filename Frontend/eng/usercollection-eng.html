@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémine - My Cards</title>
+    <link rel="stylesheet" href="css/usercollection.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="img/logo.png" alt="Pokemine Logo">
+            <button id="home-btn" onclick="location.href='home-page-eng.html'">Home</button>
+            <div class="flag-icons">
+                <a href="/../A-strategy-Learning_by-Project/Frontend/ita/usercollection.html" class="flag-icon" title="ITA"><img src="img/ita-flag.png" alt="Italian Flag"></a>
+                <a href="usercollection-eng.html" class="flag-icon" title="ENG"><img src="img/en-flag.png" alt="English Flag"></a>
+            </div>
+        </div>
+        <nav>
+            <div class="nav-btns">
+                <button id="my-cards-btn" onclick="location.href='usercollection-eng.html'">My cards</button>
+                <button id="my-decks-btn" onclick="location.href='decks-screen-eng.html'">My decks</button>
+                <div class="profile-icon">
+                    <a href="user-page-eng.html" title="Profile"><img src="img/pokeball-user.png" alt="Profile" width="60"></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <p class="rule-link">You can consult the official Pokémon card rules by clicking <a href="https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/rulebook/twm_rulebook_it.pdf" target="_blank">here</a>.</p>
+
+    <div class="container">
+        <h1 class="header">My cards</h1>
+        <div class="right-buttons">
+            <button class="new-deck-btn">Add</button>
+        </div>
+        <hr class="separator">
+        
+        <div class="cards-container">
+            <!-- Esempio di carta -->
+            <div class="card">
+                <img src="https://images.pokemontcg.io/swsh5/4_hires.png" alt="Cacnea">
+                <div class="card-info">
+                    <button class="counter-btn" onclick="updateCounter(this, -1)">-</button>
+                    <span class="counter-text">0/4</span>
+                    <button class="counter-btn" onclick="updateCounter(this, 1)">+</button>
+                </div>
+                <select class="deck-select">
+                    <option value="" disabled selected>Select Deck</option>
+                    <option value="mazzo1">Deck 1</option>
+                    <option value="mazzo2">Deck 2</option>
+                    <option value="mazzo3">Deck 3</option>
+                </select>
+                <button class="delete-btn">Add</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateCounter(element, change) {
+            const counterText = element.parentElement.querySelector('.counter-text');
+            let currentCount = parseInt(counterText.textContent.split('/')[0]);
+            currentCount += change;
+
+            if (currentCount >= 0 && currentCount <= 4) {
+                counterText.textContent = `${currentCount}/4`;
+            }
+        }
+    </script>
+</body>
+</html>

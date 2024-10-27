@@ -1,0 +1,187 @@
+
+.profile2 {
+    width: 500px;
+    height: 500px;
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+button.delete-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button.delete-btn:hover {
+    background-color: darkred;
+}
+
+
+.profile2 img {
+    display: center;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    background-color: black;
+}
+
+.profile2 h2 {
+    margin-bottom: 100px;
+    font-size: 20px;
+    color: #333;
+}
+
+
+
+.logo-home {
+    display: flex;
+    align-items: center;
+}
+
+.navbar {
+    background-color: #000000;
+    color: rgb(255, 255, 255); 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  /*  padding: 0.4rem; */
+    flex-wrap: wrap;
+    
+}
+a {
+    text-decoration: none;
+}
+.cards-decks {
+    color: white;
+    text-align: center;
+    padding: 5px;
+    border-radius: 10px;
+    border: 2px solid #535353;
+}
+.nav-links {
+    margin-right: 5px;
+    padding: 0;
+}
+
+.im {
+    margin-right: 10px;
+}
+
+.bic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home {
+   /* margin-right: auto; /* Use auto for a more fluid layout */
+   margin-right: 0; /* Remove large margin */
+   margin-left: 20px;
+   padding: 5px;
+   color: white;
+   border-radius: 10px;
+   border: 2px solid #535353; 
+  /* Add a small left margin to separate from the logo */
+}
+
+.nav-pic {
+    margin-left: 20px;
+}
+
+.profile2 {
+    width: 100%; /* Use 100% to make it flexible */
+    max-width: 500px; /* Set a maximum limit */
+    height: auto;
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto; /* Center the element */
+}
+
+.profile2 img {
+    width: 100%;
+    max-width: 200px; /* Limit the maximum width */
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    background-color: black;
+}
+
+.profile2 h2 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #333;
+}
+
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Change the direction of items in the menu on small screens */
+    }
+
+    .home {
+        margin-right: 0; /* Reduce margin to prevent it from going off-screen */
+    }
+
+    .profile {
+        width: 90%; /* Reduce the width of the card on small screens */
+    }
+
+    .profile2 img {
+        max-width: 150px; /* Reduce the size of the image on small screens */
+    }
+}
+.profile2 {
+    width: 500px;
+    height: 500px;
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile2 img {
+    display: center;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-bottom: 5px;
+    background-color: black;
+    margin-top: 45px;
+}
+
+.profile2 h2 {
+    margin-bottom: 60px;
+    font-size: 20px;
+    color: #333;
+}
+
+.profile2 button {
+    margin: 40px;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    display: center;
+}
+
+.profile2 button:hover {
+    background-color: #0056b3;
+}
+.carsd{
+    margin-left: auto;
+}
