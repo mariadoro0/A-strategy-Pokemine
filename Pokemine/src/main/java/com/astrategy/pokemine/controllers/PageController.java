@@ -38,4 +38,14 @@ public class PageController {
         return "deckscreen"; // Nome della vista per la pagina di informazioni
     }
 
+    @GetMapping("signup")
+    public String signup() {
+        return "signup"; // Nome della vista per la pagina di informazioni
+    }
+
+    @GetMapping("newdeck")
+    public String newdeck() {
+        return "newdeck"; // Nome della vista per la pagina di informazioni
+    }
+
 }

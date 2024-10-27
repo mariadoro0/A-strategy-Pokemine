@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemine - Deck Info</title>
+    <link rel="stylesheet" href="css/deckinfo.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="img/logo.png" alt="Pokemine Logo">
+        </div>
+        <nav>
+            <button class="nav-btn">Home</button>
+            <button class="nav-btn">My cards</button>
+            <button class="nav-btn">My decks</button>
+            <div class="profile-icon">
+                <img src="img/pokeball.svg" alt="Profile">
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="deck-info-container">
+            <h1>Deck Info</h1>
+            <div class="deck-details">
+                <div class="card-image">
+                    <img src="card_image.png" alt="Pokemon Card">
+                </div>
+                <div class="deck-info">
+                    <h2>Deck Name</h2>
+                    <p><strong>Card number</strong> <span class="card-number">18/60</span></p>
+                    <h3>Description</h3>
+                    <p>The deck contains only the cards you have in your collection. And pay attention to the number of cards you have, and check that you don't already have them in other decks.</p>
+                    <hr>
+                    <button class="delete-btn">Delete deck</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+    async function loadDeckInfo(deckId) {
+    try {
+        const token = localStorage.getItem('token');
+        const url = `http://localhost:8080/decks/${deckId}`; // Endpoint per ottenere informazioni sul mazzo
+
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const deckInfo = await response.json(); // Presumendo che il backend restituisca un JSON
+
+        // Funzione per visualizzare le informazioni del mazzo
+        displayDeckInfo(deckInfo);
+
+    } catch (error) {
+        console.error('Error loading deck info:', error);
+        alert('Error loading deck info: ' + error.message); // Mostra un messaggio di errore
+    }
+}
+
+function displayDeckInfo(deck) {
+    // Seleziona gli elementi HTML dove mostrare le informazioni del mazzo
+    const deckNameElement = document.querySelector('.deck-name');
+    const deckDescriptionElement = document.querySelector('.deck-description');
+    const cardImageElement = document.querySelector('.card-image img');
+
+    // Imposta il contenuto degli elementi con le informazioni del mazzo
+    deckNameElement.textContent = deck.name; // Nome del mazzo
+    deckDescriptionElement.textContent = deck.description; // Descrizione del mazzo
+    cardImageElement.src = deck.cardImage; // Se il mazzo ha un'immagine della carta
+}
+
+// Chiamata della funzione con l'ID del mazzo desiderato
+loadDeckInfo(1); // Sostituisci con l'ID del mazzo desiderato
+
+    </script>
+</body>
+</html>

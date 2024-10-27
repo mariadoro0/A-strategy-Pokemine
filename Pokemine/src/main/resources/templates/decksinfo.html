@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokemine - Deck Info</title>
-    <link rel="stylesheet" href="css/deckinfo.css">
+    <link rel="stylesheet" th:href="@{/css/deckinfo.css}">
 </head>
 <body>
 <header>
     <div class="logo">
-        <img src="../static/img/logo.png" alt="Pokemine Logo">
+        <img th:src="@{/img/logo.png}" alt="Pokemine Logo">
     </div>
     <nav>
         <button class="nav-btn">Home</button>
         <button class="nav-btn">My cards</button>
         <button class="nav-btn">My decks</button>
         <div class="profile-icon">
-            <img src="../static/img/pokeball.svg" alt="Profile">
+            <img th:src="@{/img/pokeball.svg}" alt="Profile">
         </div>
     </nav>
 </header>
@@ -24,17 +24,36 @@
 <main>
     <section class="deck-info-container">
         <h1>Deck Info</h1>
-        <div id="deck-list" class="deck-details">
-            <!-- I mazzi verranno caricati qui -->
+        <div class="deck-details">
+            <div class="card-image">
+                <img th:src="@{card_image.png}" alt="Pokemon Card">
+            </div>
+            <div class="deck-info">
+                <h1 class="deck-name">Nome Mazzo</h1>
+                <p><strong>Card number</strong> <span class="card-number">18/60</span></p>
+                <h3>Description</h3>
+                <p class="deck-description">Descrizione del mazzo.</p>
+                <hr>
+                <button class="delete-btn">Delete deck</button>
+            </div>
         </div>
     </section>
 </main>
 
 <script>
-    async function fetchDecks() {
-        const token = localStorage.getItem('token'); // Assicurati che il token sia presente nel localStorage
+    async function getDeckInfo() {
+        const urlParams = new URLSearchParams(window.location.search); // Ottieni i parametri dell'URL
+        const deckId = urlParams.get('id'); // Recupera l'ID del mazzo
+
+        if (!deckId) {
+            alert('ID del mazzo non trovato!');
+            return;
+        }
+
+        const token = localStorage.getItem('token'); // Ottieni il token dal local storage
+
         try {
-            const response = await fetch('http://localhost:8080/decks', {
+            const response = await fetch(`http://localhost:8080/decks/${deckId}`, { // Modifica l'URL secondo la tua API
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -43,64 +62,31 @@
             });
 
             if (!response.ok) {
-                throw new Error('Network response was not ok: ' + response.statusText);
+                throw new Error('Errore nel caricamento delle informazioni del mazzo');
             }
 
-            const decks = await response.json();
-            displayDecks(decks);
+            const deckInfo = await response.json(); // Presumendo che il backend restituisca un JSON
+            displayDeckInfo(deckInfo);
         } catch (error) {
-            console.error('Error fetching decks:', error);
+            console.error('Errore:', error);
+            alert('Si è verificato un errore durante il caricamento delle informazioni del mazzo.');
         }
     }
 
-    function displayDecks(decks) {
-        const deckList = document.getElementById('deck-list');
-        deckList.innerHTML = ''; // Svuota la lista esistente
+    function displayDeckInfo(deck) {
+        // Seleziona gli elementi HTML dove mostrare le informazioni del mazzo
+        const deckNameElement = document.querySelector('.deck-name');
+        const deckDescriptionElement = document.querySelector('.deck-description');
+        const cardImageElement = document.querySelector('.card-image');
 
-        decks.forEach(deck => {
-            const deckElement = document.createElement('div');
-            deckElement.classList.add('deck-item');
-            deckElement.innerHTML = `
-                <div class="card-image">
-                    <img src="path/to/card/image.png" alt="${deck.deckName}"> <!-- Modifica questo con l'immagine reale -->
-                </div>
-                <div class="deck-info">
-                    <h2>${deck.deckName}</h2>
-                    <p><strong>Deck ID:</strong> ${deck.id}</p>
-                    <h3>Description</h3>
-                    <p>${deck.deckDescription}</p>
-                    <hr>
-                    <button class="delete-btn" onclick="deleteDeck(${deck.id})">Delete deck</button>
-                </div>
-            `;
-            deckList.appendChild(deckElement);
-        });
+        // Imposta il contenuto degli elementi con le informazioni del mazzo
+        deckNameElement.textContent = deck.name; // Nome del mazzo
+        deckDescriptionElement.textContent = deck.description; // Descrizione del mazzo
+        cardImageElement.src = deck.cardImage; // Immagine del mazzo, se disponibile
     }
 
-    async function deleteDeck(deckId) {
-        const token = localStorage.getItem('token');
-        try {
-            const response = await fetch(`http://localhost:8080/decks/${deckId}`, {
-                method: 'DELETE',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            if (response.ok) {
-                alert('Deck deleted successfully!');
-                fetchDecks(); // Ricarica i mazzi dopo la cancellazione
-            } else {
-                throw new Error('Failed to delete deck: ' + response.statusText);
-            }
-        } catch (error) {
-            console.error('Error deleting deck:', error);
-        }
-    }
-
-    // Carica i mazzi quando la pagina è pronta
-    window.onload = fetchDecks;
+    // Chiamata della funzione per ottenere le informazioni sul mazzo all'apertura della pagina
+    window.onload = getDeckInfo;
 </script>
 </body>
 </html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create deck</title>
+
+    <link rel="stylesheet" href="css/createdeck.css">
+    <link rel="stylesheet" href="css/new-navbar.css">
+
+
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="img/logo.png" alt="Pokemine Logo">
+        </div>
+        <nav>
+            <button class="nav-btn">Home</button>
+            <button class="nav-btn">My cards</button>
+            <button class="nav-btn">My decks</button>
+            <div class="profile-icon">
+                <img src="img/pokeball.svg" alt="Profile">
+            </div>
+        </nav>
+    </header>
+
+
+
+	<br>
+	<br>
+	<br>
+	<main>
+        <section class="deck-create-container">
+            <h1>Deck Creation</h1>
+            <div class="deck-details">
+                <div class="deck-info">
+                    <h2>Deck Name</h2>
+                    <input type="text" placeholder="insert deck name">
+                    <h3>Description</h3>
+                    <textarea name="" id="descriptiondeck" placeholder="insert Description of the deck"></textarea>
+                    <hr>
+                    <button class="create-btn">Create deck</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const createBtn = document.querySelector('.create-btn');
+
+        createBtn.addEventListener('click', async function () {
+            // Raccogli i dati del mazzo
+            const deckName = document.querySelector('input[placeholder="insert deck name"]').value;
+            const deckDescription = document.getElementById('descriptiondeck').value;
+
+            if (!deckName || !deckDescription) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            const data = {
+                name: deckName,
+                description: deckDescription
+            };
+
+            try {
+             const token = localStorage.getItem('token');
+                const response = await fetch('http://localhost:8080/decks/newdeck', { // Assicurati che l'endpoint sia corretto
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    // Creazione avvenuta con successo
+                    alert('Deck created successfully!');
+                    window.location.href = 'decks'; // Reindirizza alla pagina dei mazzi
+                } else {
+                    // Gestisci eventuali errori
+                    const errorText = await response.text();
+                    alert('Error creating deck: ' + errorText);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Network error, please try again later.');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

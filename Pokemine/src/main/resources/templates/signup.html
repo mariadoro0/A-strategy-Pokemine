@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <link rel="stylesheet" th:href="@{/css/new-navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/register.css}">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <img th:src="@{/img/logo.png}" alt="Pokemine Logo">
+    </div>
+    <nav>
+        <button class="nav-btn">Home</button>
+
+        <div class="profile-icon">
+            <img th:src="@{/img/pokeball.svg}" alt="Profile">
+        </div>
+    </nav>
+</header>
+
+
+
+<br>
+<br>
+<br>
+<div class ="bic">
+    <div class="container">
+        <img th:src="@{/img/logo.png}" alt="Logo" class="logo">
+        <form class="register-form" method="post"  role="form">
+
+            <input
+                    type="email"
+                    placeholder="Email"
+                    required
+                    id="email"
+                    name="email">
+            <input
+                    type="text"
+                    placeholder="Nome Utente"
+                    required
+                    id="username"
+                    name="username">
+            <input
+                    type="password"
+                    placeholder="Password"
+                    required
+                    id="password"
+                    name="password">
+            <button type="submit">Registrati</button>
+
+        </form>
+        <p id="message"></p>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector('.register-form');
+
+        form.addEventListener('submit', async function (event) {
+            event.preventDefault(); // Impedisce l'invio del form in modo tradizionale
+
+            // Raccogli i dati del form
+            const formData = new FormData(form);
+            const data = {
+                email: formData.get('email'),
+                username: formData.get('username'),
+                password: formData.get('password')
+            };
+
+            try {
+                const response = await fetch('http://localhost:8080/users/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data) // Invia i dati in formato JSON
+                });
+
+                if (response.ok) {
+                    // Registrazione avvenuta con successo
+                   document.getElementById("message").textContent = "Signup successful! Redirecting...";
+                    window.location.href = 'login'; // Reindirizza alla pagina di login
+                } else {
+                    // Gestisci eventuali errori
+                    const errorText = await response.text();
+                    document.getElementById("message").textContent = "An error occurred. Please try again.";
+                }
+            } catch (error) {
+                console.error('Errore:', error);
+                document.getElementById("message").textContent = "An error occurred. Please try again.";
+            }
+        });
+    });
+</script>
+
+</body>
+
+</html>
