@@ -1,0 +1,365 @@
+{
+	"info": {
+		"_postman_id": "f381310b-5422-4ee2-b875-6df100c8fe95",
+		"name": "Pokemine Api Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "32783612"
+	},
+	"item": [
+		{
+			"name": "authenticate",
+			"item": [
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"mus\",\n    \"email\":\"1234@edu.it\",\n    \"password\":\"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/users/signup"
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"1234@edu.it\",\n    \"password\":\"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/users/login"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cards",
+			"item": [
+				{
+					"name": "cards",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/cards?id&generation&series&artist&type&set&name&rarity&supertype&page",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cards"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": null
+								},
+								{
+									"key": "generation",
+									"value": null
+								},
+								{
+									"key": "series",
+									"value": null
+								},
+								{
+									"key": "artist",
+									"value": null
+								},
+								{
+									"key": "type",
+									"value": null
+								},
+								{
+									"key": "set",
+									"value": null
+								},
+								{
+									"key": "name",
+									"value": null
+								},
+								{
+									"key": "rarity",
+									"value": null
+								},
+								{
+									"key": "supertype",
+									"value": null
+								},
+								{
+									"key": "page",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Collection Card",
+			"item": [
+				{
+					"name": "Collection list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": ""
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": "localhost:8080/collection"
+					},
+					"response": []
+				},
+				{
+					"name": "add card to collection",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/collection/ad?cardId",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"collection",
+								"ad"
+							],
+							"query": [
+								{
+									"key": "cardId",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove card from collection",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/collection/ad?cardId",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"collection",
+								"ad"
+							],
+							"query": [
+								{
+									"key": "cardId",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Decks",
+			"item": [
+				{
+					"name": "User decks list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/decks"
+					},
+					"response": []
+				},
+				{
+					"name": "Add new deck",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/decks/newdeck?name&description",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"decks",
+								"newdeck"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": null
+								},
+								{
+									"key": "description",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Card in Deck",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/decks/2"
+					},
+					"response": []
+				},
+				{
+					"name": "validate the deck",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/decks/2/validate"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Card To Deck",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/decks/2/add?cardId",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"decks",
+								"2",
+								"add"
+							],
+							"query": [
+								{
+									"key": "cardId",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove Card from Deck",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/decks/2/remove?cardId",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"decks",
+								"2",
+								"remove"
+							],
+							"query": [
+								{
+									"key": "cardId",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Deck",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/decks/deletedeck?deckId",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"decks",
+								"deletedeck"
+							],
+							"query": [
+								{
+									"key": "deckId",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Delete Account",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "localhost:8080/users/deleteaccount"
+					},
+					"response": []
+				},
+				{
+					"name": "Deactive Account",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/users/deactivate"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
