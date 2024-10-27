@@ -157,12 +157,14 @@
         </div>
     </div>
 
-    <div class="pagination-container">
-        <a href="#" class="pagination-arrow">&#10094;</a>
-        <a href="#" class="pagination-arrow">&#10095;</a>
-    </div>
+   <!-- Parte della paginazione aggiornata -->
+<div class="pagination-container">
+    <a href="#" class="pagination-arrow" id="prevPage">&#10094;</a>
+    <span id="pageDisplay">Page 1</span>
+    <a href="#" class="pagination-arrow" id="nextPage">&#10095;</a>
+</div>
 
-    <!-- Script JavaScript per il caricamento dinamico delle carte -->
+<!-- Script JavaScript -->
 <script>
     const cardGrid = document.getElementById('cardGrid');
     let currentPage = 1;
@@ -180,6 +182,7 @@
             .then(response => response.json())
             .then(data => {
                 cardGrid.innerHTML = ''; 
+                document.getElementById('pageDisplay').textContent = `Page ${page}`; // Aggiorna la visualizzazione della pagina
 
                 if (data.cards && data.cards.length > 0) {
                     data.cards.forEach(card => {
@@ -211,26 +214,45 @@
             });
     }
 
-    // Listener per il campo di ricerca per nome
-    document.getElementById('searchButton').addEventListener('click', () => {
-        const searchInput = document.getElementById('searchInput').value.trim();
-        const filters = {
-            name: searchInput,
+    function getFilters() {
+        return {
+            name: document.getElementById('searchInput').value.trim(),
             type: document.getElementById('type').value,
             artist: document.getElementById('artist').value,
             series: document.getElementById('series').value,
             rarity: document.getElementById('rarity').value,
             generation: document.getElementById('generation').value,
             setName: document.getElementById('setName').value,
-            supertype: document.getElementById('supertype').value // Ensure supertype is included here too
+            supertype: document.getElementById('supertype').value
         };
-        fetchPokemonCards(currentPage, filters);
+    }
+
+    // Listener per il campo di ricerca per nome
+    document.getElementById('searchButton').addEventListener('click', () => {
+        currentPage = 1;
+        fetchPokemonCards(currentPage, getFilters());
     });
-    
+
+    // Listener di paginazione
+    document.getElementById('prevPage').addEventListener('click', (e) => {
+        e.preventDefault();
+        if (currentPage > 1) {
+            currentPage--;
+            fetchPokemonCards(currentPage, getFilters()); // Mantenere i filtri attivi
+        }
+    });
+
+    document.getElementById('nextPage').addEventListener('click', (e) => {
+        e.preventDefault();
+        currentPage++;
+        fetchPokemonCards(currentPage, getFilters()); // Mantenere i filtri attivi
+    });
+
     document.addEventListener('DOMContentLoaded', () => {
-        fetchPokemonCards(currentPage);
+        fetchPokemonCards(currentPage, getFilters());
     });
 </script>
+
 
 
 </body>
