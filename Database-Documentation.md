@@ -129,7 +129,7 @@ With these steps, you’ll be able to access phpMyAdmin and manage your database
 
 ## Database Pokémine Diagram
 
-![alt text](image.png)
+![alt text](Frontend/img/image.png)
 
 ## Explanation of the Tables and Their Roles
 
