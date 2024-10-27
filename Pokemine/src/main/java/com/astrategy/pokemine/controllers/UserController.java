@@ -32,7 +32,7 @@ public class UserController {
         try {
             user.setPassword(passEncode.encode(user.getPassword()));
             userService.addUser(user); // Calls the service to add the new user
-            return new ResponseEntity<>("User created successfully", HttpStatus.CREATED);
+            return new ResponseEntity<>("User created successfully: your id is "+user.getId(), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>("Error creating user: " + e.getMessage(), HttpStatus.BAD_REQUEST);
         }
