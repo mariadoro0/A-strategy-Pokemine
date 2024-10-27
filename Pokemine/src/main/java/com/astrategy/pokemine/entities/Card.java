@@ -3,6 +3,7 @@ package com.astrategy.pokemine.entities;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -73,7 +74,7 @@ public class Card {
 	private String img;
 
 	@OneToMany(mappedBy = "card")
-	@JsonManagedReference
+	@JsonIgnore
 	private Set<UserCollection> userCollection ;
 
 	/*relationship between a card and its abilities by relational table*/

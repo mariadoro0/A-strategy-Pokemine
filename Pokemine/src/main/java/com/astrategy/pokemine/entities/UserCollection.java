@@ -1,5 +1,6 @@
 package com.astrategy.pokemine.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -26,7 +27,7 @@ public class UserCollection {
 	@ManyToOne
 	@MapsId("cardId")
 	@JoinColumn(name="card_id") // Foreign key reference to the 'Card' entity.
-	@JsonIgnore // Prevents the card reference from being serialized to JSON.
+	@JsonManagedReference  // Prevents the card reference from being serialized to JSON.
 	private Card card;
 	
 	// Many-to-One relationship to the 'User' entity, representing the owner of the card collection.

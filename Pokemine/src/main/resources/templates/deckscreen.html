@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Pokémon Decks</title>
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/decks-screen.css">
+</head>
+<body>
+<header>
+    <div class="logo">
+        <img src="img/logo.png" alt="Pokemine Logo">
+        <button id="home-btn">Home</button>
+        <div class="flag-icons">
+            <img src="img/ita-flag.png" alt="Italian Flag">
+            <img src="img/en-flag.png" alt="English Flag">
+        </div>
+    </div>
+    <nav>
+        <div class="nav-btns">
+            <button id="my-cards-btn">Le mie carte</button>
+            <button id="my-decks-btn">I miei mazzi</button>
+            <div class="profile-icon">
+                <img src="img/pokeball-user.png" alt="Profile" width="60">
+            </div>
+        </div>
+    </nav>
+</header>
+<p class="rule-link">Puoi consultare il regolamento ufficiale delle carte Pokémon cliccando <a href="https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/rulebook/twm_rulebook_it.pdf">qui</a>.</p>
+<div class="container">
+    <h1 class="header">I miei mazzi</h1>
+    <div class="deck-buttons">
+        <div class="left-buttons">
+            <button class="deck-btn-active">Mazzo 1</button>
+            <button class="deck-btn">Mazzo 2</button>
+            <button class="deck-btn">Mazzo 3</button>
+        </div>
+        <div class="right-buttons">
+            <button class="new-deck-btn">Nuovo mazzo</button>
+            <button class="info-btn">Info mazzo</button>
+        </div>
+    </div>
+    <hr class="separator">
+
+    <div class="cards-container" id="decks-container">
+        <!-- I mazzi verranno caricati qui -->
+    </div>
+</div>
+
+<script>
+    async function fetchDecks() {
+        const token = localStorage.getItem('token'); // Assicurati che il token sia presente nel localStorage
+        try {
+            const response = await fetch('http://localhost:8080/decks', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok: ' + response.statusText);
+            }
+
+            const decks = await response.json();
+            displayDecks(decks);
+        } catch (error) {
+            console.error('Error fetching decks:', error);
+        }
+    }
+
+    function displayDecks(decks) {
+        const decksContainer = document.getElementById('decks-container');
+        decksContainer.innerHTML = ''; // Svuota il contenitore esistente
+
+        decks.forEach(deck => {
+            const deckElement = document.createElement('div');
+            deckElement.classList.add('card');
+            deckElement.innerHTML = `
+                <img src="deck.Card.img" alt="${deck.deckName}"> <!-- Modifica questo con l'immagine reale del mazzo -->
+                <div class="card-info">
+                    <h2>${deck.deckName}</h2>
+                    <p><strong>ID del mazzo:</strong> ${deck.id}</p>
+                    <p>${deck.deckDescription}</p>
+                    <button class="delete-btn" onclick="deleteDeck(${deck.id})">Elimina</button>
+                </div>
+            `;
+            decksContainer.appendChild(deckElement);
+        });
+    }
+
+    async function deleteDeck(deckId) {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await fetch(`http://localhost:8080/decks/${deckId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                alert('Mazzo eliminato con successo!');
+                fetchDecks(); // Ricarica i mazzi dopo l'eliminazione
+            } else {
+                throw new Error('Errore nell\'eliminazione del mazzo: ' + response.statusText);
+            }
+        } catch (error) {
+            console.error('Error deleting deck:', error);
+        }
+    }
+
+    // Carica i mazzi quando la pagina è pronta
+    window.onload = fetchDecks;
+</script>
+</body>
+</html>

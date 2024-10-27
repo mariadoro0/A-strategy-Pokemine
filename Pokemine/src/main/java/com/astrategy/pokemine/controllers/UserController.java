@@ -51,7 +51,14 @@ public class UserController {
 	        return new ResponseEntity<>("Error: ID not present - " + e.getMessage(), HttpStatus.BAD_REQUEST);
 	    }
 	}
-
+	@GetMapping("/profile")
+	public ResponseEntity<?> getUserProfile(@AuthenticationPrincipal UserDetails userDetails) {
+		User user = userService.findByUsername(userDetails.getUsername());
+		if (user != null) {
+			return ResponseEntity.ok(user); // Return user data
+		}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	}
 	// GET method to delete a user account
 	@GetMapping("deactivate")
 	public ResponseEntity<String> deactivate(@AuthenticationPrincipal UserDetails userDetails) {

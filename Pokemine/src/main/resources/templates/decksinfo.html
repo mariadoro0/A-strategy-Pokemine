@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemine - Deck Info</title>
+    <link rel="stylesheet" href="css/deckinfo.css">
+</head>
+<body>
+<header>
+    <div class="logo">
+        <img src="img/logo.png" alt="Pokemine Logo">
+    </div>
+    <nav>
+        <button class="nav-btn">Home</button>
+        <button class="nav-btn">My cards</button>
+        <button class="nav-btn">My decks</button>
+        <div class="profile-icon">
+            <img src="img/pokeball.svg" alt="Profile">
+        </div>
+    </nav>
+</header>
+
+<main>
+    <section class="deck-info-container">
+        <h1>Deck Info</h1>
+        <div id="deck-list" class="deck-details">
+            <!-- I mazzi verranno caricati qui -->
+        </div>
+    </section>
+</main>
+
+<script>
+    async function fetchDecks() {
+        const token = localStorage.getItem('token'); // Assicurati che il token sia presente nel localStorage
+        try {
+            const response = await fetch('http://localhost:8080/decks', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok: ' + response.statusText);
+            }
+
+            const decks = await response.json();
+            displayDecks(decks);
+        } catch (error) {
+            console.error('Error fetching decks:', error);
+        }
+    }
+
+    function displayDecks(decks) {
+        const deckList = document.getElementById('deck-list');
+        deckList.innerHTML = ''; // Svuota la lista esistente
+
+        decks.forEach(deck => {
+            const deckElement = document.createElement('div');
+            deckElement.classList.add('deck-item');
+            deckElement.innerHTML = `
+                <div class="card-image">
+                    <img src="path/to/card/image.png" alt="${deck.deckName}"> <!-- Modifica questo con l'immagine reale -->
+                </div>
+                <div class="deck-info">
+                    <h2>${deck.deckName}</h2>
+                    <p><strong>Deck ID:</strong> ${deck.id}</p>
+                    <h3>Description</h3>
+                    <p>${deck.deckDescription}</p>
+                    <hr>
+                    <button class="delete-btn" onclick="deleteDeck(${deck.id})">Delete deck</button>
+                </div>
+            `;
+            deckList.appendChild(deckElement);
+        });
+    }
+
+    async function deleteDeck(deckId) {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await fetch(`http://localhost:8080/decks/${deckId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                alert('Deck deleted successfully!');
+                fetchDecks(); // Ricarica i mazzi dopo la cancellazione
+            } else {
+                throw new Error('Failed to delete deck: ' + response.statusText);
+            }
+        } catch (error) {
+            console.error('Error deleting deck:', error);
+        }
+    }
+
+    // Carica i mazzi quando la pagina è pronta
+    window.onload = fetchDecks;
+</script>
+</body>
+</html>

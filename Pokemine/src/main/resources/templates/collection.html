@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collezioni Pokémon</title>
+    <link rel="stylesheet" href="css/usercollection.css">
+</head>
+<body>
+<header>
+    <div class="logo">
+        <img src="img/logo.png" alt="Pokemine Logo">
+    </div>
+    <nav>
+        <button class="nav-btn">Home</button>
+        <button class="nav-btn">My cards</button>
+        <button class="nav-btn" onclick="viewDecks()">My decks</button>
+        <div class="profile-icon">
+            <img src="img/pokeball.svg" alt="Profile">
+        </div>
+    </nav>
+</header>
+<div class="content">
+    <div class="header-container">
+        <h1>My Cards</h1>
+        <button class="add-button" onclick="addCard()">Add</button>
+    </div>
+    <hr>
+    <div class="grid" id="card-grid">
+        <!-- Card elements will be added dynamically here -->
+    </div>
+</div>
+
+<script>
+    const counters = [0, 0, 0];
+
+    function updateCounter(index, change) {
+        const newCount = counters[index] + change;
+
+        if (newCount >= 0 && newCount <= 4) {
+            counters[index] = newCount;
+            document.getElementById(`display${index}`).innerText = `${newCount}/4`;
+        }
+    }
+
+    async function fetchCollections() {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await fetch('http://localhost:8080/collection', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+
+            const collections = await response.json();
+            if(collections == null){
+                 alert('Seleziona un mazzo prima di aggiungere la carta.');
+            }else{
+            displayCollections(collections);
+            }
+        } catch (error) {
+            console.error('Error fetching collections:', error);
+        }
+    }
+     async function fetchDecks() {
+        const token = localStorage.getItem('token');
+        const response = await fetch('http://localhost:8080/decks', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            throw new Error('Errore nella richiesta dei mazzi: ' + response.statusText);
+        }
+        return response.json();
+    }
+   async function displayCollections(collections) {
+        const cardGrid = document.getElementById('card-grid');
+        cardGrid.innerHTML = ''; // Clear existing cards
+             const decks = await fetchDecks();
+        collections.forEach((collection, index) => {
+            const cardElement = document.createElement('div');
+            cardElement.classList.add('card-image');
+            cardElement.innerHTML = `
+                <img src="${collection.card.img}" alt="${collection.name}" />
+                <div class="card-controls">
+                    <div class="card-counter">
+                        <button class="counter-button" onclick="updateCounter(${index}, -1)">-</button>
+                        <span class="counter-display" id="display${index}">0/4</span>
+                        <button class="counter-button" onclick="updateCounter(${index}, 1)">+</button>
+                    </div>
+                    <select class="deck-select" id="deck-select-${index}">
+                        <option value="" disabled selected>Select Mazzo</option>
+
+                    </select>
+                    <button class="add-card-button" onclick="addCardToDeck(${index})">Aggiungi Carta</button>
+                </div>
+            `;
+            cardGrid.appendChild(cardElement);
+            const selectElement = document.getElementById(`deck-select-${index}`);
+            decks.forEach(deck => {
+                const option = document.createElement('option');
+                option.value = deck.id; // Presupponendo che 'deckId' sia l'ID del mazzo
+                option.textContent = deck.deckName; // Presupponendo che 'name' sia il nome del mazzo
+                selectElement.appendChild(option);
+            });
+        });
+    }
+
+    function addCardToDeck(index) {
+        const selectedDeck = document.getElementById(`deck-select-${index}`).value;
+        const cardCount = counters[index];
+
+        if (selectedDeck) {
+            if (cardCount > 0) {
+                // Aggiungi logica per aggiungere la carta al mazzo
+                console.log(`Aggiunta ${cardCount} di Carta ${index + 1} al ${selectedDeck}`);
+                // Reset del contatore dopo l'aggiunta
+                counters[index] = 0;
+                document.getElementById(`display${index}`).innerText = `0/4`;
+            } else {
+                alert('Devi selezionare almeno 1 carta da aggiungere.');
+            }
+        } else {
+            alert('Seleziona un mazzo prima di aggiungere la carta.');
+        }
+    }
+function viewDecks() {
+        window.location.href = 'decks'; // Redirect to decks page
+    }
+    // Call fetchCollections on page load
+    window.onload = fetchCollections;
+</script>
+</body>
+</html>

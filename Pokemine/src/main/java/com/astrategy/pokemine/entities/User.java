@@ -1,8 +1,10 @@
 package com.astrategy.pokemine.entities;
 
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -42,10 +44,12 @@ public class User {
     // The decks field represents the user's decks, and the relationship is managed from the Deck entity (using mappedBy = "user").
     // @JsonIgnore: Prevents this field from being included in JSON serialization, avoiding recursive references during serialization.
 	@OneToMany(mappedBy = "user",cascade=CascadeType.ALL,orphanRemoval = true)
-    private Set<UserCollection> userCollection;
+	@JsonIgnore
+	private Set<UserCollection> userCollection = new HashSet<>();
 
-	
-	
+
+
+
 	// One-to-Many relationship with the Deck entity.
     // The decks field represents the user's decks, and the relationship is managed from the Deck entity (using mappedBy = "user").
     // @JsonIgnore: Prevents this field from being included in JSON serialization, avoiding recursive references during serialization.
