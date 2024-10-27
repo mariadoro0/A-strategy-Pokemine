@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e02099fe-ea03-4f39-ad24-53d84d9e3218",
+		"_postman_id": "b14aaee0-369c-4630-85fa-bf95c950e002",
 		"name": "Pokemine Api Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "32493899"
@@ -35,11 +35,6 @@
 							{
 								"key": "Authorization",
 								"value": "Bearer",
-								"type": "text"
-							},
-							{
-								"key": "Content-Type",
-								"value": "",
 								"type": "text"
 							}
 						],
@@ -93,7 +88,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/cards?id&generation&series&artist&type&set&name&rarity&supertype&page",
+							"raw": "localhost:8080/cards",
 							"host": [
 								"localhost"
 							],
@@ -104,43 +99,53 @@
 							"query": [
 								{
 									"key": "id",
-									"value": null
+									"value": null,
+									"disabled": true
 								},
 								{
 									"key": "generation",
-									"value": null
+									"value": null,
+									"disabled": true
 								},
 								{
 									"key": "series",
-									"value": null
+									"value": null,
+									"disabled": true
 								},
 								{
 									"key": "artist",
-									"value": null
+									"value": null,
+									"disabled": true
 								},
 								{
 									"key": "type",
-									"value": null
+									"value": null,
+									"disabled": true
 								},
 								{
 									"key": "set",
-									"value": null
+									"value": null,
+									"disabled": true
 								},
 								{
 									"key": "name",
-									"value": null
+									"value": null,
+									"disabled": true
 								},
 								{
 									"key": "rarity",
-									"value": null
+									"value": null,
+									"disabled": true
 								},
 								{
 									"key": "supertype",
-									"value": null
+									"value": null,
+									"disabled": true
 								},
 								{
 									"key": "page",
-									"value": null
+									"value": null,
+									"disabled": true
 								}
 							]
 						}
@@ -206,14 +211,14 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/collection/ad?cardId",
+							"raw": "localhost:8080/collection/add?cardId",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"collection",
-								"ad"
+								"add"
 							],
 							"query": [
 								{
@@ -231,14 +236,14 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/collection/ad?cardId",
+							"raw": "localhost:8080/collection/remove?cardId",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"collection",
-								"ad"
+								"remove"
 							],
 							"query": [
 								{
