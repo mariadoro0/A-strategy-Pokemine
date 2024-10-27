@@ -148,7 +148,6 @@
                 </select>
             </div>
         </div>
-        <button class="search-button" id="filterSearchBtn">Search by Filters</button>
     </div>
 
     <!-- Griglia delle carte -->
@@ -211,21 +210,6 @@
                 alert('Errore nel caricamento delle carte: ' + error.message);
             });
     }
-
-    // Funzione per applicare i filtri selezionati
-    document.getElementById('filterSearchBtn').addEventListener('click', () => {
-        const filters = {
-            type: document.getElementById('type').value,
-            artist: document.getElementById('artist').value,
-            series: document.getElementById('series').value,
-            rarity: document.getElementById('rarity').value,
-            generation: document.getElementById('generation').value,
-            setName: document.getElementById('setName').value,
-            supertype: document.getElementById('supertype').value // Added supertype filter here
-        };
-
-        fetchPokemonCards(currentPage, filters);
-    });
 
     // Listener per il campo di ricerca per nome
     document.getElementById('searchButton').addEventListener('click', () => {
