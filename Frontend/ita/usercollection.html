@@ -31,13 +31,30 @@
 
     <div class="container">
         <h1 class="header">Le mie Carte</h1>
+        <!--
         <div class="right-buttons">
             <button class="new-deck-btn">Aggiungi</button>
+        -->
         </div>
         <hr class="separator">
         
         <div class="cards-container">
             <!-- Esempio di carta -->
+            <div class="card">
+                <img src="img/cards/swsh4-75_hiresopt.png" alt="Cacnea">
+                <div class="card-info">
+                    <button class="counter-btn" onclick="updateCounter(this, -1)">-</button>
+                    <span class="counter-text">0/4</span>
+                    <button class="counter-btn" onclick="updateCounter(this, 1)">+</button>
+                </div>
+                <select class="deck-select">
+                    <option value="" disabled selected>Select Mazzo</option>
+                    <option value="mazzo1">Mazzo 1</option>
+                    <option value="mazzo2">Mazzo 2</option>
+                    <option value="mazzo3">Mazzo 3</option>
+                </select>
+                <button class="delete-btn" onclick="location.href='decks-screen.html'">Aggiungi</a></button>
+            </div>
             <div class="card">
                 <img src="https://images.pokemontcg.io/swsh5/4_hires.png" alt="Cacnea">
                 <div class="card-info">
@@ -98,21 +115,7 @@
                 </select>
                 <button class="delete-btn">Aggiungi</button>
             </div>
-            <div class="card">
-                <img src="img/cards/swsh4-75_hiresopt.png" alt="Cacnea">
-                <div class="card-info">
-                    <button class="counter-btn" onclick="updateCounter(this, -1)">-</button>
-                    <span class="counter-text">0/4</span>
-                    <button class="counter-btn" onclick="updateCounter(this, 1)">+</button>
-                </div>
-                <select class="deck-select">
-                    <option value="" disabled selected>Select Mazzo</option>
-                    <option value="mazzo1">Mazzo 1</option>
-                    <option value="mazzo2">Mazzo 2</option>
-                    <option value="mazzo3">Mazzo 3</option>
-                </select>
-                <button class="delete-btn">Aggiungi</button>
-            </div>
+            
         </div>
     </div>
 
@@ -126,6 +129,11 @@
                 counterText.textContent = `${currentCount}/4`;
             }
         }
+        
+        function nascondiDiv() {
+            document.getElementById("mioDiv").style.display = "none";
+        }
+    
     </script>
 </body>
 </html>

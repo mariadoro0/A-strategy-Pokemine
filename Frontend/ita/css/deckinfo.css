@@ -113,6 +113,15 @@ hr {
     cursor: pointer;
     font-size: 16px;
 }
+.info-btn {
+    background-color:#00cc66;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
 
 .delete-btn:hover {
     background-color: darkred;

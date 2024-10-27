@@ -42,6 +42,16 @@ nav {
     background-color: #555;
 }
 
+.add-btn {
+    background-color:bl;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
 .profile-icon img {
     width: 50px;
     border-radius: 50%;
@@ -227,6 +237,16 @@ nav {
     cursor: pointer;
     border-radius: 5px;
     font-size: 22px; /* Aumenta la dimensione del testo */
+}
+
+.info-btn {
+    background-color:#00cc66;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
 #my-decks-btn:hover {

@@ -45,14 +45,14 @@
 
             <div class="cards-container">
                 <!-- 12 Cards (4 per row, 3 rows) -->
-                <div class="card">
-                    <img src="https://images.pokemontcg.io/swsh5/4_hires.png" alt="Cacnea">
+                <div class="card" id="mioDiv">
+                    <img src="img/cards/swsh4-75_hiresopt.png" alt="Cacnea">
                     <div class="card-info">
                         <button class="counter-btn">-</button>
                         <span class="counter-text">0/4</span>
                         <button class="counter-btn">+</button>
                     </div>
-                    <button class="delete-btn">Elimina</button>
+                    <button class="delete-btn" onclick="nascondiDiv()">Elimina</button>
                 </div>
 
                 <div class="card">
@@ -164,5 +164,10 @@
                 </div>
             </div>
         </div>
+        <script>
+            function nascondiDiv() {
+                document.getElementById("mioDiv").style.display = "none";
+            }
+        </script>
     </body>
 </html>
