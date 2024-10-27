@@ -134,7 +134,6 @@
                     <option value="Gym Heroes">Gym Heroes</option>
                     <option value="Neo Genesis">Neo Genesis</option>
                     <option value="Legendary Collection">Legendary Collection</option>
-                    <!-- Aggiungi altri set se necessario -->
                 </select>
             </div>
         </div>
@@ -163,7 +162,7 @@
 
         Object.keys(filters).forEach(key => {
             if (filters[key]) {
-                apiUrl += `&${key}=${filters[key]}`;
+                apiUrl += `&${key}=${encodeURIComponent(filters[key])}`;
             }
         });
 
@@ -214,6 +213,21 @@
             setName: document.getElementById('setName').value
         };
 
+        fetchPokemonCards(currentPage, filters);
+    });
+
+    // Listener per il campo di ricerca per nome
+    document.getElementById('searchButton').addEventListener('click', () => {
+        const searchInput = document.getElementById('searchInput').value.trim();
+        const filters = {
+            name: searchInput,
+            type: document.getElementById('type').value,
+            artist: document.getElementById('artist').value,
+            series: document.getElementById('series').value,
+            rarity: document.getElementById('rarity').value,
+            generation: document.getElementById('generation').value,
+            setName: document.getElementById('setName').value
+        };
         fetchPokemonCards(currentPage, filters);
     });
     
