@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,91 +10,62 @@
     <header>
         <div class="logo">
             <img src="img/logo.png" alt="Pokemine Logo">
+            <button id="home-btn">Home</button>
+            <div class="flag-icons">
+                <img src="img/ita-flag.png" alt="Italian Flag">
+                <img src="img/en-flag.png" alt="English Flag">
+            </div>
         </div>
         <nav>
-            <button class="nav-btn">Home</button>
-            <button class="nav-btn">My cards</button>
-            <button class="nav-btn">My decks</button>
-            <div class="profile-icon">
-                <img src="img/pokeball.svg" alt="Profile">
+            <div class="nav-btns">
+                <button id="my-cards-btn">Le mie carte</button>
+                <button id="my-decks-btn">I miei mazzi</button>
+                <div class="profile-icon">
+                    <img src="img/pokeball-user.png" alt="Profile" width="60">
+                </div>
             </div>
         </nav>
     </header>
-    <div class="content">
-        <div class="header-container">
-            <h1>My Cards</h1>
-            <button class="add-button">Add</button>
+    
+    <p class="rule-link">Consulta il regolamento ufficiale cliccando <a href="https://www.pokemon.com/static-assets/content-assets/cms2-it-it/pdf/trading-card-game/rulebook/twm_rulebook_it.pdf">qui</a>.</p>
+
+    <div class="container">
+        <h1 class="header">Le mie Carte</h1>
+        <div class="right-buttons">
+            <button class="new-deck-btn">Aggiungi</button>
         </div>
-        <hr>
-        <div class="grid">
-            <div class="card-image">
-                <img src="img/base1-1.png" alt="Carta 1" />
-                <div class="card-controls">
-                    <div class="card-counter">
-                        <button class="counter-button" onclick="updateCounter(0, -1)">-</button>
-                        <span class="counter-display" id="display0">0/4</span>
-                        <button class="counter-button" onclick="updateCounter(0, 1)">+</button>
-                    </div>
-                    <select class="deck-select">
-                        <option value="" disabled selected>Select Mazzo</option>
-                        <option value="mazzo1">Mazzo 1</option>
-                        <option value="mazzo2">Mazzo 2</option>
-                        <option value="mazzo3">Mazzo 3</option>
-                    </select>
-                    <button class="add-card-button">Aggiungi Carta</button>
+        <hr class="separator">
+        
+        <div class="cards-container">
+            <!-- Esempio di carta -->
+            <div class="card">
+                <img src="https://images.pokemontcg.io/swsh5/4_hires.png" alt="Cacnea">
+                <div class="card-info">
+                    <button class="counter-btn" onclick="updateCounter(this, -1)">-</button>
+                    <span class="counter-text">0/4</span>
+                    <button class="counter-btn" onclick="updateCounter(this, 1)">+</button>
                 </div>
-            </div>
-
-            <div class="card-image">
-                <img src="img/base1-10.png" alt="Carta 2" />
-                <div class="card-controls">
-                    <div class="card-counter">
-                        <button class="counter-button" onclick="updateCounter(1, -1)">-</button>
-                        <span class="counter-display" id="display1">0/4</span>
-                        <button class="counter-button" onclick="updateCounter(1, 1)">+</button>
-                    </div>
-                    <select class="deck-select">
-                        <option value="" disabled selected>Select Mazzo</option>
-                        <option value="mazzo1">Mazzo 1</option>
-                        <option value="mazzo2">Mazzo 2</option>
-                        <option value="mazzo3">Mazzo 3</option>
-                    </select>
-                    <button class="add-card-button">Aggiungi Carta</button>
-                </div>
-            </div>
-
-            <div class="card-image">
-                <img src="img/base1-26.png" alt="Carta 3" />
-                <div class="card-controls">
-                    <div class="card-counter">
-                        <button class="counter-button" onclick="updateCounter(2, -1)">-</button>
-                        <span class="counter-display" id="display2">0/4</span>
-                        <button class="counter-button" onclick="updateCounter(2, 1)">+</button>
-                    </div>
-                    <select class="deck-select">
-                        <option value="" disabled selected>Select Mazzo</option>
-                        <option value="mazzo1">Mazzo 1</option>
-                        <option value="mazzo2">Mazzo 2</option>
-                        <option value="mazzo3">Mazzo 3</option>
-                    </select>
-                    <button class="add-card-button">Aggiungi Carta</button>
-                </div>
+                <select class="deck-select">
+                    <option value="" disabled selected>Select Mazzo</option>
+                    <option value="mazzo1">Mazzo 1</option>
+                    <option value="mazzo2">Mazzo 2</option>
+                    <option value="mazzo3">Mazzo 3</option>
+                </select>
+                <button class="delete-btn">Aggiungi</button>
             </div>
         </div>
     </div>
 
     <script>
-        const counters = [0, 0, 0];
+        function updateCounter(element, change) {
+            const counterText = element.parentElement.querySelector('.counter-text');
+            let currentCount = parseInt(counterText.textContent.split('/')[0]);
+            currentCount += change;
 
-        function updateCounter(index, change) {
-            const newCount = counters[index] + change;
-
-            if (newCount >= 0 && newCount <= 4) {
-                counters[index] = newCount;
-                document.getElementById(`display${index}`).innerText = `${newCount}/4`;
+            if (currentCount >= 0 && currentCount <= 4) {
+                counterText.textContent = `${currentCount}/4`;
             }
         }
     </script>
-
 </body>
 </html>
