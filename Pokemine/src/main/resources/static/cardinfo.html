@@ -21,7 +21,7 @@
                 <button id="my-cards-btn">Le mie carte</button>
                 <button id="my-decks-btn">I miei mazzi</button>
                 <div class="profile-icon">
-                    <img src="img\pokeball-user.png" alt="Profile" width="60">
+                    <img src="img/pokeball-user.png" alt="Profile" width="60">
                 </div>
             </div>
         </nav>
@@ -32,21 +32,50 @@
             <h1>Card Info</h1>
             <div class="card-details">
                 <div class="card-image">
-                    <img src="img/cards/swsh4-75_hiresopt.png" alt="Pokemon Card">
+                    <img id="cardImage" src="" alt="Pokemon Card">
                 </div>
-            <div class="hp">
-                <p>HP:60</p>
-            </div>
+                <div class="hp">
+                    <p id="cardHp">HP:</p>
+                </div>
                 <div class="card-info">
-                    <h2>Cottonee</h2>
-                    <p><strong>Pokemon tipo:</strong>  <span class="tipo">Erba/Folletto</span></p>
-                    <h3>Pokedex #546</h3>
-                    <p>Se viene attaccato crea una nuvola di cotone per confondere il nemico, poi ne approfitta per fuggire. Si sentono più sicuri in gruppo, e quando incontrano i loro simili non li lasciano più formando come una grande nuvola.</p>
+                    <h2 id="cardName"></h2>
+                    <p><strong>Pokemon tipo:</strong> <span id="cardType"></span></p>
+                    <h3 id="cardPokedex"></h3>
+                    <p id="cardDescription"></p>
                     <hr>
-                    
                 </div>
             </div>
         </section>
     </main>
+
+    <script>
+    
+    
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        const cardId = "base1-1"
+        	
+        
+        if (cardId) {
+            fetch(`/cards?id=${cardId}`)
+            
+                .then(response => response.json())
+                .then(card => {
+                    document.getElementById('cardImage').src = card.img || 'img/default-card.png';
+                    document.getElementById('cardHp').textContent = `HP: ${card.hp || 'N/A'}`;
+                    document.getElementById('cardName').textContent = card.name || 'Unknown';
+                    document.getElementById('cardType').textContent = card.type || 'N/A';
+                    document.getElementById('cardPokedex').textContent = `Pokedex #${card.pokedexNumber || 'N/A'}`;
+                    document.getElementById('cardDescription').textContent = card.description || 'No description available.';
+                })
+                .catch(error => {
+                    console.error('Errore nel caricamento della carta:', error);
+                    alert('Errore nel caricamento della carta: ' + error.message);
+                });
+        }
+    </script>
 </body>
 </html>

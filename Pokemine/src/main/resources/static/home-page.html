@@ -154,15 +154,13 @@
     </div>
 
     <!-- Script JavaScript per il caricamento dinamico delle carte -->
-    <script>
+<script>
     const cardGrid = document.getElementById('cardGrid');
     let currentPage = 1;
 
-    // Funzione per recuperare le carte dal backend
     function fetchPokemonCards(page, filters = {}) {
         let apiUrl = `/cards?page=${page}`;
 
-        // Aggiunge i filtri all'URL della richiesta
         Object.keys(filters).forEach(key => {
             if (filters[key]) {
                 apiUrl += `&${key}=${filters[key]}`;
@@ -172,9 +170,8 @@
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
-                cardGrid.innerHTML = ''; // Svuota la griglia delle carte
+                cardGrid.innerHTML = ''; 
 
-                // Mostra le carte se trovate
                 if (data.cards && data.cards.length > 0) {
                     data.cards.forEach(card => {
                         const cardElement = document.createElement('div');
@@ -188,6 +185,12 @@
                             <p><strong>Artist:</strong> ${card.artist || 'N/A'}</p>
                             <p><strong>HP:</strong> ${card.hp || 'N/A'}</p>
                         `;
+
+                        // Imposta un evento click sulla carta
+                        cardElement.addEventListener('click', () => {
+                            window.location.href = `cardinfo.html?id=${card.id}`;
+                        });
+
                         cardGrid.appendChild(cardElement);
                     });
                 } else {
@@ -208,41 +211,16 @@
             series: document.getElementById('series').value,
             rarity: document.getElementById('rarity').value,
             generation: document.getElementById('generation').value,
-            setName: document.getElementById('setName').value // Nuovo filtro per "Set Name"
+            setName: document.getElementById('setName').value
         };
 
         fetchPokemonCards(currentPage, filters);
     });
-
-    // Funzione per la ricerca per nome
-    document.getElementById('searchButton').addEventListener('click', () => {
-        const searchName = document.getElementById('searchInput').value.trim();
-        if (searchName) {
-            fetchPokemonCards(currentPage, { name: searchName });
-        }
-    });
-
-    // Carica le carte al caricamento della pagina
+    
     document.addEventListener('DOMContentLoaded', () => {
-        fetchPokemonCards(currentPage); // Carica la prima pagina di carte all'inizio
+        fetchPokemonCards(currentPage);
     });
+</script>
 
-    // Logica per cambio pagina
-    document.querySelectorAll('.pagination-arrow').forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-
-            if (button.textContent === '❮') {
-                // Freccia sinistra
-                currentPage = Math.max(1, currentPage - 1); // Evita pagine minori di 1
-            } else if (button.textContent === '❯') {
-                // Freccia destra
-                currentPage += 1; // Aumenta la pagina
-            }
-
-            fetchPokemonCards(currentPage); // Ricarica le carte con la nuova pagina
-        });
-    });
-    </script>
 </body>
 </html>
