@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemine - Home</title>
+    <link rel="stylesheet" href="./css/decks-screen.css">
+    <link rel="stylesheet" href="./css/home-page.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="img/logo.png" alt="Pokemine Logo">
+            <button id="home-btn">Home</button>
+            <div class="flag-icons">
+                <img src="img/ita-flag.png" alt="Italian Flag">
+                <img src="img/en-flag.png" alt="English Flag">
+            </div>
+        </div>
+        <nav>
+            <div class="nav-btns">
+                <button id="my-cards-btn"><a href="usercollection.html">Le mie carte</a></button>
+                <button id="my-decks-btn"><a href="decks-screen.html">I miei mazzi</a></button>
+                <div class="profile-icon">
+                    <a href="user-page.html"><img src="img/pokeball-user.png" alt="Profile" width="60"></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <br>
+
+    <!-- Search and Filter Container -->
+    <div class="search-container">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search by name" class="search-input">
+            <i class="icon-search">🔍</i>
+        </div>
+        <button class="search-button" id="searchButton">Search</button>
+    </div>
+
+    <!-- Sezione dei Filtri -->
+    <div class="modal-content">
+        <h2>Search Filters</h2>
+        <div class="filter-grid">
+            <!-- Filtro per Tipo di Pokémon -->
+            <div>
+                <label for="type">Tipo:</label>
+                <select id="type">
+                    <option value="">Select</option>
+                    <option value="Colorless">Colorless</option>
+                    <option value="Fire">Fire</option>
+                    <option value="Water">Water</option>
+                    <option value="Lightning">Lightning</option>
+                    <option value="Grass">Grass</option>
+                    <option value="Fighting">Fighting</option>
+                    <option value="Psychic">Psychic</option>
+                    <option value="Dragon">Dragon</option>
+                    <option value="Darkness">Darkness</option>
+                    <option value="Fairy">Fairy</option>
+                    <option value="Metal">Metal</option>
+                </select>
+            </div>
+
+            <!-- Filtro per Artista -->
+            <div>
+                <label for="artist">Artista:</label>
+                <select id="artist">
+                    <option value="">Select</option>
+                    <option value="Ken Sugimori">Ken Sugimori</option>
+                    <option value="Mitsuhiro Arita">Mitsuhiro Arita</option>
+                    <option value="Atsuko Nishida">Atsuko Nishida</option>
+                    <option value="Kagemaru Himeno">Kagemaru Himeno</option>
+                    <option value="Shin Nagasawa">Shin Nagasawa</option>
+                </select>
+            </div>
+
+            <!-- Filtro per Series -->
+            <div>
+                <label for="series">Series:</label>
+                <select id="series">
+                    <option value="">Select</option>
+                    <option value="Base">Base</option>
+                    <option value="E-Card">E-Card</option>
+                    <option value="EX">EX</option>
+                    <option value="Diamond & Pearl">Diamond & Pearl</option>
+                    <option value="HeartGold & SoulSilver">HeartGold & SoulSilver</option>
+                    <option value="Black & White">Black & White</option>
+                    <option value="XY">XY</option>
+                    <option value="Sun & Moon">Sun & Moon</option>
+                    <option value="Sword & Shield">Sword & Shield</option>
+                </select>
+            </div>
+
+            <!-- Filtro per Rarity -->
+            <div>
+                <label for="rarity">Rarity:</label>
+                <select id="rarity">
+                    <option value="">Select</option>
+                    <option value="Common">Common</option>
+                    <option value="Uncommon">Uncommon</option>
+                    <option value="Rare">Rare</option>
+                    <option value="Ultra Rare">Ultra Rare</option>
+                </select>
+            </div>
+
+            <!-- Filtro per Generation -->
+            <div>
+                <label for="generation">Generation:</label>
+                <select id="generation">
+                    <option value="">Select</option>
+                    <option value="First">Generation 1</option>
+                    <option value="Second">Generation 2</option>
+                    <option value="Third">Generation 3</option>
+                    <option value="Fourth">Generation 4</option>
+                    <option value="Fifth">Generation 5</option>
+                    <option value="Sixth">Generation 6</option>
+                    <option value="Seventh">Generation 7</option>
+                    <option value="Eighth">Generation 8</option>
+                    <option value="Ninth">Generation 9</option>
+                </select>
+            </div>
+
+            <!-- Filtro per Set Name -->
+            <div>
+                <label for="setName">Set Name:</label>
+                <select id="setName">
+                    <option value="">Select</option>
+                    <option value="Base">Base Set</option>
+                    <option value="Jungle">Jungle</option>
+                    <option value="Fossil">Fossil</option>
+                    <option value="Team Rocket">Team Rocket</option>
+                    <option value="Gym Heroes">Gym Heroes</option>
+                    <option value="Neo Genesis">Neo Genesis</option>
+                    <option value="Legendary Collection">Legendary Collection</option>
+                    <!-- Aggiungi altri set se necessario -->
+                </select>
+            </div>
+        </div>
+        <button class="search-button" id="filterSearchBtn">Search by Filters</button>
+    </div>
+
+    <!-- Griglia delle carte -->
+    <div class="card-container">
+        <div class="card-grid" id="cardGrid">
+            <!-- Le carte verranno caricate qui -->
+        </div>
+    </div>
+
+    <div class="pagination-container">
+        <a href="#" class="pagination-arrow">&#10094;</a>
+        <a href="#" class="pagination-arrow">&#10095;</a>
+    </div>
+
+    <!-- Script JavaScript per il caricamento dinamico delle carte -->
+    <script>
+    const cardGrid = document.getElementById('cardGrid');
+    let currentPage = 1;
+
+    // Funzione per recuperare le carte dal backend
+    function fetchPokemonCards(page, filters = {}) {
+        let apiUrl = `/cards?page=${page}`;
+
+        // Aggiunge i filtri all'URL della richiesta
+        Object.keys(filters).forEach(key => {
+            if (filters[key]) {
+                apiUrl += `&${key}=${filters[key]}`;
+            }
+        });
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                cardGrid.innerHTML = ''; // Svuota la griglia delle carte
+
+                // Mostra le carte se trovate
+                if (data.cards && data.cards.length > 0) {
+                    data.cards.forEach(card => {
+                        const cardElement = document.createElement('div');
+                        cardElement.className = 'card';
+                        cardElement.innerHTML = `
+                            <img src="${card.img || 'img/default-card.png'}" alt="${card.name || 'No name'}">
+                            <p><strong>Name:</strong> ${card.name || 'N/A'}</p>
+                            <p><strong>Set Name:</strong> ${card.setName || 'N/A'}</p>
+                            <p><strong>Series:</strong> ${card.series || 'N/A'}</p>
+                            <p><strong>Rarity:</strong> ${card.rarity || 'N/A'}</p>
+                            <p><strong>Artist:</strong> ${card.artist || 'N/A'}</p>
+                            <p><strong>HP:</strong> ${card.hp || 'N/A'}</p>
+                        `;
+                        cardGrid.appendChild(cardElement);
+                    });
+                } else {
+                    cardGrid.innerHTML = `<p>No cards found for the current filter.</p>`;
+                }
+            })
+            .catch(error => {
+                console.error('Errore nel caricamento delle carte:', error);
+                alert('Errore nel caricamento delle carte: ' + error.message);
+            });
+    }
+
+    // Funzione per applicare i filtri selezionati
+    document.getElementById('filterSearchBtn').addEventListener('click', () => {
+        const filters = {
+            type: document.getElementById('type').value,
+            artist: document.getElementById('artist').value,
+            series: document.getElementById('series').value,
+            rarity: document.getElementById('rarity').value,
+            generation: document.getElementById('generation').value,
+            setName: document.getElementById('setName').value // Nuovo filtro per "Set Name"
+        };
+
+        fetchPokemonCards(currentPage, filters);
+    });
+
+    // Funzione per la ricerca per nome
+    document.getElementById('searchButton').addEventListener('click', () => {
+        const searchName = document.getElementById('searchInput').value.trim();
+        if (searchName) {
+            fetchPokemonCards(currentPage, { name: searchName });
+        }
+    });
+
+    // Carica le carte al caricamento della pagina
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchPokemonCards(currentPage); // Carica la prima pagina di carte all'inizio
+    });
+
+    // Logica per cambio pagina
+    document.querySelectorAll('.pagination-arrow').forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            if (button.textContent === '❮') {
+                // Freccia sinistra
+                currentPage = Math.max(1, currentPage - 1); // Evita pagine minori di 1
+            } else if (button.textContent === '❯') {
+                // Freccia destra
+                currentPage += 1; // Aumenta la pagina
+            }
+
+            fetchPokemonCards(currentPage); // Ricarica le carte con la nuova pagina
+        });
+    });
+    </script>
+</body>
+</html>

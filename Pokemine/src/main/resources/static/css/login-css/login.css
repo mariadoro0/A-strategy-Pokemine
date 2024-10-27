@@ -1,0 +1,361 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+.container {
+    width: 500px;
+    height: 500px;
+    background-color: white;
+    padding: 20px;
+   
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    
+    
+}
+.bic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ 
+}
+
+.register-form {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+}
+.register-form input {
+    margin-bottom: 40px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.register-form button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+
+.register-form {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.register-form button:hover {
+    background-color: #0056b3;
+}
+
+
+body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    background-image: url("https://static.prod.pokemon.com/images/pikachu_pattern.png");
+    background-repeat: repeat;
+    font-family: 'Patrick Hand', Arial, sans-serif; /* Font simile */
+}
+
+.container {
+    max-width: 1600px; /* Imposta una larghezza massima per il contenitore */
+    margin: 0 auto; /* Centra la pagina orizzontalmente */
+    padding: 0 20px; /* Aggiungi padding laterale per un layout più fluido */
+    overflow-x: hidden; /* Previeni scorrimento orizzontale */
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    padding: 18px 20px;
+}
+
+.logo img {
+    width: 150px;
+}
+
+h1.header {
+    text-align: left; /* Sposta il titolo a destra */
+    margin-left: 22px;
+    font-size: 3.2rem; /* Dimensione testo simile */
+    margin-top: 0;  /* Riduci al minimo lo spazio sopra il titolo */
+    margin-bottom: 10px;  /* Riduci lo spazio sotto il titolo */
+}
+
+nav {
+    display: flex;
+    justify-content: flex-end; /* Sposta gli altri bottoni a destra */
+    align-items: center;
+    flex: 1; /* Occupare tutto lo spazio rimanente */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+#home-btn {
+    font-family: 'Patrick Hand', Arial, sans-serif;
+    margin-left: 40px; /* Spazio tra il logo e il bottone Home */
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 15px 40px; /* Rendi il bottone più grande */
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 22px; /* Aumenta la dimensione del testo */
+}
+
+#home-btn:hover {
+    background-color: #919191; /* Cambia il colore in base alle preferenze */
+    transition: background-color 0.3s ease;
+}
+
+.nav-btns {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+.flag-icons {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 9px;
+}
+
+.flag-icons img {
+    width: 30px;
+    height: auto;
+}
+
+.rule-link {
+    font-family: 'Patrick Hand', Arial, sans-serif;
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 1px;
+}
+
+#my-cards-btn {
+    font-family: 'Patrick Hand', Arial, sans-serif;
+    background-color: #333;
+    color: white;
+    margin: 6px;
+    border: none;
+    padding: 15px 40px; /* Rendi i bottoni più grandi */
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 22px; /* Aumenta la dimensione del testo */
+}
+
+#my-cards-btn:hover {
+    background-color: #919191; /* Cambia il colore in base alle preferenze */
+    transition: background-color 0.3s ease;
+}
+
+#my-decks-btn {
+    font-family: 'Patrick Hand', Arial, sans-serif;
+    margin-left: 20px;
+    background-color: #333;
+    color: white;
+    margin: 13px;
+    border: none;
+    padding: 15px 40px; /* Rendi i bottoni più grandi */
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 22px; /* Aumenta la dimensione del testo */
+}
+
+#my-decks-btn:hover {
+    background-color: #919191; /* Cambia il colore in base alle preferenze */
+    transition: background-color 0.3s ease;
+}
+
+
+
+.left-buttons {
+    display: flex;
+    gap: 10px; /* Spazio tra i bottoni */
+    font-size: 18px;
+    padding: 10px 20px;
+}
+
+.right-buttons {
+    display: flex;
+    flex-direction: column; /* Cambia la disposizione in verticale */
+    gap: 10px; /* Spazio tra i bottoni */
+    position: absolute;  /* Cambia da relative a absolute */
+    top: 183px;  /* Sposta i bottoni più in alto (modifica questo valore secondo necessità) */
+    right: 32px;  /* Posiziona i bottoni più vicino al bordo destro */
+}
+
+
+/* Bottoni più lunghi e stretti */
+.deck-buttons button {
+    width: 160px;  /* Più lungo */
+    height: 50px;  /* Più stretto */
+    margin-right: 10px;
+    padding: 8px 16px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    font-size: 22px;  /* Aumenta leggermente il testo */
+    margin-bottom: 5px;
+}
+
+
+/* Bottoni "New deck" e "Deck info" in colonna */
+.new-deck-btn,
+.info-btn {
+    display: block;
+    width: 200px; /* Aumenta larghezza */
+    height: 70px; /* Regola altezza */
+    margin-bottom: 10px; /* Spazio tra i due bottoni */
+    margin-left: auto; /* Allinea a destra */
+    margin-right: 0;
+    margin-top: 0px;
+}
+
+.deck-btn {
+    width: 200px; /* Mantieni i bottoni larghi */
+    height: 65px; /* Mantieni i bottoni alti */
+    font-size: 26px; /* Font più grande */
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    font-family: 'Patrick Hand', Arial, sans-serif;
+}
+
+.deck-btn, .new-deck-btn, .info-btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    font-family: 'Patrick Hand', Arial, sans-serif;
+}
+
+.deck-btn:hover {
+    background-color: #c4c4c4;
+}
+
+.new-deck-btn:hover {
+    background-color: #009349;
+}
+
+.deck-btn-active {
+    background-color: #5a5ff0;
+    color: white;
+    font-family: 'Patrick Hand', Arial, sans-serif;
+    width: 200px; /* Bottoni più larghi */
+    height: 65px; /* Bottoni più alti */
+    font-size: 26px; /* Font più grande */
+}
+
+.new-deck-btn {
+    background-color: #00cc66;
+    color: white;
+}
+
+.info-btn {
+    background-color: #f0f0f0;
+}
+
+.info-btn:hover {
+    background-color: #c4c4c4;
+}
+
+hr.separator {
+    border: 2px solid #ccc;
+    width: 97.1%;
+    margin-left: 19px;
+    margin-right: 18px;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 carte per riga */
+    gap: 20px;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    border: 2px solid #f0f0f0;
+}
+
+.card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.card-info {
+    display: flex;
+    justify-content: space-between; /* Aggiusta il layout del contatore */
+    align-items: center;
+    border: 1px solid black; /* Bordo nero attorno al counter */
+    padding: 5px;
+    width: 100px; /* Larghezza del contenitore del counter */
+    margin: 0 auto;
+}
+
+.counter-btn {
+    background-color: #ccc;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.counter-btn:hover {
+    background-color: #c4c4c4;
+}
+
+.counter-text {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.delete-btn {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.delete-btn:hover {
+    background-color: #660000;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .cards-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .cards-container {
+        grid-template-columns: 1fr; /* 1 column for very small screens */
+    }
+}
+#lo1{
+    margin-top: 20px;
+}

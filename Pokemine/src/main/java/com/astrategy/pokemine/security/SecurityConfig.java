@@ -39,19 +39,19 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // Configure the security filter chain
         http
-                .csrf(AbstractHttpConfigurer::disable)  // Disable CSRF protection for stateless APIs
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/cards", "/users/login", "/users/signup").permitAll()  // Allow access to /cards, /login, and /signup without authentication
-                        .anyRequest().authenticated())  // Require authentication for all other requests
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS));  // Disable sessions
+            .csrf(AbstractHttpConfigurer::disable)  // Disabilita la protezione CSRF per le API stateless
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/home-page.html", "/css/**", "/js/**", "/img/**", "/cards", "/users/login", "/users/signup").permitAll()  // Consente l'accesso senza autenticazione a questi percorsi
+                .anyRequest().authenticated())  // Richiede autenticazione per tutti gli altri percorsi
+            .sessionManagement(session -> session
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS));  // Disabilita le sessioni
 
-        // Add the JWT request filter before the UsernamePasswordAuthenticationFilter
+        // Aggiunge il filtro JWT prima del filtro di autenticazione
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
+
 
     @Bean
     public UserDetailsService userDetailsService() {

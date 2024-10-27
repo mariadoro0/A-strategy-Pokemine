@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    background-image: url("https://static.prod.pokemon.com/images/pikachu_pattern.png");
+    background-repeat: repeat;
+    font-family: 'Patrick Hand', Arial, sans-serif;
+}
+
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 20px;
+    overflow-x: hidden;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    padding: 10px 20px;
+}
+
+.logo img {
+    width: 150px;
+}
+
+h1.header {
+    text-align: left;
+    font-size: 3.2rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 22px;
+}
+
+.new-deck-btn {
+    display: block;
+    width: 160px;
+    height: 50px;
+    margin: 0 0 20px 22px; /* Posizionato sotto il titolo */
+    background-color: #00cc66;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 22px;
+    border: 2px solid #ccc;
+    font-family: 'Patrick Hand', Arial, sans-serif;
+    text-align: center;
+}
+
+.new-deck-btn:hover {
+    background-color: #009349;
+}
+
+
+.separator {
+    border: 1px solid #ccc;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+#home-btn {
+    font-family: 'Patrick Hand', Arial, sans-serif;
+    margin-left: 40px;
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 22px;
+}
+
+#home-btn:hover {
+    background-color: #919191;
+    transition: background-color 0.3s ease;
+}
+
+.nav-btns {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.flag-icons {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 9px;
+}
+
+.flag-icons img {
+    width: 30px;
+    height: auto;
+}
+
+.rule-link {
+    font-family: 'Patrick Hand', Arial, sans-serif;
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 1px;
+}
+
+#my-cards-btn, #my-decks-btn {
+    font-family: 'Patrick Hand', Arial, sans-serif;
+    background-color: #333;
+    color: white;
+    margin: 6px;
+    border: none;
+    padding: 15px 40px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 22px;
+}
+
+#my-cards-btn:hover, #my-decks-btn:hover {
+    background-color: #919191;
+    transition: background-color 0.3s ease;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    border: 2px solid #f0f0f0;
+}
+
+.card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.card-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid black;
+    padding: 5px;
+    width: 100px;
+    margin: 0 auto;
+}
+
+.counter-btn {
+    background-color: #ccc;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.counter-btn:hover {
+    background-color: #c4c4c4;
+}
+
+.counter-text {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.deck-select {
+    background-color: #ccc;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin: 0 5px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.delete-btn {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.delete-btn:hover {
+    background-color: #660000;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .cards-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .cards-container {
+        grid-template-columns: 1fr;
+    }
+}
