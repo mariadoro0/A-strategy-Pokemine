@@ -1,0 +1,116 @@
+body {
+    background-image: url("https://static.prod.pokemon.com/images/pikachu_pattern.png");
+    background-repeat: repeat;
+    margin: 0;
+}
+.losgo-home {
+    display: flex;
+    align-items: center;
+}
+.navbar {
+    background-color: #000000;
+    color: rgb(255, 255, 255); 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   /* padding: 1rem; */
+    flex-wrap: wrap;
+}
+
+.nav-links {
+    margin-right: 5px;
+    padding: 0;
+}
+
+.bic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home {
+    color:white;
+   /* margin-right: auto; /* Use auto for a more fluid layout */
+    margin-right: 0; /* Remove large margin */
+    margin-left: 20px; /* Add a small left margin to separate from the logo */
+    text-decoration: none;
+    border: 2px solid #535353;
+    border-radius: 10px;
+    padding: 5px;
+
+}
+
+.nav-pic {
+    
+    margin-left: 20px;
+}
+
+.profile {
+    width: 100%; /* Usa 100% per renderlo flessibile */
+    max-width: 500px; /* Imposta un limite massimo */
+    height: auto;
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto; /* Centra l'elemento */
+}
+
+.profile img {
+    width: 100%;
+    max-width: 200px; /* Limita la larghezza massima */
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    background-color: black;
+}
+
+.profile h2 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #333;
+}
+
+.profile button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.profile button:hover {
+    background-color: #0056b3;
+}
+#logind {
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    background-color: #ddd;
+   }
+   #logind a:hover {
+       background-color: #555;
+       border-radius: 5px;
+   }
+/* Media query per schermi più piccoli */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Cambia la direzione degli elementi nel menu su schermi piccoli */
+    }
+
+    .home {
+        margin-right: 0; /* Riduci il margine per evitare che vada fuori dallo schermo */
+    }
+
+    .profile {
+        width: 90%; /* Riduci la larghezza della scheda su schermi piccoli */
+    }
+
+    .profile img {
+        max-width: 150px; /* Riduci la dimensione dell'immagine su schermi piccoli */
+    }
+}

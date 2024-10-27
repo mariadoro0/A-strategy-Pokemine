@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="./css/decks-screen.css">
+    <link rel="stylesheet" href="./css/home-page.css">
+    
+<!--  <style>
+        .search-container {
+            margin-left: 60px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            border: 2px solid black;
+            border-radius: 30px;
+            padding: 5px 10px;
+            background-color: white;
+        }
+
+        .search-input {
+            border: none;
+            outline: none;
+            height: 30px;
+            padding-left: 10px;
+            font-size: 16px;
+            width: 200px;
+        }
+
+        .icon-search, .icon-clear {
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .filter-button, .search-button {
+            font-family: 'Patrick Hand', Arial, sans-serif;
+            border: 2px solid black;
+            background-color: white;
+            border-radius: 30px;
+            padding: 5px 15px;
+            font-size: 20px;
+            cursor: pointer;
+            height: 45px;
+        }
+
+        .filter-button {
+            display: flex;
+            align-items: center;
+        }
+
+        .filter-button i {
+            margin-right: 5px;
+        }
+
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+            border-radius: 15px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .filter-grid div {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .search-button {
+            background-color: #ffa500;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .search-button:hover {
+            background-color: #ff8c00;
+        }
+    </style> -->
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="img/logo.png" alt="Pokemine Logo">
+            <button id="home-btn">Home</button>
+            <div class="flag-icons">
+                <img src="img/ita-flag.png" alt="Italian Flag">
+                <img src="img/en-flag.png" alt="English Flag">
+            </div>
+        </div>
+        <nav>
+            <div class="nav-btns">
+                <button id="my-cards-btn">My cards</button>
+
+                <button id="my-decks-btn"><a href="decks-screen.html">My decks</a></button>
+                <div class="profile-icon">
+                    <a href="user-page.html"><img src="img/pokeball-user.png" alt="Profile" width="60"></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <br>
+
+    <!-- Search and Filter Container -->
+    <div class="search-container">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search by name" class="search-input">
+            <i class="icon-search">🔍</i>
+        </div>
+        <button id="openModalBtn" class="filter-button">
+            <i class="icon-filter">🔧</i> Filter
+        </button>
+        <button class="search-button" id="searchButton">Search</button>
+    </div>
+
+    <!-- The Modal -->
+    <div id="searchModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Search Filters</h2>
+            <div class="filter-grid">
+                <div>
+                    <label for="type">Search by type:</label>
+                    <select id="type">
+					    <option value="Select">Select</option>
+
+                        <option value="Colorless">Colorless</option>
+                        <option value="Water">Water</option>
+                        <option value="Grass">Grass</option>
+                        <option value="Psychic">Psychic</option>
+                        <option value="Fairy">Fairy</option>
+                        <option value="Dragon">Dragon</option>
+                        <option value="Fire">Fire</option>
+                        <option value="Fighting">Fighting</option>
+                        <option value="Lightning">Lightning</option>
+                        <option value="Darkness">Darkness</option>
+                        <option value="Metal">Metal</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="setname">Search by set:</label>
+                    <select id="setname">
+                        <option value="">Select</option>
+                        <option value="Base">Base Set</option>
+						<option value="Fossil">Fossil</option>
+                        <option>Legendary Collection            </option>  
+                        <option>Wizards Black Star Promos       </option>  
+                        <option>Best of Game                    </option>  
+                        <option>Black & White                   </option>  
+                        <option>Plasma Blast                    </option>  
+                        <option>Legendary Treasures             </option>  
+                        <option>Emerging Powers                 </option>  
+                        <option>Noble Victories                 </option>  
+                        <option>Next Destinies                  </option>  
+                        <option>Dark Explorers                  </option>  
+                        <option>Dragons Exalted                 </option>  
+                        <option>Boundaries Crossed              </option>  
+                    
+                        
+                    </select>
+                </div>
+
+                <div>
+                    <label for="rarity">Search by rarity:</label>
+                    <select id="rarity">
+                        <option value="">Select</option>
+                        <option value="Rare">Rare</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="illustrator">Search by Illustrator:</label>
+                    <select id="illustrator">
+                        <option value="">Select</option>
+                        <option value="Ken Sugimori">Ken Sugimori</option>
+                        <option>Keiji Kinebuchi</option> 
+                        <option>Mitsuhiro Arita</option> 
+                        <option>Tomoaki Imakuni</option> 
+                        <option>Kagemaru Himeno</option> 
+                    </select>
+                </div>
+                <div>
+                    <label for="cardType">Search by Card subtype:</label>
+                    <select id="cardType">
+                        <option value="">Select</option>
+                        <option value="Trainer">Trainer</option> 
+                                          <option>  Radiant </option>
+                                          <option>  Single S</option>
+                                          <option>  Ultra Be</option>
+                                          <option>  Goldenro</option>
+                                          <option>  Level-Up</option>
+                                          <option>  Future  </option>
+                                          <option>  Prism St</option>
+                                          <option>  Supporte</option>
+                                          <option>  Stage 1 </option>
+                                          <option>  Pokémon </option>
+                                          <option>  Tera    </option>
+                                          <option>  SP      </option>
+                                          <option>  Prime   </option>
+                                          <option>  Eternama</option>
+                                          <option>  BREAK   </option>
+                                          <option>  Technica</option>
+                                          <option>  TAG TEAM</option>
+                                          <option>  Pokémon </option>
+                                          <option>  Stadium </option>
+                                          <option>  MEGA    </option>
+                                          <option>  LEGEND  </option>
+                                          <option>  Rockets </option>
+                                          <option>  ACE SPEC</option>
+                                          <option>  Team Pla</option>
+                                          <option>  Fusion S</option>
+                                          <option>  Restored</option>
+                                          <option>  EX      </option>
+                                          <option>  VMAX    </option>
+                                          <option>  Item    </option>
+                                          <option>  VSTAR   </option>
+                                          <option>  Basic   </option>
+                                          <option>  Special </option>
+                                          <option>  Star    </option>
+                                          <option>  Rapid St</option>
+                                          <option>  Stage 2 </option>
+                                          <option>  V-UNION </option>
+                                          <option>  GX      </option>
+                                          <option>  Baby    </option>
+                                          <option>  V       </option>
+                                          <option>  Ancient </option>
+                    </select>
+                </div>
+            </div>
+            <button class="search-button" id="filterSearchBtn">Search by Filters</button>
+        </div>
+
+    </div>
+
+    <div class="card-container">
+        <!-- Griglia delle carte Pokémon -->
+        <div class="card-grid">
+            <!-- Singola carta -->
+            <div class="card">
+                <img src="./img/cards/swsh4-145_hiresopt.png" alt="Toucannon Card">
+                <!-- Ulteriori dettagli della carta -->
+            </div>
+            <div class="card">
+                <img src="./img/cards/swsh4-5_hiresopt.png" alt="Toucannon Card">
+                <!-- Ulteriori dettagli della carta -->
+            </div>
+            <div class="card">
+                <img src="./img/cards/swsh4-17_hiresopt.png" alt="Toucannon Card">
+                <!-- Ulteriori dettagli della carta -->
+            </div>
+            <div class="card">
+                <img src="./img/cards/swsh4-24_hiresopt.png" alt="Toucannon Card">
+                <!-- Ulteriori dettagli della carta -->
+            </div>
+            <div class="card">
+                <img src="./img/cards/swsh4-60_hiresopt.png" alt="Toucannon Card">
+                <!-- Ulteriori dettagli della carta -->
+            </div>
+            <div class="card">
+                <img src="./img/cards/swsh4-75_hiresopt.png" alt="Toucannon Card">
+                <!-- Ulteriori dettagli della carta -->
+            </div>
+            <div class="card">
+                <img src="./img/cards/swsh4-76_hiresopt.png" alt="Toucannon Card">
+                <!-- Ulteriori dettagli della carta -->
+            </div>
+            <div class="card">
+                <img src="./img/cards/swsh4-19_hiresopt.png" alt="Toucannon Card">
+                <!-- Ulteriori dettagli della carta -->
+            </div>
+            <div class="card">
+                <img src="./img/cards/swsh4-145_hiresopt.png" alt="Toucannon Card">
+                <!-- Ulteriori dettagli della carta -->
+            </div>
+            <div class="card">
+                <img src="./img/cards/swsh4-145_hiresopt.png" alt="Toucannon Card">
+                <!-- Ulteriori dettagli della carta -->
+            </div>
+            <!-- Altre carte seguono lo stesso schema -->
+        </div>
+
+       
+        <div class="pagination-container">
+            <a href="#" class="pagination-arrow">&#10094;</a> <!-- Freccia sinistra -->
+            <a href="home-page.html" class="pagination-number">1</a>
+            <a href="homepagination.html" class="pagination-number active">2</a>
+            <a href="#" class="pagination-number">3</a>
+            <span class="pagination-dots">...</span>
+            <a href="#" class="pagination-number">8</a>
+            <a href="#" class="pagination-arrow">&#10095;</a> <!-- Freccia destra -->
+        </div>
+    </div>
+
+ <script>
+    // Get the modal
+    var modal = document.getElementById("searchModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("openModalBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+        console.log("Modal opened"); // Debug: Modal opened
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+        console.log("Modal closed"); // Debug: Modal closed
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+            console.log("Modal closed by clicking outside"); // Debug: Modal closed outside
+        }
+    }
+
+    // Fetch and display Pokémon cards (adjust the API calls as necessary)
+    let currentPage = 1;
+    const cardGrid = document.getElementById('cardGrid');
+/*
+    function fetchPokemonCards(page, filters = {}) {
+        let apiUrl = `/api/cards?page=${page}`;
+        Object.keys(filters).forEach(key => {
+            if (filters[key]) {
+                apiUrl += `&${key}=${filters[key]}`;
+            }
+        });
+
+        console.log("Fetching data from URL:", apiUrl); // Debug: Log the URL
+
+        fetch(apiUrl)
+            .then(response => {
+                console.log("API response status:", response.status); // Debug: Response status
+                if (!response.ok) {
+                    throw new Error('Errore nella risposta dal server: ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("API Response:", data); // Debug: Log the API response
+                cardGrid.innerHTML = ''; // Clear the card grid
+
+                if (data.cards && data.cards.length > 0) {
+                    console.log(`Found ${data.cards.length} cards`); // Debug: Log the number of cards
+                   data.cards.forEach(card => {
+    console.log("Card data:", card); // Log per verificare il contenuto di ogni carta
+    const cardElement = document.createElement('div');
+    cardElement.className = 'card';
+    cardElement.innerHTML = `
+        <img src="${card.img || ''}" alt="${card.name || 'No name'}">
+        <p><strong>Name:</strong> ${card.name || 'N/A'}</p>
+        <p><strong>Set Name:</strong> ${card.setname || 'N/A'}</p>
+        <p><strong>Series:</strong> ${card.series || 'N/A'}</p>
+        <p><strong>Rarity:</strong> ${card.rarity || 'N/A'}</p>
+        <p><strong>Artist:</strong> ${card.artist || 'N/A'}</p>
+        <p><strong>HP:</strong> ${card.hp || 'N/A'}</p>
+    `;
+    cardGrid.appendChild(cardElement);
+});
+
+                } else {
+                    cardGrid.innerHTML = `<p>No cards found for the current filter.</p>`;
+                    console.log("No cards found for the current filter"); // Debug: No cards found
+                }
+            })
+            .catch(error => {
+                console.error('Errore nel caricamento delle carte:', error);
+                alert('Errore nel caricamento delle carte: ' + error.message);
+            });
+    }
+*/
+    // Funzione per eseguire la ricerca con i filtri selezionati
+document.getElementById('filterSearchBtn').addEventListener('click', () => {
+    const filters = {
+        type: document.getElementById('type').value,
+        setName: document.getElementById('setname').value,  // Usa set_name per coerenza
+        generation: document.getElementById('generation').value,
+        rarity: document.getElementById('rarity').value,
+        artist: document.getElementById('illustrator').value,
+        cardType: document.getElementById('cardType').value
+    };
+
+    // Log dei filtri applicati
+    console.log("Filters applied:", filters);
+
+    // Verifica se set_name viene passato correttamente
+    if (filters.setName) {
+        console.log("Searching by set_name:", filters.setName);
+    }
+
+    fetchPokemonCards(currentPage, filters);
+    modal.style.display = "none"; // Chiudi il modale dopo aver fatto la ricerca
+    console.log("Modal closed after filter search");
+});
+
+
+    // Funzione per eseguire la ricerca per nome
+    document.getElementById('searchButton').addEventListener('click', () => {
+        const searchName = document.getElementById('searchInput').value.trim();
+        if (searchName) {
+            console.log("Searching by name:", searchName); // Debug: Log search by name
+            fetchPokemonCards(currentPage, { name: searchName });
+        }
+    });
+
+    // Initial load to display cards
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log("Page loaded, fetching initial cards");
+        fetchPokemonCards(currentPage); // Load initial cards
+    });
+</script>
+
+
+</body>
+</html>

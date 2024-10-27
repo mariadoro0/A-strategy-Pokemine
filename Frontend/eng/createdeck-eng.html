@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémine - Create deck</title>
+    
+    <link rel="stylesheet" href="css/createdeck.css">
+    
+      
+
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="img/logo.png" alt="Pokemine Logo">
+            <button id="home-btn" onclick="location.href='home-page-eng.html'">Home</button>
+            <div class="flag-icons">
+                <a href="/../A-strategy-Learning_by-Project/Frontend/ita/createdeck.html" class="flag-icon" title="ITA"><img src="img/ita-flag.png" alt="Italian Flag"></a>
+                <a href="createdeck-eng.html" class="flag-icon" title="ENG"><img src="img/en-flag.png" alt="English Flag"></a>
+            </div>
+        </div>
+        <nav>
+            <div class="nav-btns">
+                <button id="my-cards-btn" onclick="location.href='usercollection-eng.html'">My cards</button>
+                <button id="my-decks-btn" onclick="location.href='decks-screen-eng.html'">My decks</button>
+                <div class="profile-icon">
+                    <a href="user-page-eng.html" title="Profile"><img src="img/pokeball-user.png" alt="Profile" width="60"></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+   
+
+
+	<br>
+	<br>
+	<br>
+	<main>
+        <section class="deck-create-container">
+            <h1>Deck Creation</h1>
+            <div class="deck-details">
+                <div class="deck-info">
+                    <h2>Deck Name</h2>
+                    <input type="text" placeholder="insert deck name">
+                    <h3>Description</h3>
+                    <textarea name="" id="descriptiondeck" placeholder="insert Description of the deck"></textarea>
+                    <hr>
+                    <button class="create-btn"><a href="decks-screen-eng.html">Create deck</a></button>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
