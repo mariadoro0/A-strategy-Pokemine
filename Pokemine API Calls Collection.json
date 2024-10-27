@@ -1,13 +1,13 @@
 {
 	"info": {
-		"_postman_id": "f381310b-5422-4ee2-b875-6df100c8fe95",
+		"_postman_id": "e02099fe-ea03-4f39-ad24-53d84d9e3218",
 		"name": "Pokemine Api Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "32783612"
+		"_exporter_id": "32493899"
 	},
 	"item": [
 		{
-			"name": "authenticate",
+			"name": "Authenticate",
 			"item": [
 				{
 					"name": "signup",
@@ -55,6 +55,32 @@
 						"url": "localhost:8080/users/login"
 					},
 					"response": []
+				}
+			],
+			"description": "This folder contains the sign up and login calls, that will enable the user to create an account and log into it in order to access his collection and decks.",
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
@@ -120,6 +146,32 @@
 						}
 					},
 					"response": []
+				}
+			],
+			"description": "This folder contains the universal call for researching cards in our database: enable the parameters you want to use and get creative!",
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
@@ -197,6 +249,33 @@
 						}
 					},
 					"response": []
+				}
+			],
+			"description": "This folder contains the calls that enable the user collection's management.\n\nNOTE: this will calls will need the Authorization Bearer token you get by logging in.",
+			"auth": {
+				"type": "bearer",
+				"bearer": {}
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
@@ -336,6 +415,33 @@
 					},
 					"response": []
 				}
+			],
+			"description": "This folder contains the calls that enable the user's decks management.\n\nNOTE: this will calls will need the Authorization Bearer token you get by logging in.",
+			"auth": {
+				"type": "bearer",
+				"bearer": {}
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
 			]
 		},
 		{
@@ -358,6 +464,33 @@
 						"url": "localhost:8080/users/deactivate"
 					},
 					"response": []
+				}
+			],
+			"description": "This folder contains the calls that enable the user account's management.\n\nNOTE: this will calls will need the Authorization Bearer token you get by logging in.",
+			"auth": {
+				"type": "bearer",
+				"bearer": {}
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		}
