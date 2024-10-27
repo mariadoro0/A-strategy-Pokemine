@@ -35,15 +35,22 @@
                     <img src="./img/pokecard.JPG" alt="Pokemon Card">
                 </div>
                 <div class="deck-info">
-                    <h2>Nome mazzo</h2>
+                    <h2>Mazzo 1</h2>
                     <p><strong>Numero carte</strong> <span class="card-number">18/60</span></p>
                     <h3>Descrizione</h3>
                     <p>Il mazzo può contenere solo le carte presenti nella tua collezione. Fai attenzione al numero di carte che possiedi e verifica che non siano già incluse in altri mazzi. </p>
                     <hr>
                     <button class="delete-btn">Elimina mazzo</button>
+                    <button class="info-btn" onclick="mostraDiv()">Valida mazzo</button>
+                    <p id="mioDiv" style="display:none;">Il tuo mazzo non è valido: deve contenere 60 carte</p>
                 </div>
             </div>
         </section>
     </main>
+    <script>
+        function mostraDiv() {
+            document.getElementById("mioDiv").style.display = "block";
+        }
+    </script>
 </body>
 </html>

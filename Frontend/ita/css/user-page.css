@@ -185,3 +185,7 @@ a {
 .carsd{
     margin-left: auto;
 }
+
+#logout {
+    background-color: red;
+}
